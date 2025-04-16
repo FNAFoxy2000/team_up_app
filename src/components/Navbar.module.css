@@ -1,0 +1,53 @@
+.navbar {
+    position: sticky;
+    top: 0;
+    background-color: #1a1a1a;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5rem 2rem;
+    z-index: 1000;
+  }
+  
+  .logo {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  
+  .logo img {
+    height: 40px;
+    margin-right: 0.5rem;
+  }
+  
+  .navLinks {
+    display: flex;
+    list-style: none;
+    gap: 1.5rem;
+  }
+  
+  .navLinks li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    transition: color 0.3s;
+  }
+  
+  .navLinks li a:hover {
+    color: #00bcd4;
+  }
+  
+  .userSection {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .userIcon {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-bottom: 0.2rem;
+  }
+  
