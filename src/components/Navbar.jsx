@@ -13,7 +13,7 @@ function Navbar() {
       <ul className={styles.navLinks}>
         <li><a href="#">LoL</a></li>
         <li><a href="#">Counter Strike</a></li>
-        <li><a href="#">Clash Royale</a></li>
+        <li><a href="/juego">Clash Royale</a></li>
         <li><a href="#">+ Más</a></li>
       </ul>
 

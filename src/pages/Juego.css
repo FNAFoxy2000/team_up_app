@@ -1,0 +1,100 @@
+.game-profile {
+    font-family: 'Poppins', 'Segoe UI', sans-serif;
+    background-color: #0d1117;
+    color: #ffffff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .header {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+  }
+  
+  .header-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: brightness(0.7);
+  }
+  
+  .profile-info {
+    text-align: center;
+    margin-top: -80px;
+    padding: 20px;
+    z-index: 10;
+  }
+  
+  .profile-avatar {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 6px solid #0d1117;
+    background-color: #1f1f1f;
+    object-fit: cover;
+  }
+  
+  .game-name {
+    margin-top: 15px;
+    font-size: 3rem;
+    font-weight: 700;
+    color: #facc15; /* Amarillo vibrante */
+  }
+  
+  .game-description {
+    margin-top: 10px;
+    font-size: 1.3rem;
+    color: #c9d1d9;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  
+  .extra-info {
+    margin-top: 20px;
+    font-size: 1rem;
+    color: #8b949e;
+  }
+  
+  .extra-info p {
+    margin: 5px 0;
+  }
+  
+  .cta-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+  }
+  
+  .btn-primary, .btn-secondary {
+    text-decoration: none;
+    padding: 12px 24px;
+    border-radius: 30px;
+    font-size: 1rem;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .btn-primary {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
+  .btn-primary:hover {
+    background-color: #2563eb;
+  }
+  
+  .btn-secondary {
+    background-color: transparent;
+    color: #3b82f6;
+    border: 2px solid #3b82f6;
+  }
+  
+  .btn-secondary:hover {
+    background-color: #3b82f6;
+    color: white;
+  }
+  
