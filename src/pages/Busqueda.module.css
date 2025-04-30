@@ -1,0 +1,72 @@
+.container {
+    padding: 80px 20px 40px 20px;
+    min-height: 100vh;
+    background-color: #121212;
+    color: #f5f5f5;
+  }
+  
+  .title {
+    font-size: 2rem;
+    margin-bottom: 50px;
+    text-align: center;
+  }
+  
+  .description {
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 1.1rem;
+    color: #ccc;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  
+  /* Grupo del label + input en una fila */
+  .inputGroup {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .label {
+    font-size: 1rem;
+    color: #ccc;
+  }
+  
+  /* Filtros en una sola línea */
+  .filtersRow {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .input, .select {
+    padding: 10px;
+    background-color: #333333;
+    border: none;
+    border-radius: 5px;
+    color: #f5f5f5;
+    font-size: 1rem;
+    width: 250px;
+  }
+  
+  .button {
+    padding: 10px 20px;
+    background-color: #f5f5f5;
+    color: #121212;
+    border: none;
+    border-radius: 5px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .button:hover {
+    background-color: #ccc;
+  }
+  

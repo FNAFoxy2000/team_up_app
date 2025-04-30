@@ -1,20 +1,21 @@
 import styles from './Navbar.module.css';
-import logo from '../assets/logo.png'; // reemplaza con tu imagen
+import logo from '../assets/logo.png';
 import userIcon from '../assets/default-user.png'; // imagen por defecto
+import { Link } from 'react-router-dom';
 
 function Navbar() {
   return (
     <nav className={styles.navbar}>
-      <div className={styles.logo} onClick={() => window.location.href = '/'}>
+      <Link to="/" className={styles.logo}>
         <img src={logo} alt="TeamUp Logo" />
         <span>TeamUp</span>
-      </div>
+      </Link>
 
       <ul className={styles.navLinks}>
-        <li><a href="#">LoL</a></li>
-        <li><a href="#">Counter Strike</a></li>
-        <li><a href="#">Clash Royale</a></li>
-        <li><a href="#">+ Más</a></li>
+        <li><Link to="/busqueda">Búsqueda</Link></li>
+        <li><a href="#">Chats</a></li>
+        <li><a href="#">Guias</a></li>
+        <li><a href="#">Juegos</a></li>
       </ul>
 
       <div className={styles.userSection}>
