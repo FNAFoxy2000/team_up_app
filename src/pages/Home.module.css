@@ -1,70 +1,100 @@
 .main {
-    font-family: 'Segoe UI', sans-serif;
-    color: white;
-    background-color: #121212;
-  }
-  
-  .header {
-    text-align: center;
-    padding: 4rem 2rem 4rem;
-  }
-  
-  .header h1 {
-    font-size: 3rem;
-    margin-bottom: 1rem;
-  }
-  
-  .header p {
-    font-size: 1.2rem;
-    color: #ccc;
-  }
-  
-  .carousel {
-    width: 100vw;
-    height: 500px;
-    overflow: hidden;
-  }
-  
-  .slide {
-    width: 100%;
-    height: 500px;
-    position: relative;
-  }
-  
-  .videoBackground {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  background-color: #121212;
+}
 
-  .reactPlayer {
-    position: absolute;
-    top: 0;
-    left: 0;
-  }
-  
-  .services {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 2rem;
-    padding: 3rem 2rem;
-  }
-  
-  .serviceCard {
-    background-color: #333333;
-    border-radius: 12px;
-    padding: 1.5rem;
-    width: 300px;
-    text-align: center;
-    box-shadow: 0 0 10px rgba(0,0,0,0.4);
-  }
-  
-  .serviceCard h3 {
-    margin-bottom: 1rem;
-    color: #00bcd4;
-  }
-  
-  .serviceCard p {
-    color: #ccc;
-  }
+.header {
+  text-align: center;
+  padding: 4rem 2rem 4rem;
+}
+
+.header h1 {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.header p {
+  font-size: 1.2rem;
+  color: #ccc;
+}
+
+.carousel {
+  width: 100vw;
+  height: 500px;
+  overflow: hidden;
+}
+
+.slide {
+  width: 100%;
+  height: 500px;
+  position: relative;
+}
+
+.videoBackground {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.reactPlayer {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.services {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2rem;
+  padding: 3rem 2rem;
+}
+
+.serviceCard {
+  background-color: #333333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+}
+
+.serviceCard h3 {
+  margin-bottom: 1rem;
+  color: #00bcd4;
+}
+
+.serviceCard p {
+  color: #ccc;
+}
+
+.juegosSection {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin: 50px 0;
+}
+
+.juegoCard {
+  background-color: #333333;
+  border-radius: 10px;
+  padding: 20px;
+  width: 300px;
+  text-align: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  transition: transform 0.3s;
+}
+
+.juegoCard:hover {
+  transform: translateY(-5px);
+}
+
+.juegoImg {
+  width: 100%;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-bottom: 10px;
+}

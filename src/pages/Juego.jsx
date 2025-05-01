@@ -2,11 +2,19 @@ import React from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './Juego.css';
+import { useParams } from 'react-router-dom';
 
 const GameProfilePage = () => {
+  const { juegoId } = useParams();
+
   return (
     <>
       <Navbar />
+
+      <div style={{ padding: '120px 20px 40px', color: '#f5f5f5' }}>
+        <h1>Página del juego: {juegoId}</h1>
+        <p>Aquí podrás mostrar información específica sobre el juego {juegoId}.</p>
+      </div>
 
       <div className="game-profile">
         <div className="header">
