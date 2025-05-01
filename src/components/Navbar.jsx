@@ -15,12 +15,11 @@ function Navbar() {
         <li><Link to="/busqueda">Búsqueda</Link></li>
         <li><a href="#">Chats</a></li>
         <li><a href="#">Guias</a></li>
-        <li><a href="#">Juegos</a></li>
       </ul>
 
       <div className={styles.userSection}>
         <img src={userIcon} alt="Usuario" className={styles.userIcon} />
-        <span>Iniciar Sesión</span>
+        <span><a href="#">Iniciar Sesión</a></span>
       </div>
     </nav>
   );
