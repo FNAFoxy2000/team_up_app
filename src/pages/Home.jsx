@@ -16,7 +16,7 @@ function Home() {
   const juegos = [
     {
       nombre: 'League of Legends',
-      slug: '5',
+      slug: '2',
       descripcion: 'Únete a invocadores y conquista la Grieta del Invocador.',
       imagen: 'https://th.bing.com/th/id/R.850ffe9945e3442cb3602e98884613ba?rik=UZuPcncigaN%2f3A&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f9%2f9%2fb%2f643239.jpg&ehk=DvisVJeYn690bk%2bL%2bl82IEAMz0ktk4EOBWD4Iw8gk2g%3d&risl=&pid=ImgRaw&r=0',
     },
