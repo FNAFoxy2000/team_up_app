@@ -4,11 +4,14 @@ import Busqueda from './pages/Busqueda';
 import Juego from './pages/Juego';
 import AnnadirJuego from './pages/AnnadirJuegos';
 import ScrollToTop from './components/ScrollToTop';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 
 function App() {
   return (
     <Router>
-       <ScrollToTop />
+      <ScrollToTop />
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/busqueda" element={<Busqueda />} />
@@ -16,6 +19,8 @@ function App() {
         <Route path="/juegos/Annadir" element={<AnnadirJuego />} />
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
       </Routes>
+
+      <Footer />
     </Router>
   );
 }

@@ -27,18 +27,15 @@ const GameProfilePage = () => {
   if (!juego) {
     return (
       <>
-        <Navbar />
         <div style={{ padding: '120px 20px', color: '#f5f5f5' }}>
           <h2>Juego no Encontrado</h2>
         </div>
-        <Footer />
       </>
     );
   }
 
   return (
     <>
-      <Navbar />
 
       <div className="game-profile">
         <div className="header">
@@ -95,7 +92,6 @@ const GameProfilePage = () => {
         </div>
       </div>
 
-      <Footer />
     </>
   );
 };

@@ -36,7 +36,6 @@ function Home() {
 
   return (
     <>
-      <Navbar />
       <main className={styles.main}>
         <section className={styles.header}>
           <h1>TeamUp</h1>
@@ -126,7 +125,6 @@ function Home() {
         ))}
 
       </main>
-      <Footer />
     </>
   );
 }

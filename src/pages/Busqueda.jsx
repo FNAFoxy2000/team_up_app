@@ -30,7 +30,6 @@ function Busqueda() {
 
     return (
         <>
-            <Navbar />
             <div className={styles.container}>
                 <h1 className={styles.title}>Busca jugadores en TeamUp</h1>
                 <p className={styles.description}>
@@ -93,7 +92,6 @@ function Busqueda() {
 
                 {/* Aquí debajo luego mostraremos los resultados que devuelve la API */}
             </div>
-            <Footer />
         </>
     );
 }

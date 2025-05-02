@@ -59,10 +59,9 @@ const AnnadirJuego = () => {
     }
   };
   
-
+ 
   return (
     <>
-      <Navbar />
       <div className="añadir-juego-container">
         <h2>Añadir Nuevo Juego</h2>
         <form onSubmit={handleSubmit} className="juego-form">
@@ -110,7 +109,6 @@ const AnnadirJuego = () => {
           <button type="submit" className="submit-button">Guardar Juego</button>
         </form>
       </div>
-      <Footer />
     </>
   );
 };
