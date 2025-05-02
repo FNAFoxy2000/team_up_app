@@ -1,45 +1,62 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './Juego.css';
+import { getDatosJuego } from '../peticiones/juego_peticiones.mjs';
 import { useParams } from 'react-router-dom';
 
 const GameProfilePage = () => {
   const { juegoId } = useParams();
+  const [juego, setJuego] = useState(null);
+
+  useEffect(() => {
+    const fetchJuego = async () => {
+      const data = await getDatosJuego(juegoId);
+      setJuego(data);
+    };
+    fetchJuego();
+  }, [juegoId]);
+
+  if (!juego) {
+    return (
+      <>
+        <Navbar />
+        <div style={{ padding: '120px 20px', color: '#f5f5f5' }}>
+          <h2>Cargando información del juego...</h2>
+        </div>
+        <Footer />
+      </>
+    );
+  }
 
   return (
     <>
       <Navbar />
 
-      <div style={{ padding: '120px 20px 40px', color: '#f5f5f5' }}>
-        <h1>Página del juego: {juegoId}</h1>
-        <p>Aquí podrás mostrar información específica sobre el juego {juegoId}.</p>
-      </div>
-
       <div className="game-profile">
         <div className="header">
           <img
-            src="https://etgeekera.com/wp-content/uploads/2016/05/clash-royale-banner.jpg"
-            alt="Clash Royale Banner"
+            src={juego.banner}
+            alt={`${juego.nombre} Banner`}
             className="header-image"
           />
         </div>
 
         <div className="profile-info">
           <img
-            src="https://yt3.googleusercontent.com/ytc/AIdro_m0DtuBhZUI1Mie9JUspzzqediBM76hO49vWA8hM5hwu9s=s900-c-k-c0x00ffffff-no-rj"
-            alt="Clash Royale Logo"
+            src={juego.foto_juego}
+            alt={`${juego.nombre} Logo`}
             className="profile-avatar"
           />
-          <h1 className="game-name">Clash Royale</h1>
-          <p className="game-description">
-            ¡Forma tu mazo, domina el campo y derrota a tus enemigos en emocionantes batallas en tiempo real!
-          </p>
+          <h1 className="game-name">{juego.nombre}</h1>
+          <p className="game-description">{juego.descripcion}</p>
+
           <div className="extra-info">
-            <p><strong>Género:</strong> Estrategia en Tiempo Real</p>
-            <p><strong>Disponible en:</strong> iOS, Android</p>
-            <p><strong>Fecha de Lanzamiento:</strong> Marzo 2016</p>
+            <p><strong>Género:</strong> {juego.categoria}</p>
+            <p><strong>Disponible en:</strong> {juego.dispositivos}</p>
+            <p><strong>Rangos:</strong> {juego.rangos.join(', ')}</p>
           </div>
+
           <div className="cta-buttons">
             <a href="https://clashroyale.com/" target="_blank" rel="noopener noreferrer" className="btn-primary">
               Página Oficial
