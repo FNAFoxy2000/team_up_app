@@ -8,6 +8,7 @@ import { useParams } from 'react-router-dom';
 const GameProfilePage = () => {
   const { juegoId } = useParams();
   const [juego, setJuego] = useState(null);
+  const [rangoSeleccionado, setRangoSeleccionado] = useState('');
 
   useEffect(() => {
     const fetchJuego = async () => {
@@ -17,12 +18,16 @@ const GameProfilePage = () => {
     fetchJuego();
   }, [juegoId]);
 
+  const handleRangoChange = (e) => {
+    setRangoSeleccionado(e.target.value);
+  };
+
   if (!juego) {
     return (
       <>
         <Navbar />
         <div style={{ padding: '120px 20px', color: '#f5f5f5' }}>
-          <h2>Cargando información del juego...</h2>
+          <h2>Juego no Encontrado</h2>
         </div>
         <Footer />
       </>
@@ -54,16 +59,36 @@ const GameProfilePage = () => {
           <div className="extra-info">
             <p><strong>Género:</strong> {juego.categoria}</p>
             <p><strong>Disponible en:</strong> {juego.dispositivos}</p>
-            <p><strong>Rangos:</strong> {juego.rangos.join(', ')}</p>
-          </div>
 
-          <div className="cta-buttons">
-            <a href="https://clashroyale.com/" target="_blank" rel="noopener noreferrer" className="btn-primary">
-              Página Oficial
-            </a>
-            <a href="https://www.youtube.com/watch?v=x-Dy9_EZsdE" target="_blank" rel="noopener noreferrer" className="btn-secondary">
-              Ver Tráiler
-            </a>
+            <div className="rangos-visual">
+              <h3>Rangos del juego</h3>
+              <div className="rango-grid">
+                {juego.rangos.map((rango, index) => (
+                  <div key={index} className="rango-card">
+                    <h4>{rango.nombre}</h4>
+                    <p>{rango.puntos}</p>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            <div className="rango-selector-wrapper">
+              <label htmlFor="rango-select"><strong>Selecciona tu rango:   </strong></label>
+              <select
+                id="rango-select"
+                value={rangoSeleccionado}
+                onChange={handleRangoChange}
+                className="rango-select"
+              >
+                <option value="">-- Elige un rango --</option>
+                {juego.rangos.map((rango, index) => (
+                  <option key={index} value={rango.nombre}>
+                    {rango.nombre}
+                  </option>
+                ))}
+              </select>
+            </div>
+
           </div>
         </div>
       </div>

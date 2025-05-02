@@ -102,6 +102,68 @@
   color: white;
 }
 
+.rangos-visual {
+  margin-top: 30px;
+}
+
+.rangos-visual h3 {
+  color: #facc15;
+  text-align: center;
+  margin-bottom: 15px;
+}
+
+.rango-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 15px;
+  margin-top: 10px;
+}
+
+.rango-card {
+  background-color: #1f2937;
+  border-radius: 12px;
+  padding: 10px;
+  text-align: center;
+  color: #f5f5f5;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.4);
+  transition: transform 0.2s ease;
+}
+
+.rango-card:hover {
+  transform: scale(1.05);
+}
+
+.rango-card h4 {
+  margin: 5px 0;
+  font-size: 1.1rem;
+  color: #93c5fd;
+}
+
+.rango-card p {
+  font-size: 0.95rem;
+  color: #d1d5db;
+}
+
+.rango-selector-wrapper {
+  margin-top: 30px;
+  text-align: center;
+}
+
+.rango-select {
+  margin-top: 8px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  background-color: #111827;
+  color: #ffffff;
+  border: 1px solid #3b82f6;
+  font-size: 1rem;
+  outline: none;
+}
+
+.rango-select:focus {
+  border-color: #60a5fa;
+}
+
 /* Media Queries para hacer la página responsive */
 
 /* Pantallas grandes (desktop) */
