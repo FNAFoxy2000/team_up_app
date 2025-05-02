@@ -28,7 +28,7 @@ function Home() {
     },
     {
       nombre: 'Clash Royale',
-      slug:'7',
+      slug:'1',
       descripcion: 'Combates rápidos y estrategia en tiempo real en tu móvil.',
       imagen: 'https://games.lol/wp-content/uploads/2020/12/clashroyale-free-full-version-1.jpg',
     }
