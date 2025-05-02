@@ -6,17 +6,19 @@ import { getDatosJuego } from '../peticiones/juego_peticiones.mjs';
 import { useParams } from 'react-router-dom';
 
 const GameProfilePage = () => {
-  const { juegoId } = useParams();
+  const { nombreJuego } = useParams();
+  const nombreParseado = nombreJuego.replaceAll('_', ' ');
   const [juego, setJuego] = useState(null);
   const [rangoSeleccionado, setRangoSeleccionado] = useState('');
 
   useEffect(() => {
+
     const fetchJuego = async () => {
-      const data = await getDatosJuego(juegoId);
+      const data = await getDatosJuego(nombreParseado);
       setJuego(data);
     };
     fetchJuego();
-  }, [juegoId]);
+  }, [nombreParseado]);
 
   const handleRangoChange = (e) => {
     setRangoSeleccionado(e.target.value);

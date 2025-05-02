@@ -1,11 +1,21 @@
 import axios from 'axios'; 
 
-export async function getDatosJuego(id_juego){
+export async function getDatosJuego(nombreJuego){
     try{
-        const respuesta = await axios.get(`http://localhost:3000/juego/${id_juego}`)
+        const respuesta = await axios.get(`http://localhost:3000/juegos/${nombreJuego}`)
         return respuesta.data
     }catch(err){
         console.error('Error al obtener los datos del juego:', err);
         return [];
     }
+}
+
+export async function annadirJuego(datosJuego){
+    try {
+        const response = await axios.post('http://localhost:3000/juegos/annadirJuego', datosJuego);
+        return response.data;
+      } catch (err) {
+        console.error('Error al añadir juego:', err);
+        throw err;
+      }
 }
