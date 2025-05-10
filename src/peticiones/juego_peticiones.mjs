@@ -19,3 +19,23 @@ export async function annadirJuego(datosJuego){
         throw err;
       }
 }
+
+export async function editarJuego(juego) {
+    try {
+        const response = await axios.put('http://localhost:3000/juegos/editarJuego', juego);
+        return response.data;
+    } catch (err) {
+        console.error('Error al actualizar juego:', err);
+        throw err;
+    }
+}
+
+export async function borrarJuego(juego) {
+    try {
+        const response = await axios.put('http://localhost:3000/juegos/borrarJuego', juego);
+        return response.data;
+    } catch (err) {
+        console.error('Error al borrar juego:', err);
+        throw err;
+    }
+}

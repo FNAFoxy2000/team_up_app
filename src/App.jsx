@@ -16,7 +16,8 @@ function App() {
         <Route path="/" element={<Home />} />
         <Route path="/busqueda" element={<Busqueda />} />
         <Route path="/juegos/:nombreJuego" element={<Juego />} />
-        <Route path="/juegos/Annadir" element={<AnnadirJuego />} />
+        <Route path="/juegos/annadir" element={<AnnadirJuego />} />
+        <Route path="/juegos/editar" element={<AnnadirJuego />} />
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
       </Routes>
 

@@ -1,11 +1,15 @@
 import React, { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './AnnadirJuegos.css';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import { annadirJuego } from '../peticiones/juego_peticiones.mjs';
+import { annadirJuego, editarJuego } from '../peticiones/juego_peticiones.mjs';
 
 const AnnadirJuego = () => {
-  const [formData, setFormData] = useState({
+  const location = useLocation();
+  const juegoExistente = location.state?.juego;
+
+  const [formData, setFormData] = useState(juegoExistente || {
     nombre: '',
     descripcion: '',
     banner: '',
@@ -40,10 +44,16 @@ const AnnadirJuego = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(formData);
     try {
-      await annadirJuego(formData);
-      alert('Juego preparado para añadir (ver consola)');
+      if (juegoExistente) {
+        console.table(formData);
+        await editarJuego(formData);
+        alert('Juego actualizado correctamente');
+      } else {
+        await annadirJuego(formData);
+        alert('Juego añadido correctamente');
+      }
+
       setFormData({
         nombre: '',
         descripcion: '',
@@ -58,16 +68,15 @@ const AnnadirJuego = () => {
       console.error(error);
     }
   };
-  
- 
+
   return (
     <>
       <div className="añadir-juego-container">
-        <h2>Añadir Nuevo Juego</h2>
+        <h2>{juegoExistente ? 'Editar Juego' : 'Añadir Nuevo Juego'}</h2>
         <form onSubmit={handleSubmit} className="juego-form">
 
           <label>Nombre</label>
-          <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required />
+          <input type="text" name="nombre" value={formData.nombre} onChange={handleChange} required disabled={!!juegoExistente} />
 
           <label>Descripción</label>
           <textarea name="descripcion" value={formData.descripcion} onChange={handleChange} required />
@@ -106,7 +115,9 @@ const AnnadirJuego = () => {
           ))}
           <button type="button" onClick={agregarRango} className="agregar-rango">+ Añadir Rango</button>
 
-          <button type="submit" className="submit-button">Guardar Juego</button>
+          <button type="submit" className="submit-button">
+            {juegoExistente ? 'Actualizar Juego' : 'Guardar Juego'}
+          </button>
         </form>
       </div>
     </>

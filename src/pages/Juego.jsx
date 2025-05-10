@@ -2,17 +2,17 @@ import React, { useEffect, useState } from 'react';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import './Juego.css';
-import { getDatosJuego } from '../peticiones/juego_peticiones.mjs';
-import { useParams } from 'react-router-dom';
+import { getDatosJuego, borrarJuego } from '../peticiones/juego_peticiones.mjs';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 
 const GameProfilePage = () => {
   const { nombreJuego } = useParams();
   const nombreParseado = nombreJuego.replaceAll('_', ' ');
   const [juego, setJuego] = useState(null);
   const [rangoSeleccionado, setRangoSeleccionado] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
-
     const fetchJuego = async () => {
       const data = await getDatosJuego(nombreParseado);
       setJuego(data);
@@ -22,6 +22,20 @@ const GameProfilePage = () => {
 
   const handleRangoChange = (e) => {
     setRangoSeleccionado(e.target.value);
+  };
+
+  const handleBorrarJuego = async () => {
+    const confirmacion = window.confirm(`¿Estás seguro de que quieres borrar "${juego.nombre}"?`);
+    if (confirmacion) {
+      try {
+        await borrarJuego(juego);
+        alert("Juego borrado correctamente");
+        navigate("/");
+      } catch (error) {
+        console.error("Error al borrar el juego:", error);
+        alert("Error al borrar el juego");
+      }
+    }
   };
 
   if (!juego) {
@@ -36,7 +50,6 @@ const GameProfilePage = () => {
 
   return (
     <>
-
       <div className="game-profile">
         <div className="header">
           <img
@@ -54,6 +67,20 @@ const GameProfilePage = () => {
           />
           <h1 className="game-name">{juego.nombre}</h1>
           <p className="game-description">{juego.descripcion}</p>
+
+          <div className="cta-buttons">
+            <Link
+              to="/juegos/editar"
+              state={{ juego }}
+              className="btn-primary"
+            >
+              Editar Juego
+            </Link>
+
+            <button onClick={handleBorrarJuego} className="btn-secondary">
+              Borrar Juego
+            </button>
+          </div>
 
           <div className="extra-info">
             <p><strong>Género:</strong> {juego.categoria}</p>
@@ -87,11 +114,9 @@ const GameProfilePage = () => {
                 ))}
               </select>
             </div>
-
           </div>
         </div>
       </div>
-
     </>
   );
 };
