@@ -6,8 +6,8 @@ export async function getDatosJuego(nombreJuego){
         return respuesta.data
     }catch(err){
         console.error('Error al obtener los datos del juego:', err);
-        // window.location.href = '/error' // puedes o redireccionar a /error (salta 404)
-        //throw err; // si lanzas el error te manda a la pagina de juego no encontrado
+        // window.location.href = '/error' // puedes o redireccionar a /error (salta 404) o hacer throw err;
+        throw err; // si lanzas el error te manda a la pagina de juego no encontrado
         //return []; //con esto da error
     }
 }
