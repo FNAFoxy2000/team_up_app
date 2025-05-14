@@ -1,62 +1,77 @@
+/* Navbar */
 .navbar {
-    position: sticky;
-    top: 0;
-    background-color: #333333;
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0.5rem 2rem;
-    z-index: 1000;
-  }
-  
-  .logo {
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  
-  .logo img {
-    height: 40px;
-    margin-right: 0.5rem;
-  }
-  
-  .navLinks {
-    display: flex;
-    list-style: none;
-    gap: 2.5rem;
-  }
-  
-  .navLinks li a {
-    text-decoration: none;
-    color: white;
-    font-weight: bold;
-    transition: color 0.3s;
-  }
-  
-  .navLinks li a:hover {
-    color: #00bcd4;
-  }
-  
-  .userSection {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  position: sticky;
+  top: 0;
+  background-color: #333333;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 2rem;
+  z-index: 1000;
+}
 
-  .userSection a {
-    text-decoration: none;
-    color: white;
-    transition: color 0.3s;
-  }
-  
-  .userIcon {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-bottom: 0.2rem;
-  }
-  
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.logo img {
+  height: 40px;
+  margin-right: 0.5rem;
+}
+
+/* Links */
+.navLinks {
+  display: flex;
+  list-style: none;
+  gap: 2.5rem;
+}
+
+.navLinks li a {
+  text-decoration: none;
+  color: white;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.navLinks li a:hover {
+  color: #00bcd4;
+}
+
+/* User Section */
+.userSection {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+/* User Icon */
+.userIcon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin-right: 0.5rem;
+}
+
+/* Auth Buttons (Discord & Google) */
+.authButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background-color: white;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.authButton:hover {
+  background-color: #f0f0f0;
+}
