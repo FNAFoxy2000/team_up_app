@@ -21,7 +21,13 @@ const ChatPage = () => {
 
                     // Obtener el ID del usuario basado en su nombre de usuario
                     if (userData.username) {
-                        const userId = await getUserIdByUsername(userData.username);
+                        try {
+                            const id = await getUserIdByUsername(userData.username);
+                            setUserId(id); // Guardar el ID en el estado
+                            console.log("ID de usuario obtenido:", id);
+                        } catch (error) {
+                            console.error("Error al obtener el ID del usuario:", error);
+                        }
                     }
                 } else {
                     // Si no hay usuario autenticado, redirigir al login
@@ -37,19 +43,28 @@ const ChatPage = () => {
 
         fetchUserData();
     }, [navigate]);
+
     // Mostrar un mensaje de carga mientras verificamos la autenticación
-    if (user === null) {
+    if (loading) {
         return <div className="loading">Cargando...</div>;
+    }
+
+    // Verificar que tenemos tanto el usuario como su ID
+    if (!user || !userId) {
+        return (
+            <div className="error-message">
+                <h2>Error: No se pudo cargar la información del usuario</h2>
+                <p>Por favor, intenta recargar la página o contacta al administrador.</p>
+            </div>
+        );
     }
 
     return (
         <div className="chat-page">
-            {user && (
-                <ChatContainer
-                    userId={userId}
-                    username={user.username}
-                />
-            )}
+            <ChatContainer
+                userId={userId}
+                username={user.username}
+            />
         </div>
     );
 };
