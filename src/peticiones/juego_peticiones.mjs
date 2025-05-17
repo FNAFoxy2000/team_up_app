@@ -1,5 +1,15 @@
 import axios from 'axios'; 
 
+export async function getAllJuegos(){
+    try{
+        const respuesta = await axios.get('http://localhost:3000/juegos/listadoJuegos')
+        return respuesta.data
+    }catch(err){
+        console.error('Error al obtener los datos de los juegos:', err);
+        return [];
+    }
+}
+
 export async function getDatosJuego(nombreJuego){
     try{
         const respuesta = await axios.get(`http://localhost:3000/juegos/${nombreJuego}`)

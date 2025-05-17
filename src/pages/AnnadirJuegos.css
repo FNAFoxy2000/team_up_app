@@ -3,57 +3,81 @@
     max-width: 800px;
     margin: auto;
     color: #f5f5f5;
-  }
-  
-  .añadir-juego-container h2 {
+}
+
+.añadir-juego-container h2 {
     text-align: center;
     margin-bottom: 30px;
     font-size: 2rem;
-  }
-  
-  .juego-form {
+}
+
+.juego-form {
     display: flex;
     flex-direction: column;
     gap: 20px;
-  }
-  
-  .juego-form input,
-  .juego-form textarea,
-  .juego-form select {
+}
+
+.juego-form input,
+.juego-form textarea,
+.juego-form select {
     padding: 10px;
     border: none;
     border-radius: 8px;
     font-size: 1rem;
     background-color: #2c2c2c;
     color: #fff;
-  }
-  
-  .juego-form textarea {
+}
+
+/* Estilo específico para el select */
+.juego-form select {
+    appearance: none;
+    cursor: pointer;
+}
+
+.juego-form select:focus {
+    outline: none;
+    border: 1px solid #1d3557;
+}
+
+/* Estilo para input de nueva categoría (cuando se muestra) */
+.juego-form input.nueva-categoria {
+    background-color: #3a3a3a;
+    border: 1px solid #555;
+    color: #fff;
+}
+
+/* Placeholder color para inputs */
+.juego-form input::placeholder,
+.juego-form textarea::placeholder {
+    color: #aaa;
+}
+
+.juego-form textarea {
     resize: vertical;
     min-height: 100px;
-  }
-  
-  .rango-group {
+}
+
+.rango-group {
     display: flex;
     gap: 10px;
     margin-bottom: 10px;
     align-items: center;
-  }
-  
-  .rango-group input {
+}
+
+.rango-group input {
     flex: 1;
-  }
-  
-  .rango-group button {
+}
+
+.rango-group button {
     background-color: #e63946;
     color: white;
     border: none;
     padding: 8px 12px;
     border-radius: 6px;
     cursor: pointer;
-  }
-  
-  .agregar-rango {
+}
+
+.agregar-rango {
     background-color: #457b9d;
     color: white;
     border: none;
@@ -61,9 +85,9 @@
     border-radius: 6px;
     cursor: pointer;
     align-self: flex-start;
-  }
-  
-  .submit-button {
+}
+
+.submit-button {
     background-color: #1d3557;
     color: white;
     border: none;
@@ -72,5 +96,4 @@
     font-size: 1rem;
     cursor: pointer;
     margin-top: 20px;
-  }
-  
+}

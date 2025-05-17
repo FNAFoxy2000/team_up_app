@@ -1,6 +1,6 @@
 import styles from './Navbar.module.css';
 import logo from '../assets/logo.png';
-import userIcon from '../assets/default-user.png'; // imagen por defecto
+import userIcon from '../assets/default-user.png';
 import { Link } from 'react-router-dom';
 
 function Navbar() {
@@ -12,6 +12,7 @@ function Navbar() {
       </Link>
 
       <ul className={styles.navLinks}>
+        <li><Link to="/juegos/listadoJuegos">Juegos</Link></li>
         <li><Link to="/busqueda">Búsqueda</Link></li>
         <li><a href="#">Chats</a></li>
         <li><a href="#">Guias</a></li>
