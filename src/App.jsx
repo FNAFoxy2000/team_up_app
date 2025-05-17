@@ -4,6 +4,7 @@ import Busqueda from './pages/Busqueda';
 import Juego from './pages/Juego';
 import LoginError from './pages/LoginError';
 import AnnadirJuego from './pages/AnnadirJuegos';
+import ChatPage from './pages/ChatPage';
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
@@ -19,7 +20,8 @@ function App() {
         <Route path="/juegos/:nombreJuego" element={<Juego />} />
         <Route path="/juegos/annadir" element={<AnnadirJuego />} />
         <Route path="/juegos/editar" element={<AnnadirJuego />} />
-        <Route path="/LoginError" element={<LoginError/>}/>
+        <Route path="/LoginError" element={<LoginError />} />
+        <Route path="/chat" element={<ChatPage />} />
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
       </Routes>
 
