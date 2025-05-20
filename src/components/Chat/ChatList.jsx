@@ -2,22 +2,12 @@
 
 import { useState } from "react"
 
-const ChatList = ({ chats, currentChat, onSelectChat, onStartPrivateChat }) => {
+const ChatList = ({ chats, currentChat, onSelectChat }) => {
   const [searchTerm, setSearchTerm] = useState("")
-  const [otherUserId, setOtherUserId] = useState("")
-  const [otherUsername, setOtherUsername] = useState("")
-  const [showPrivateChatForm, setShowPrivateChatForm] = useState(false)
 
-  const filteredChats = chats.filter((chat) => chat.nombre.toLowerCase().includes(searchTerm.toLowerCase()))
-
-  const handleStartPrivateChat = () => {
-    if (otherUserId && otherUsername) {
-      onStartPrivateChat(otherUserId, otherUsername)
-      setOtherUserId("")
-      setOtherUsername("")
-      setShowPrivateChatForm(false)
-    }
-  }
+  const filteredChats = chats.filter((chat) => 
+    chat.nombre.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <div className="chat-list">
@@ -30,28 +20,7 @@ const ChatList = ({ chats, currentChat, onSelectChat, onStartPrivateChat }) => {
           onChange={(e) => setSearchTerm(e.target.value)}
           className="search-input"
         />
-        <button className="new-chat-btn" onClick={() => setShowPrivateChatForm(!showPrivateChatForm)}>
-          {showPrivateChatForm ? "Cancelar" : "Nuevo Chat Privado"}
-        </button>
       </div>
-
-      {showPrivateChatForm && (
-        <div className="private-chat-form">
-          <input
-            type="text"
-            placeholder="ID del usuario"
-            value={otherUserId}
-            onChange={(e) => setOtherUserId(e.target.value)}
-          />
-          <input
-            type="text"
-            placeholder="Nombre del usuario"
-            value={otherUsername}
-            onChange={(e) => setOtherUsername(e.target.value)}
-          />
-          <button onClick={handleStartPrivateChat}>Iniciar Chat</button>
-        </div>
-      )}
 
       <ul className="chats-list">
         {filteredChats.length > 0 ? (
@@ -68,7 +37,9 @@ const ChatList = ({ chats, currentChat, onSelectChat, onStartPrivateChat }) => {
             </li>
           ))
         ) : (
-          <li className="no-chats">{searchTerm ? "No se encontraron chats" : "No tienes chats activos"}</li>
+          <li className="no-chats">
+            {searchTerm ? "No se encontraron chats" : "No tienes chats activos"}
+          </li>
         )}
       </ul>
     </div>

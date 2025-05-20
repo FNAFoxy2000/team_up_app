@@ -1,6 +1,3 @@
-/* Eliminar los estilos relacionados con el login */
-/* Mantener el resto de los estilos como estaban */
-
 /* Estilos generales */
 .chat-container {
   display: flex;
@@ -8,7 +5,9 @@
   height: 100vh;
   max-height: 100vh;
   overflow: hidden;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', sans-serif;
+  color: white;
+  background-color: #121212;
 }
 
 .chat-header {
@@ -16,8 +15,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: #2c3e50;
+  background-color: #1e1e1e;
   color: white;
+  border-bottom: 1px solid #444;
 }
 
 .chat-header h1 {
@@ -54,65 +54,35 @@
 /* Estilos para la lista de chats */
 .chat-list {
   width: 30%;
-  border-right: 1px solid #ddd;
+  border-right: 1px solid #444;
   display: flex;
   flex-direction: column;
-  background-color: #f5f5f5;
+  background-color: #1e1e1e;
 }
 
 .chat-list-header {
   padding: 1rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #444;
 }
 
 .chat-list-header h2 {
   margin: 0 0 1rem 0;
   font-size: 1.2rem;
+  color: white;
 }
 
 .search-input {
   width: 100%;
   padding: 0.5rem;
-  border: 1px solid #ddd;
+  border: 1px solid #444;
   border-radius: 4px;
   margin-bottom: 0.5rem;
-}
-
-.new-chat-btn {
-  width: 100%;
-  padding: 0.5rem;
-  background-color: #27ae60;
+  background-color: #2a2a2a;
   color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
 }
 
-.new-chat-btn:hover {
-  background-color: #219653;
-}
-
-.private-chat-form {
-  padding: 1rem;
-  background-color: #eee;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-}
-
-.private-chat-form input {
-  padding: 0.5rem;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.private-chat-form button {
-  padding: 0.5rem;
-  background-color: #3498db;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
+.search-input::placeholder {
+  color: #aaa;
 }
 
 .chats-list {
@@ -125,35 +95,36 @@
 
 .chats-list li {
   padding: 1rem;
-  border-bottom: 1px solid #ddd;
+  border-bottom: 1px solid #444;
   cursor: pointer;
   transition: background-color 0.3s;
 }
 
 .chats-list li:hover {
-  background-color: #e9e9e9;
+  background-color: #2a2a2a;
 }
 
 .chats-list li.active {
-  background-color: #e1f5fe;
-  border-left: 4px solid #2196f3;
+  background-color: #2c3e50;
+  border-left: 4px solid #3498db;
 }
 
 .chat-item h3 {
   margin: 0 0 0.5rem 0;
   font-size: 1rem;
+  color: white;
 }
 
 .chat-item p {
   margin: 0;
   font-size: 0.8rem;
-  color: #666;
+  color: #bbb;
 }
 
 .no-chats {
   padding: 2rem;
   text-align: center;
-  color: #666;
+  color: #aaa;
 }
 
 /* Estilos para los mensajes */
@@ -161,24 +132,25 @@
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-  background-color: white;
+  background-color: #333333;
 }
 
 .chat-messages-header {
   padding: 1rem;
-  border-bottom: 1px solid #ddd;
-  background-color: #f9f9f9;
+  border-bottom: 1px solid #444;
+  background-color: #2a2a2a;
 }
 
 .chat-messages-header h2 {
   margin: 0 0 0.5rem 0;
   font-size: 1.2rem;
+  color: white;
 }
 
 .chat-messages-header p {
   margin: 0;
   font-size: 0.8rem;
-  color: #666;
+  color: #bbb;
 }
 
 .messages-container {
@@ -191,14 +163,32 @@
   list-style: none;
   padding: 0;
   margin: 0;
+  display: flex;
+  flex-direction: column;
 }
 
+/* Estilos base para todos los mensajes */
 .message-item {
   margin-bottom: 1rem;
   padding: 0.8rem;
   border-radius: 8px;
-  background-color: #f1f1f1;
-  max-width: 80%;
+  color: white;
+  max-width: 70%;
+  position: relative;
+}
+
+/* Mensajes de otros usuarios (a la izquierda) */
+.other-message {
+  align-self: flex-start;
+  background-color: #2a2a2a;
+  border-bottom-left-radius: 2px;
+}
+
+/* Mensajes propios (a la derecha) */
+.own-message {
+  align-self: flex-end;
+  background-color: #1a5276; /* Azul más oscuro para mensajes propios */
+  border-bottom-right-radius: 2px;
 }
 
 .message-header {
@@ -209,7 +199,7 @@
 
 .message-time {
   font-size: 0.7rem;
-  color: #888;
+  color: #aaa;
 }
 
 .message-content {
@@ -221,20 +211,27 @@
   justify-content: center;
   align-items: center;
   height: 100%;
-  color: #888;
+  color: #aaa;
 }
 
 .message-form {
   display: flex;
   padding: 1rem;
-  border-top: 1px solid #ddd;
+  border-top: 1px solid #444;
+  background-color: #2a2a2a;
 }
 
 .message-form input {
   flex-grow: 1;
   padding: 0.8rem;
-  border: 1px solid #ddd;
+  border: 1px solid #444;
   border-radius: 4px 0 0 4px;
+  background-color: #333;
+  color: white;
+}
+
+.message-form input::placeholder {
+  color: #aaa;
 }
 
 .message-form button {
@@ -247,7 +244,7 @@
 }
 
 .message-form button:disabled {
-  background-color: #95a5a6;
+  background-color: #555;
   cursor: not-allowed;
 }
 
@@ -256,20 +253,23 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: #333333;
 }
 
 .empty-state {
   text-align: center;
-  color: #95a5a6;
+  color: #aaa;
   padding: 2rem;
 }
 
 .empty-state h2 {
   margin: 0 0 1rem 0;
+  color: white;
 }
 
 .empty-state p {
   margin: 0;
+  color: #bbb;
 }
 
 /* Mensaje de error para usuario no autenticado */
@@ -281,8 +281,8 @@
   height: 100vh;
   text-align: center;
   padding: 2rem;
-  background-color: #f8d7da;
-  color: #721c24;
+  background-color: #2a0000;
+  color: #ff6b6b;
 }
 
 .error-message h2 {
@@ -291,4 +291,34 @@
 
 .error-message p {
   margin: 0;
+}
+
+/* Personalización de la barra de desplazamiento para tema oscuro */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
+}
+
+/* Estilos para la pantalla de carga */
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: #121212;
+  color: white;
+  font-family: 'Segoe UI', sans-serif;
+  font-size: 1.2rem;
 }

@@ -1,125 +1,148 @@
-import { useState, useEffect } from 'react';
-import { io } from 'socket.io-client';
-import ChatList from './ChatList';
-import ChatMessages from './ChatMessages';
-import { getUserChats } from '../../services/chatService';
-import './Chat.css';
+"use client"
 
-// Ahora recibimos userId y username como props
-const ChatContainer = ({ userId, username }) => {
-  const [socket, setSocket] = useState(null);
-  const [isConnected, setIsConnected] = useState(false);
-  const [chats, setChats] = useState([]);
-  const [currentChat, setCurrentChat] = useState(null);
-  const [messages, setMessages] = useState([]);
+import { useState, useEffect } from "react"
+import { io } from "socket.io-client"
+import ChatList from "./ChatList"
+import ChatMessages from "./ChatMessages"
+import { getUserChats } from "../../services/chatService"
+import "./Chat.css"
 
-  // Inicializar Socket.io cuando el componente se monta
+const ChatContainer = () => {
+  const [socket, setSocket] = useState(null)
+  const [isConnected, setIsConnected] = useState(false)
+  const [chats, setChats] = useState([])
+  const [currentChat, setCurrentChat] = useState(null)
+  const [messages, setMessages] = useState([])
+  const [userId, setUserId] = useState("")
+  const [username, setUsername] = useState("")
+
+  // Obtener información del usuario del localStorage al cargar
   useEffect(() => {
-    if (userId && username) {
-      const newSocket = io('http://localhost:3000', {
-        auth: { serverOffset: 0 }
-      });
-      
-      setSocket(newSocket);
-      
-      // Limpiar socket al desmontar
-      return () => {
-        newSocket.disconnect();
-      };
+    const storedUserId = localStorage.getItem("userId")
+    const storedUsername = localStorage.getItem("username")
+
+    if (storedUserId && storedUsername) {
+      setUserId(storedUserId)
+      setUsername(storedUsername)
+      console.log("Usuario cargado:", { userId: storedUserId, username: storedUsername })
     }
-  }, [userId, username]);
+  }, [])
+
+  // Inicializar Socket.io cuando el usuario está disponible
+  useEffect(() => {
+    if (!userId) return
+
+    const newSocket = io("http://localhost:3000", {
+      auth: { serverOffset: 0 },
+    })
+
+    setSocket(newSocket)
+
+    // Limpiar socket al desmontar
+    return () => {
+      newSocket.disconnect()
+    }
+  }, [userId])
 
   // Configurar eventos de Socket.io
   useEffect(() => {
-    if (!socket) return;
+    if (!socket) return
 
     // Eventos de conexión
-    socket.on('connect', () => {
-      console.log('Conectado al servidor');
-      setIsConnected(true);
-      
-      // Cargar lista de chats del usuario
-      fetchUserChats();
-    });
+    socket.on("connect", () => {
+      // console.log("Conectado al servidor")
+      setIsConnected(true)
 
-    socket.on('disconnect', () => {
-      console.log('Desconectado del servidor');
-      setIsConnected(false);
-    });
+      // Cargar lista de chats del usuario
+      fetchUserChats()
+    })
+
+    socket.on("disconnect", () => {
+      // console.log("Desconectado del servidor")
+      setIsConnected(false)
+    })
 
     // Eventos de chat
-    socket.on('load messages', (msgs) => {
-      setMessages(msgs);
-    });
+    socket.on("load messages", (msgs) => {
+      // console.log("Mensajes cargados:", msgs)
 
-    socket.on('chat message', (msg) => {
-      setMessages(prev => [...prev, msg]);
-    });
+      // Verificar si hay mensajes con el mismo id_mensaje
+      const messageIds = {}
+      msgs.forEach((msg) => {
+        if (msg.id_mensaje !== undefined && msg.id_mensaje !== null) {
+          if (messageIds[msg.id_mensaje]) {
+            console.warn(`Mensaje duplicado encontrado con id_mensaje: ${msg.id_mensaje}`)
+          }
+          messageIds[msg.id_mensaje] = true
+        }
+      })
+
+      setMessages(msgs)
+    })
+
+    socket.on("chat message", (msg) => {
+      console.log("Nuevo mensaje recibido:", msg)
+
+      // Verificar si este mensaje ya existe en la lista actual
+      setMessages((prev) => {
+        // Comprobar si ya existe un mensaje con el mismo id_mensaje (si tiene)
+        if (msg.id_mensaje && prev.some((m) => m.id_mensaje === msg.id_mensaje)) {
+          console.warn(`Mensaje con id_mensaje ${msg.id_mensaje} ya existe en la lista`)
+          return prev
+        }
+
+        return [...prev, msg]
+      })
+    })
 
     return () => {
-      socket.off('connect');
-      socket.off('disconnect');
-      socket.off('load messages');
-      socket.off('chat message');
-    };
-  }, [socket]);
+      socket.off("connect")
+      socket.off("disconnect")
+      socket.off("load messages")
+      socket.off("chat message")
+    }
+  }, [socket])
 
   // Función para obtener los chats del usuario
   const fetchUserChats = async () => {
     try {
-      if (!userId) return;
-      const data = await getUserChats(userId);
-      setChats(data);
+      const data = await getUserChats(userId)
+      // console.log("Chats del usuario:", data)
+      setChats(data)
     } catch (error) {
-      console.error('Error al cargar los chats:', error);
+      console.error("Error al cargar los chats:", error)
     }
-  };
+  }
 
   // Función para unirse a un chat
   const joinChat = (chat) => {
-    if (!socket || !isConnected) return;
-    
-    setCurrentChat(chat);
-    socket.emit('join room', {
+    if (!socket || !isConnected) return
+
+    // console.log("Uniéndose al chat:", chat)
+    setCurrentChat(chat)
+    socket.emit("join room", {
       idChat: chat.id_chat,
       idUsuario: userId,
-      username: username
-    });
-  };
-
-  // Función para iniciar un chat privado
-  const startPrivateChat = (otherUserId, otherUsername) => {
-    if (!socket || !isConnected) return;
-    
-    socket.emit('private chat', {
-      otherUserId,
-      userId,
-      username
-    });
-    
-    // Actualizamos el chat actual con información temporal hasta que se cargue
-    setCurrentChat({
-      id_chat: `private_${userId}_${otherUserId}`,
-      nombre: `Chat con ${otherUsername}`,
-      descripcion: 'Chat privado'
-    });
-  };
+      username: username,
+    })
+  }
 
   // Función para enviar un mensaje
   const sendMessage = (message) => {
-    if (!socket || !isConnected || !currentChat) return;
-    
-    socket.emit('chat message', message);
-  };
+    if (!socket || !isConnected || !currentChat) return
+
+    // console.log("Enviando mensaje:", message)
+    socket.emit("chat message", message)
+  }
 
   // Función para desconectar/conectar
   const toggleConnection = () => {
     if (isConnected) {
-      socket.disconnect();
+      socket.disconnect()
     } else {
-      socket.connect();
+      socket.connect()
     }
-  };
+  }
 
   return (
     <div className="chat-container">
@@ -127,29 +150,23 @@ const ChatContainer = ({ userId, username }) => {
         <h1>Team Up Chat</h1>
         <div className="user-controls">
           <span>Conectado como: {username}</span>
-          <button onClick={toggleConnection}>
-            {isConnected ? 'Desconectar' : 'Conectar'}
-          </button>
+          <button onClick={toggleConnection}>{isConnected ? "Desconectar" : "Conectar"}</button>
         </div>
       </div>
-      
+
       <div className="chat-content">
-        <ChatList 
-          chats={chats} 
-          currentChat={currentChat} 
-          onSelectChat={joinChat}
-          onStartPrivateChat={startPrivateChat}
-        />
-        
-        <ChatMessages 
-          messages={messages} 
+        <ChatList chats={chats} currentChat={currentChat} onSelectChat={joinChat} />
+
+        <ChatMessages
+          messages={messages}
           currentChat={currentChat}
           onSendMessage={sendMessage}
           isConnected={isConnected}
+          userId={userId}
         />
       </div>
     </div>
-  );
-};
+  )
+}
 
-export default ChatContainer;
+export default ChatContainer

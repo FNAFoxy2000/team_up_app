@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react"
 
-const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected }) => {
+const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userId }) => {
   const [newMessage, setNewMessage] = useState("")
   const messagesEndRef = useRef(null)
 
@@ -19,12 +19,38 @@ const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected }) => 
     }
   }
 
+  // Función para determinar si un mensaje es del usuario actual
+  const isOwnMessage = (message) => {
+    // Asegurarse de que estamos comparando el mismo tipo de datos
+    const messageUserId = typeof message.id_usuario === "string" ? message.id_usuario : String(message.id_usuario)
+
+    const currentUserId = typeof userId === "string" ? userId : String(userId)
+
+    return messageUserId === currentUserId
+  }
+
+  // Función para generar una clave única para cada mensaje
+  const getMessageKey = (msg, index) => {
+    // Si el mensaje tiene id_mensaje, usarlo
+    if (msg.id_mensaje !== undefined && msg.id_mensaje !== null) {
+      return `msg-${msg.id_mensaje}`
+    }
+
+    // Si no tiene id_mensaje pero tiene timestamp, usar una combinación
+    if (msg.fecha_mensaje) {
+      return `temp-${msg.fecha_mensaje}-${index}`
+    }
+
+    // Como último recurso, usar un timestamp actual con el índice
+    return `temp-${Date.now()}-${index}`
+  }
+
   if (!currentChat) {
     return (
       <div className="chat-messages empty-chat">
         <div className="empty-state">
           <h2>Selecciona un chat para comenzar</h2>
-          <p>Elige un chat de la lista o inicia un nuevo chat privado</p>
+          <p>Elige un chat de la lista para ver los mensajes</p>
         </div>
       </div>
     )
@@ -41,7 +67,10 @@ const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected }) => 
         {messages.length > 0 ? (
           <ul className="messages-list">
             {messages.map((msg, index) => (
-              <li key={msg.id_mensaje || index} className="message-item">
+              <li
+                key={getMessageKey(msg, index)}
+                className={`message-item ${isOwnMessage(msg) ? "own-message" : "other-message"}`}
+              >
                 <div className="message-header">
                   <strong>{msg.username}</strong>
                   <span className="message-time">
