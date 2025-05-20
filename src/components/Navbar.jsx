@@ -67,12 +67,14 @@ function Navbar() {
       {/* Si el usuario esta autenticado cargamos los datos */}
         {isAuthenticated ? ( 
           <>
-            <img
-              src={user.avatar || userIcon}
-              alt="Avatar"
-              className={styles.userIcon}
-              title={user.username}
-            />
+            <Link to={`/usuario/datosUsuario?email=${encodeURIComponent(user.email)}`}>
+                <img
+                  src={user.avatar || userIcon}
+                  alt="Avatar"
+                  className={styles.userIcon}
+                  title={user.username}
+                />
+              </Link>
             <button onClick={handleLogout} className={styles.authButton}>
               Cerrar sesión
             </button>
