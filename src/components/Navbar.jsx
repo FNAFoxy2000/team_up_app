@@ -57,7 +57,7 @@ function Navbar() {
       <ul className={styles.navLinks}>
         <li><Link to="/juegos/listadoJuegos">Juegos</Link></li>
         <li><Link to="/busqueda">Búsqueda</Link></li>
-        <li><a href="#">Chats</a></li>
+        <li><a href="/chat">Chats</a></li>
         <li><a href="#">Guias</a></li>
       </ul>
 
