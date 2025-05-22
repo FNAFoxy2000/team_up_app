@@ -7,31 +7,18 @@ import ChatMessages from "./ChatMessages"
 import { getUserChats } from "../../services/chatService"
 import "./Chat.css"
 
-const ChatContainer = () => {
+const ChatContainer = ({ userId, username }) => {
   const [socket, setSocket] = useState(null)
   const [isConnected, setIsConnected] = useState(false)
   const [chats, setChats] = useState([])
   const [currentChat, setCurrentChat] = useState(null)
   const [messages, setMessages] = useState([])
-  const [userId, setUserId] = useState("")
-  const [username, setUsername] = useState("")
-
-  // Obtener información del usuario del localStorage al cargar
-  useEffect(() => {
-    const storedUserId = localStorage.getItem("userId")
-    const storedUsername = localStorage.getItem("username")
-
-    if (storedUserId && storedUsername) {
-      setUserId(storedUserId)
-      setUsername(storedUsername)
-      console.log("Usuario cargado:", { userId: storedUserId, username: storedUsername })
-    }
-  }, [])
 
   // Inicializar Socket.io cuando el usuario está disponible
   useEffect(() => {
     if (!userId) return
 
+    console.log("Inicializando Socket.io con usuario:", { userId, username })
     const newSocket = io("http://localhost:3000", {
       auth: { serverOffset: 0 },
     })
@@ -42,7 +29,7 @@ const ChatContainer = () => {
     return () => {
       newSocket.disconnect()
     }
-  }, [userId])
+  }, [userId, username])
 
   // Configurar eventos de Socket.io
   useEffect(() => {
@@ -81,7 +68,7 @@ const ChatContainer = () => {
     })
 
     socket.on("chat message", (msg) => {
-      console.log("Nuevo mensaje recibido:", msg)
+      // console.log("Nuevo mensaje recibido:", msg)
 
       // Verificar si este mensaje ya existe en la lista actual
       setMessages((prev) => {
@@ -101,7 +88,7 @@ const ChatContainer = () => {
       socket.off("load messages")
       socket.off("chat message")
     }
-  }, [socket])
+  }, [socket, userId])
 
   // Función para obtener los chats del usuario
   const fetchUserChats = async () => {

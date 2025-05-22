@@ -24,6 +24,8 @@ const ChatPage = () => {
                         try {
                             const id = await getUserIdByUsername(userData.username);
                             setUserId(id); // Guardar el ID en el estado
+                            // console.log("Nombre de usuario guardado:", userData.username);
+                            // console.log("Email de usuario guardado:", userData.email);
                             // console.log("ID de usuario obtenido:", id);
                         } catch (error) {
                             console.error("Error al obtener el ID del usuario:", error);
