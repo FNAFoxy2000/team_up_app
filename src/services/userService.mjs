@@ -2,9 +2,9 @@ import axios from 'axios';
 
 const API_URL = 'http://localhost:3000';
 
-export async function getUserIdByUsername(username) {
+export async function getUserIdByEmail(email) {
   try {
-    const response = await axios.get(`${API_URL}/usuario/obtenerId?nombre_usuario=${username}`);
+    const response = await axios.get(`${API_URL}/usuario/obtenerId?email=${email}`);
 
     if (response.data && response.data.id_usuario !== undefined) {
       return response.data.id_usuario;

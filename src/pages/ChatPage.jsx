@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ChatContainer from '../components/Chat/ChatContainer';
 import AuthService from '../services/authService.mjs';
-import { getUserIdByUsername } from '../services/userService';
+import { getUserIdByEmail } from '../services/userService';
 
 const ChatPage = () => {
     const [user, setUser] = useState(null);
@@ -20,9 +20,9 @@ const ChatPage = () => {
                     setUser(userData);
 
                     // Obtener el ID del usuario basado en su nombre de usuario
-                    if (userData.username) {
+                    if (userData.email) {
                         try {
-                            const id = await getUserIdByUsername(userData.username);
+                            const id = await getUserIdByEmail(userData.email);
                             setUserId(id); // Guardar el ID en el estado
                             // console.log("Nombre de usuario guardado:", userData.username);
                             // console.log("Email de usuario guardado:", userData.email);
