@@ -12,14 +12,14 @@ const AnnadirJuego = () => {
   const [nuevaCategoria, setNuevaCategoria] = useState('');
   const [usarNuevaCategoria, setUsarNuevaCategoria] = useState(false);
 
-  const [formData, setFormData] = useState(juegoExistente || {
-    nombre: '',
-    descripcion: '',
-    banner: '',
-    foto_juego: '',
-    dispositivos: '',
+  const [formData, setFormData] = useState({
+    nombre: juegoExistente?.nombre || '',
+    descripcion: juegoExistente?.descripcion || '',
+    banner: juegoExistente?.banner || '',
+    foto_juego: juegoExistente?.foto_juego || '',
+    dispositivos: juegoExistente?.dispositivos || '',
     categoria: '',
-    rangos: [{ nombre: '', puntos: '' }]
+    rangos: juegoExistente?.rangos || [{ nombre: '', puntos: '' }]
   });
 
   useEffect(() => {
@@ -27,6 +27,16 @@ const AnnadirJuego = () => {
       try {
         const categoriasObtenidas = await getCategorias();
         setCategorias(categoriasObtenidas);
+
+        if (juegoExistente) {
+          const categoriaEncontrada = categoriasObtenidas.find(
+            cat => cat.id_categoria === juegoExistente.categoria
+          );
+          if (categoriaEncontrada) {
+            setFormData(prev => ({ ...prev, categoria: categoriaEncontrada.nombre }));
+          }
+        }
+
       } catch (error) {
         console.error('Error al cargar categorías:', error);
       }
@@ -37,36 +47,34 @@ const AnnadirJuego = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
+    setFormData(prev => ({ ...prev, [name]: value }));
   };
 
   const handleCategoriaSelect = (e) => {
     const value = e.target.value;
     if (value === 'nueva') {
       setUsarNuevaCategoria(true);
-      setFormData((prev) => ({ ...prev, categoria: '' }));
+      setFormData(prev => ({ ...prev, categoria: '' }));
     } else {
       setUsarNuevaCategoria(false);
-      const categoriaSeleccionada = categorias.find(cat => cat.nombre === value);
-      setFormData((prev) => ({ ...prev, categoria: categoriaSeleccionada?.id_categoria || '' }));
+      setFormData(prev => ({ ...prev, categoria: value }));
     }
   };
 
   const handleNuevaCategoriaChange = (e) => {
     const value = e.target.value;
     setNuevaCategoria(value);
-    // temporalmente guardamos el nombre, pero luego lo reemplazaremos con el ID tras crearla
-    setFormData((prev) => ({ ...prev, categoria: value }));
+    setFormData(prev => ({ ...prev, categoria: value }));
   };
 
   const handleRangoChange = (index, field, value) => {
     const nuevosRangos = [...formData.rangos];
     nuevosRangos[index][field] = value;
-    setFormData((prev) => ({ ...prev, rangos: nuevosRangos }));
+    setFormData(prev => ({ ...prev, rangos: nuevosRangos }));
   };
 
   const agregarRango = () => {
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       rangos: [...prev.rangos, { nombre: '', puntos: '' }]
     }));
@@ -74,28 +82,32 @@ const AnnadirJuego = () => {
 
   const eliminarRango = (index) => {
     const nuevosRangos = formData.rangos.filter((_, i) => i !== index);
-    setFormData((prev) => ({ ...prev, rangos: nuevosRangos }));
+    setFormData(prev => ({ ...prev, rangos: nuevosRangos }));
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      let categoriaID = formData.categoria;
+      let categoriaID;
 
       if (usarNuevaCategoria && nuevaCategoria) {
         const respuesta = await annadirCategoria(nuevaCategoria);
-        if (respuesta?.categoria?.id_categoria) {
-          categoriaID = respuesta.categoria.id_categoria;
-        } else {
-          throw new Error("No se pudo crear la categoría");
-        }
+        categoriaID = respuesta?.categoria?.id_categoria;
+      } else {
+        const categoriaSeleccionada = categorias.find(cat => cat.nombre === formData.categoria);
+        categoriaID = categoriaSeleccionada?.id_categoria;
+      }
+
+      if (!categoriaID) {
+        alert("No se pudo obtener el ID de la categoría.");
+        return;
       }
 
       const datosJuego = {
         ...formData,
-        categoria: categoriaID, // enviar ID, no nombre
+        categoria: categoriaID
       };
-
+      console.log(datosJuego);
       if (juegoExistente) {
         await editarJuego(datosJuego);
         alert('Juego actualizado correctamente');
@@ -149,7 +161,11 @@ const AnnadirJuego = () => {
         <input type="text" name="dispositivos" value={formData.dispositivos} onChange={handleChange} required />
 
         <label>Categoría</label>
-        <select value={usarNuevaCategoria ? 'nueva' : (formData.categoria || '')} onChange={handleCategoriaSelect} required>
+        <select
+          value={usarNuevaCategoria ? 'nueva' : formData.categoria}
+          onChange={handleCategoriaSelect}
+          required
+        >
           <option value="">Selecciona una categoría</option>
           {categorias.map((cat) => (
             <option key={cat.id_categoria} value={cat.nombre}>

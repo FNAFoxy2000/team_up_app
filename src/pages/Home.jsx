@@ -21,10 +21,10 @@ function Home() {
       imagen: 'https://th.bing.com/th/id/R.850ffe9945e3442cb3602e98884613ba?rik=UZuPcncigaN%2f3A&riu=http%3a%2f%2fgetwallpapers.com%2fwallpaper%2ffull%2f9%2f9%2fb%2f643239.jpg&ehk=DvisVJeYn690bk%2bL%2bl82IEAMz0ktk4EOBWD4Iw8gk2g%3d&risl=&pid=ImgRaw&r=0',
     },
     {
-      nombre: 'Counter Strike',
-      slug: 'Counter_Strike',
+      nombre: 'Valorant',
+      slug: 'Valorant',
       descripcion: 'Estrategia, puntería y trabajo en equipo en el shooter más icónico.',
-      imagen: 'https://cdn.cloudflare.steamstatic.com/apps/csgo/blog/images/fb_image.png',
+      imagen: 'https://cmsassets.rgpub.io/sanity/images/dsfx7636/news/1c1776bd1bdd921061a53953d81a393ef69ce633-1920x1080.jpg?w=1200&h=630&fm=webp&fit=crop&crop=center',
     },
     {
       nombre: 'Clash Royale',

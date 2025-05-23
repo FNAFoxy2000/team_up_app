@@ -1,9 +1,107 @@
 .listado-juegos {
-  padding: 100px 20px 40px 20px;
+  padding: 0;
   min-height: 100vh;
   background-color: #0d1117;
   color: white;
   font-family: 'Poppins', 'Segoe UI', sans-serif;
+  display: flex;
+  flex-direction: column;
+}
+
+.topbar {
+  background-color: #161b22;
+  padding: 20px;
+  text-align: center;
+}
+
+.topbar input {
+  width: 50%;
+  padding: 10px;
+  border-radius: 8px;
+  border: none;
+  font-size: 1rem;
+}
+
+.contenido {
+  display: flex;
+  flex-grow: 1;
+}
+
+.sidebar {
+  width: 20%;
+  max-width: 20%;
+  background-color: #1f2631;
+  padding: 20px;
+}
+
+.sidebar h3 {
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+  color: #00bcd4;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin-bottom: 12px;
+}
+
+.sidebar label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+  color: #ccc;
+  transition: color 0.2s;
+  font-size: 0.95rem;
+}
+
+.sidebar label:hover {
+  color: #00bcd4;
+}
+
+.sidebar input[type="checkbox"] {
+  appearance: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid #00bcd4;
+  border-radius: 4px;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s, border-color 0.2s;
+  position: relative;
+}
+
+.sidebar input[type="checkbox"]:checked {
+  background-color: #00bcd4;
+  border-color: #00bcd4;
+}
+
+.sidebar input[type="checkbox"]::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 5px;
+  width: 4px;
+  height: 8px;
+  border: solid #0d1117;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.sidebar input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
+
+
+.main-content {
+  flex-grow: 1;
+  padding: 40px 20px;
 }
 
 .titulo-listado {
@@ -14,7 +112,10 @@
 }
 
 .grid-juegos {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 30px;
+  justify-content: center;
+  max-width: 100%;
+  margin:5px;
 }

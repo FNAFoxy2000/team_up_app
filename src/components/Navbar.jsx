@@ -73,22 +73,23 @@ function Navbar() {
                   alt="Avatar"
                   className={styles.userIcon}
                   title={user.username}
+                  referrerPolicy="no-referrer"
                 />
               </Link>
-            <button onClick={handleLogout} className={styles.authButton}>
+            <button onClick={handleLogout} className={styles.logoutButton}>
               Cerrar sesión
             </button>
           </>
         ) : ( // Si no lo esta cargamos los botones para que pueda hacer login
           <div style={{ display: 'flex' }}>
             <button 
-              className={styles.authButton}
+              className={styles.discordButton}
               onClick={() => window.location.href = 'http://localhost:3000/auth/discord'}
             >
               <FaDiscord /> Discord
             </button>
             <button
-              className={styles.authButton}
+              className={styles.googleButton}
               onClick={() => window.location.href = 'http://localhost:3000/auth/google'}
             >
               <FaGoogle /> Google

@@ -10,7 +10,7 @@ const CardJuego = ({ juego }) => {
   const handleMouseEnter = () => {
     hoverTimeout.current = setTimeout(() => {
       setShowDescription(true);
-    }, 1500);
+    }, 1000);
   };
 
   const handleMouseLeave = () => {
