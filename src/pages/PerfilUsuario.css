@@ -31,19 +31,35 @@
 }
 
 .editar-btn {
-  margin-left: auto;
-  background-color: #004aad;
+  background-color: #00bcd4;
   color: white;
-  padding: 0.6rem 1.2rem;
+  padding: 10px 16px;
   border: none;
   border-radius: 8px;
   cursor: pointer;
   font-weight: bold;
+  transition: background 0.3s ease;
 }
 
 .editar-btn:hover {
-  background-color: #00357a;
+  background-color: #019ab0;
 }
+
+.amistad-btn {
+  background-color: #4ade80;
+  color: #0f172a;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.amistad-btn:hover {
+  background-color: #22c55e;
+}
+
 
 .perfil-seccion {
   margin-top: 2rem;

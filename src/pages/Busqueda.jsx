@@ -1,8 +1,7 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import styles from './Busqueda.module.css';
+import UsuarioCard from '../components/CardUsuario';
+import { getAllUsuarios } from '../peticiones/usuario_peticiones.mjs';
 
 function Busqueda() {
     // Estados para los filtros
@@ -10,22 +9,31 @@ function Busqueda() {
     const [selectedGame, setSelectedGame] = useState('');
     const [isRegistered, setIsRegistered] = useState('');
     const [orderBy, setOrderBy] = useState('');
+    const [usuarios, setUsuarios] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    useEffect(() => {
+      const cargarUsuarios = async () => {
+        setLoading(true);
+        try {
+          const usuariosData = await getAllUsuarios();
+          setUsuarios(usuariosData);
+        } catch (error) {
+          console.error("Error al cargar usuarios:", error);
+        } finally {
+          setLoading(false);
+        }
+      };
+      cargarUsuarios();
+    }, []);
+
+    // Filtrar usuarios por nombre
+    const usuariosFiltrados = usuarios.filter(usuario =>
+      usuario.nombre_usuario?.toLowerCase().includes(searchText.toLowerCase())
+    );
 
     const handleSubmit = (e) => {
         e.preventDefault();
-
-        // Aquí enviarías los datos a tu API
-        const filtros = {
-            searchText,
-            selectedGame,
-            isRegistered,
-            orderBy
-        };
-
-        console.log('Filtros enviados:', filtros);
-
-        // Luego harías una llamada fetch o axios a tu API
-        // fetch('/api/busqueda', { method: 'POST', body: JSON.stringify(filtros) })...
     };
 
     return (
@@ -89,8 +97,13 @@ function Busqueda() {
                     </button>
                 </form>
 
-
-                {/* Aquí debajo luego mostraremos los resultados que devuelve la API */}
+                <div className={styles.listadoUsuarios}>
+                  {loading && <p>Cargando usuarios...</p>}
+                  {!loading && usuariosFiltrados.length === 0 && <p>No se encontraron usuarios.</p>}
+                  {!loading && usuariosFiltrados.map(usuario => (
+                    <UsuarioCard key={usuario.id_usuario} usuario={usuario} />
+                  ))}
+                </div>
             </div>
         </>
     );
