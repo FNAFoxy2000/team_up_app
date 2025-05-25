@@ -36,3 +36,24 @@ export async function getSolicitudesRecibidas(id_destinatario) {
     throw error;
   }
 }
+
+export async function aceptarSolicitud(id) {
+  console.log(id);
+    try {
+        const response = await axios.put('http://localhost:3000/solicitudes/aceptar', {id});
+        return response.data;
+    } catch (err) {
+        console.error('Error al aceptar la solicitud:', err);
+        throw err;
+    }
+}
+
+export async function rechazarSolicitud(id) {
+    try {
+        const response = await axios.put('http://localhost:3000/solicitudes/rechazar', {id});
+        return response.data;
+    } catch (err) {
+        console.error('Error al rechazar o cancelar la solicitud:', err);
+        throw err;
+    }
+}

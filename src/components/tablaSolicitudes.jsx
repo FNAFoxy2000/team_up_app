@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './tablaSolicitudes.css';
+import { aceptarSolicitud, rechazarSolicitud } from '../peticiones/solicitudes_amistad_peticiones.mjs';
 
 const TablaSolicitudes = ({ enviadas = [], recibidas = [] }) => {
   const [pestañaActiva, setPestañaActiva] = useState('enviadas');
@@ -69,14 +70,28 @@ const TablaSolicitudes = ({ enviadas = [], recibidas = [] }) => {
                 <td className="estado">{solicitud.estado}</td>
                 <td>
                   {pestañaActiva === 'enviadas' ? (
-                    <button className="accion-btn cancelar">Cancelar</button>
+                    <button 
+                      className="accion-btn cancelar"
+                      onClick={() => rechazarSolicitud(solicitud.id_solicitud)}
+                    >
+                      Cancelar
+                    </button>
                   ) : (
-                    <button className="accion-btn aceptar">Aceptar</button>
+                    <button 
+                      className="accion-btn aceptar"
+                      onClick={() => aceptarSolicitud(solicitud.id_solicitud)}
+                    >
+                      Aceptar
+                    </button>
+                    
                   )}
                 </td>
                 <td>
                   {pestañaActiva === 'enviadas' ? null : (
-                    <button className="accion-btn rechazar">Rechazar</button>
+                    <button 
+                      className="accion-btn rechazar"
+                      onClick={() => rechazarSolicitud(solicitud.id_solicitud)}
+                    >Rechazar</button>
                   )}
                 </td>
               </tr>
