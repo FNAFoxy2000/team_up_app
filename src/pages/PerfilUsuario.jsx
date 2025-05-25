@@ -2,12 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './PerfilUsuario.css';
 import { getUsuarioInfo, cambiarNombre } from '../peticiones/usuario_peticiones.mjs';
-import { nuevaSolicitudAmistad } from '../peticiones/solicitudes_amistad_peticiones.mjs';
+import { nuevaSolicitudAmistad, getSolicitudesEnviadas, getSolicitudesRecibidas } from '../peticiones/solicitudes_amistad_peticiones.mjs';
 import AuthService from '../services/authService';
+import TablaSolicitudes from '../components/tablaSolicitudes';
 
 const PerfilUsuario = () => {
   const [usuario, setUsuario] = useState(null);
   const [usuarioActivo, setUsuarioActivo] = useState(null);
+  const [solicitudesRecibidas, setSolicitudesRecibidas] = useState([]);
+  const [solicitudesEnviadas, setSolicitudesEnviadas] = useState([]);
   const location = useLocation();
 
   useEffect(() => {
@@ -15,7 +18,6 @@ const PerfilUsuario = () => {
       try {
         const params = new URLSearchParams(location.search);
         const email = params.get('email');
-
         if (!email) throw new Error("Email no especificado en la URL");
 
         const usuarioData = await getUsuarioInfo(email);
@@ -24,6 +26,16 @@ const PerfilUsuario = () => {
         const userFromToken = AuthService.getUserFromToken();
         if (userFromToken) {
           setUsuarioActivo(userFromToken);
+
+          // Si es el perfil propio, cargar solicitudes
+          if (userFromToken.email === email) {
+            const [recibidas, enviadas] = await Promise.all([
+              getSolicitudesRecibidas(userFromToken.id_usuario),
+              getSolicitudesEnviadas(userFromToken.id_usuario)
+            ]);
+            if (recibidas.success) setSolicitudesRecibidas(recibidas.data);
+            if (enviadas.success) setSolicitudesEnviadas(enviadas.data);
+          }
         }
       } catch (error) {
         console.error('Error al cargar el perfil:', error);
@@ -41,12 +53,11 @@ const PerfilUsuario = () => {
     }
 
     try {
-      const user = {
+      await cambiarNombre({
         id_usuario: usuario.id_usuario,
         nombre_usuario_app: nuevoNombre.trim()
-      };
+      });
 
-      await cambiarNombre(user);
       setUsuario(prev => ({
         ...prev,
         nombre_usuario_app: nuevoNombre.trim()
@@ -58,11 +69,7 @@ const PerfilUsuario = () => {
   };
 
   const handleSolicitarAmistad = async () => {
-    if (!usuarioActivo || !usuario) return;
-    if (usuarioActivo.id_usuario === usuario.id_usuario) {
-      alert("No puedes enviarte una solicitud a ti mismo.");
-      return;
-    }
+    if (!usuarioActivo || !usuario || usuarioActivo.id_usuario === usuario.id_usuario) return;
 
     try {
       const respuesta = await nuevaSolicitudAmistad(usuarioActivo.id_usuario, usuario.id_usuario);
@@ -104,6 +111,13 @@ const PerfilUsuario = () => {
           </button>
         )}
       </div>
+
+      {esPerfilPropio && (
+        <div className="solicitudes-section">
+          <h3>Solicitudes de amistad</h3>
+          <TablaSolicitudes enviadas={solicitudesEnviadas || []} recibidas={solicitudesRecibidas || []} />
+        </div>
+      )}
     </div>
   );
 };
