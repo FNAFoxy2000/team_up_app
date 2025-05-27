@@ -31,3 +31,13 @@ export async function getChatMessages(chatId) {
     throw error;
   }
 }
+
+export async function createChat(chatData) {
+  try {
+    const response = await axios.post(`${API_URL}/chat/crearChat`, chatData);
+    return response.data;
+  } catch (error) {
+    console.error('Error en createChat:', error);
+    throw error;
+  }
+}

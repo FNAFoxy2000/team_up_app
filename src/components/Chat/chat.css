@@ -5,7 +5,7 @@
   height: 100vh;
   max-height: 100vh;
   overflow: hidden;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   color: white;
   background-color: #121212;
 }
@@ -319,6 +319,30 @@
   height: 100vh;
   background-color: #121212;
   color: white;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   font-size: 1.2rem;
+}
+
+/* Estilos para el botón de crear grupo */
+.create-group-button {
+  width: 100%;
+  padding: 0.8rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  background-color: #27ae60;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: background-color 0.3s;
+}
+
+.create-group-button:hover {
+  background-color: #229954;
+}
+
+.create-group-button:active {
+  background-color: #1e8449;
 }
