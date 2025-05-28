@@ -2,16 +2,27 @@ import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import './PerfilUsuario.css';
 import { getUsuarioInfo, cambiarNombre } from '../peticiones/usuario_peticiones.mjs';
-import { nuevaSolicitudAmistad, getSolicitudesEnviadas, getSolicitudesRecibidas } from '../peticiones/solicitudes_amistad_peticiones.mjs';
+import {
+  nuevaSolicitudAmistad,
+  getSolicitudesEnviadas,
+  getSolicitudesRecibidas
+} from '../peticiones/solicitudes_amistad_peticiones.mjs';
+import { getAmistades } from '../peticiones/amistades_peticiones.mjs';
 import AuthService from '../services/authService';
 import TablaSolicitudes from '../components/tablaSolicitudes';
 
 const PerfilUsuario = () => {
   const [usuario, setUsuario] = useState(null);
   const [usuarioActivo, setUsuarioActivo] = useState(null);
+  const [amistades, setAmistades] = useState([]);
   const [solicitudesRecibidas, setSolicitudesRecibidas] = useState([]);
   const [solicitudesEnviadas, setSolicitudesEnviadas] = useState([]);
   const location = useLocation();
+
+  const userFromToken = AuthService.getUserFromToken();
+  if (!userFromToken) {
+    window.location.href = '/LoginError';
+  }
 
   useEffect(() => {
     const cargarDatos = async () => {
@@ -27,12 +38,17 @@ const PerfilUsuario = () => {
         if (userFromToken) {
           setUsuarioActivo(userFromToken);
 
-          // Si es el perfil propio, cargar solicitudes
+          // Si es el perfil propio, cargar solicitudes y amistades
           if (userFromToken.email === email) {
-            const [recibidas, enviadas] = await Promise.all([
+            const [amistadesData, recibidas, enviadas] = await Promise.all([
+              getAmistades(userFromToken.email),
               getSolicitudesRecibidas(userFromToken.id_usuario),
               getSolicitudesEnviadas(userFromToken.id_usuario)
             ]);
+
+            console.log('Amistades cargadas:', amistadesData);
+
+            if (amistadesData.success) setAmistades(amistadesData.data);
             if (recibidas.success) setSolicitudesRecibidas(recibidas.data);
             if (enviadas.success) setSolicitudesEnviadas(enviadas.data);
           }
@@ -115,7 +131,11 @@ const PerfilUsuario = () => {
       {esPerfilPropio && (
         <div className="solicitudes-section">
           <h3>Solicitudes de amistad</h3>
-          <TablaSolicitudes enviadas={solicitudesEnviadas || []} recibidas={solicitudesRecibidas || []} />
+          <TablaSolicitudes
+            amistades={amistades || []}
+            enviadas={solicitudesEnviadas || []}
+            recibidas={solicitudesRecibidas || []}
+          />
         </div>
       )}
     </div>

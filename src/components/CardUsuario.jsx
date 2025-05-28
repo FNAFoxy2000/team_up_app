@@ -34,6 +34,7 @@ const UsuarioCard = ({ usuario }) => {
         src={usuario.avatar || '/default-avatar.png'}
         alt={`${usuario.nombre_usuario_app || usuario.nombre_usuario} avatar`}
         className="usuario-avatar"
+        referrerPolicy="no-referrer"
       />
       <div className="usuario-info">
         <h3 className="usuario-nombre">{usuario.nombre_usuario_app || usuario.nombre_usuario}</h3>
