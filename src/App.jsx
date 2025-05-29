@@ -7,9 +7,12 @@ import LoginError from './pages/LoginError';
 import AnnadirJuego from './pages/AnnadirJuegos';
 import ChatPage from './pages/ChatPage';
 import PerfilUsuario from './pages/PerfilUsuario';
+import ChampionGrid from './pages/ChampionGrid';
+import CrearGuia from './pages/CrearGuia'
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+
 
 function App() {
   return (
@@ -23,6 +26,8 @@ function App() {
         <Route path="/juegos/:nombreJuego" element={<Juego />} />
         <Route path="/juegos/annadir" element={<AnnadirJuego />} />
         <Route path="/juegos/editar" element={<AnnadirJuego />} />
+        <Route path="/guias/crear" element={<ChampionGrid/>}/>
+        <Route path='/guias/crear/:championId' element={<CrearGuia/>} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/usuario/datosUsuario" element={<PerfilUsuario />} />
         <Route path="/LoginError" element={<LoginError/>}/>
