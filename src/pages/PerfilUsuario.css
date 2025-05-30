@@ -60,6 +60,35 @@
   background-color: #22c55e;
 }
 
+.cancelar-btn {
+  background-color: #e91f1f;
+  color: #0f172a;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.cancelar-btn:hover {
+  background-color: rgb(180, 20, 20);
+}
+
+.aceptar-btn {
+  background-color: #00bcd4;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s ease;
+}
+
+.aceptar-btn:hover {
+  background-color: #019ab0;
+}
 
 .perfil-seccion {
   margin-top: 2rem;

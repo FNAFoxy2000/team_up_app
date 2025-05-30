@@ -5,8 +5,6 @@ import userIcon from '../assets/default-user.png';
 import { Link } from 'react-router-dom';
 import { FaDiscord, FaGoogle } from 'react-icons/fa';
 import AuthService from '../services/authService';
-import BotonDiscord from './Botones/DiscordBoton';
-import BotonGoogle from './Botones/GoogleBoton';
 
 function Navbar() {
 
@@ -83,9 +81,19 @@ function Navbar() {
             </button>
           </>
         ) : ( // Si no lo esta cargamos los botones para que pueda hacer login
-          <div style={{ display: 'flex', gap: '1rem' }}>
-            <BotonDiscord onClick={() => window.location.href = 'http://localhost:3000/auth/discord'} />
-            <BotonGoogle onClick={() => window.location.href = 'http://localhost:3000/auth/google'} />
+          <div style={{ display: 'flex' }}>
+            <button 
+              className={styles.discordButton}
+              onClick={() => window.location.href = 'http://localhost:3000/auth/discord'}
+            >
+              <FaDiscord /> Discord
+            </button>
+            <button
+              className={styles.googleButton}
+              onClick={() => window.location.href = 'http://localhost:3000/auth/google'}
+            >
+              <FaGoogle /> Google
+            </button>
           </div>
         )}
       </div>

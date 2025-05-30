@@ -4,6 +4,8 @@ import {
   aceptarSolicitud,
   rechazarSolicitud
 } from '../peticiones/solicitudes_amistad_peticiones.mjs';
+import { cancelarAmistad } from '../peticiones/amistades_peticiones.mjs';
+import AuthService from '../services/authService';
 
 const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => {
   const [pestañaActiva, setPestañaActiva] = useState('amistades');
@@ -21,9 +23,28 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
     window.location.href = `/usuario/datosUsuario?email=${encodeURIComponent(email)}`;
   };
 
-  const handleCancelarAmistad = (email) => {
-    alert(`Función para cancelar amistad con ${email} aún no implementada.`);
-    // Aquí podrías llamar a una función real como cancelarAmistad(email)
+  const handleCancelarAmistad = async (email) => {
+    try {
+      const confirmacion = window.confirm(`¿Estás seguro de que quieres cancelar la amistad con ${email}?`);
+      if (!confirmacion) return;
+
+      const usuarioActual = AuthService.getUserFromToken();
+      if (!usuarioActual) {
+        alert("No se pudo obtener el usuario actual.");
+        return;
+      }
+
+      const amigo = amistades.find((a) => a.email === email);
+      if (!amigo) {
+        alert("No se encontró la amistad.");
+        return;
+      }
+
+      await cancelarAmistad(amigo.id_usuario, usuarioActual.id_usuario);
+      window.location.reload();
+    } catch (error) {
+      console.error('Error al cancelar amistad:', error);
+    }
   };
 
   return (
@@ -46,6 +67,9 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
           onClick={() => setPestañaActiva('recibidas')}
         >
           Recibidas
+          {Array.isArray(recibidas) && recibidas.length > 0 && (
+            <span className="notificacion-dot" />
+          )}
         </button>
       </div>
 
@@ -95,7 +119,12 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
                   style={{ cursor: 'pointer' }}
                 >
                   <td>
-                    <img src={avatar} alt="Avatar" className="avatar-img" />
+                    <img 
+                      src={avatar} 
+                      alt="Avatar" 
+                      className="avatar-img"
+                      referrerPolicy="no-referrer"
+                    />
                   </td>
                   <td>{nombre}</td>
                   <td>{email}</td>
@@ -113,9 +142,12 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
                     ) : pestañaActiva === 'enviadas' ? (
                       <button
                         className="accion-btn cancelar"
-                        onClick={(e) => {
+                        onClick={async (e) => {
                           e.stopPropagation();
-                          rechazarSolicitud(item.id_solicitud);
+                          const confirmacion = window.confirm("¿Seguro que quieres cancelar esta solicitud?");
+                          if (!confirmacion) return;
+                          await rechazarSolicitud(item.id_solicitud);
+                          window.location.reload();
                         }}
                       >
                         Cancelar
@@ -124,18 +156,22 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
                       <>
                         <button
                           className="accion-btn aceptar"
-                          onClick={(e) => {
+                          onClick={async (e) => {
                             e.stopPropagation();
-                            aceptarSolicitud(item.id_solicitud);
+                            await aceptarSolicitud(item.id_solicitud);
+                            window.location.reload();
                           }}
                         >
                           Aceptar
                         </button>
                         <button
                           className="accion-btn rechazar"
-                          onClick={(e) => {
+                          onClick={async (e) => {
                             e.stopPropagation();
-                            rechazarSolicitud(item.id_solicitud);
+                            const confirmacion = window.confirm("¿Seguro que quieres rechazar esta solicitud?");
+                            if (!confirmacion) return;
+                            await rechazarSolicitud(item.id_solicitud);
+                            window.location.reload();
                           }}
                         >
                           Rechazar

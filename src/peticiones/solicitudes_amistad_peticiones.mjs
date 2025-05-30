@@ -38,7 +38,6 @@ export async function getSolicitudesRecibidas(id_destinatario) {
 }
 
 export async function aceptarSolicitud(id) {
-  console.log(id);
     try {
         const response = await axios.put('http://localhost:3000/solicitudes/aceptar', {id});
         return response.data;
@@ -56,4 +55,14 @@ export async function rechazarSolicitud(id) {
         console.error('Error al rechazar o cancelar la solicitud:', err);
         throw err;
     }
+}
+
+export async function solicitudPendiente(id1, id2) {
+  try {
+    const response = await axios.get(`http://localhost:3000/solicitudes/pendiente/${id1}/${id2}`);
+    return response.data;
+  } catch (err) {
+    console.error('Error al verificar solicitud pendiente:', err);
+    throw err;
+  }
 }
