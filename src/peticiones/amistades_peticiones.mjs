@@ -1,8 +1,10 @@
 import axios from 'axios';
 
+const apiURL = import.meta.env.VITE_API_URL
+
 export async function getAmistades(email){
     try{
-        const respuesta = await axios.get(`http://localhost:3000/amistades/${email}`)
+        const respuesta = await axios.get(`${apiURL}/amistades/${email}`)
         return respuesta.data
     }catch(err){
         console.error('Error al obtener la lista de amigos:', err);
@@ -12,7 +14,7 @@ export async function getAmistades(email){
 
 export async function sonAmigos(id1, id2){
     try{
-        const respuesta = await axios.get(`http://localhost:3000/amistades/sonAmigos/${id1}/${id2}`)
+        const respuesta = await axios.get(`${apiURL}/amistades/sonAmigos/${id1}/${id2}`)
         return respuesta.data
     } catch(err){
         console.error('Error al obtener si son amigos:', err);
@@ -21,7 +23,7 @@ export async function sonAmigos(id1, id2){
 
 export async function cancelarAmistad(id1, id2) {
   try {
-    const respuesta = await axios.delete("http://localhost:3000/amistades/eliminar", {
+    const respuesta = await axios.delete(`${apiURL}/amistades/eliminar`, {
       data: {
         id1: id1,
         id2: id2
