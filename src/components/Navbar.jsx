@@ -8,6 +8,8 @@ import AuthService from '../services/authService';
 import BotonDiscord from './Botones/DiscordBoton';
 import BotonGoogle from './Botones/GoogleBoton';
 
+const apiURL = import.meta.env.VITE_API_URL;
+
 function Navbar() {
 
   const [user, setUser] = useState(null);
@@ -84,8 +86,8 @@ function Navbar() {
           </>
         ) : ( // Si no lo esta cargamos los botones para que pueda hacer login
           <div style={{ display: 'flex', gap: '1rem' }}>
-            <BotonDiscord onClick={() => window.location.href = 'http://localhost:3000/auth/discord'} />
-            <BotonGoogle onClick={() => window.location.href = 'http://localhost:3000/auth/google'} />
+            <BotonDiscord onClick={() => window.location.href = `${apiURL}/auth/discord`} />
+            <BotonGoogle onClick={() => window.location.href = `${apiURL}/auth/google`} />
           </div>
         )}
       </div>

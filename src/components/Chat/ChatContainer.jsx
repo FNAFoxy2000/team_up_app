@@ -7,6 +7,8 @@ import ChatMessages from "./ChatMessages"
 import { getUserChats } from "../../services/chatService"
 import "./Chat.css"
 
+const apiURL = import.meta.env.VITE_API_URL
+
 const ChatContainer = ({ userId, username }) => {
   const [socket, setSocket] = useState(null)
   const [isConnected, setIsConnected] = useState(false)
@@ -19,7 +21,7 @@ const ChatContainer = ({ userId, username }) => {
     if (!userId) return
 
     console.log("Inicializando Socket.io con usuario:", { userId, username })
-    const newSocket = io("http://localhost:3000", {
+    const newSocket = io(`${apiURL}`, {
       auth: { serverOffset: 0 },
     })
 

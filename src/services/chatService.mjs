@@ -1,10 +1,10 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:3000';
+const apiURL = import.meta.env.VITE_API_URL
 
 export async function getUserChats(userId) {
   try {
-    const response = await axios.get(`${API_URL}/chat/usuario/${userId}`);
+    const response = await axios.get(`${apiURL}/chat/usuario/${userId}`);
     return response.data;
   } catch (error) {
     console.error('Error en getUserChats:', error);
@@ -14,7 +14,7 @@ export async function getUserChats(userId) {
 
 export async function getUsers() {
   try {
-    const response = await axios.get(`${API_URL}/usuario`);
+    const response = await axios.get(`${apiURL}/usuario`);
     return response.data;
   } catch (error) {
     console.error('Error en getUsers:', error);
@@ -24,7 +24,7 @@ export async function getUsers() {
 
 export async function getChatMessages(chatId) {
   try {
-    const response = await axios.get(`${API_URL}/chat/${chatId}/mensajes`);
+    const response = await axios.get(`${apiURL}/chat/${chatId}/mensajes`);
     return response.data;
   } catch (error) {
     console.error('Error en getChatMessages:', error);

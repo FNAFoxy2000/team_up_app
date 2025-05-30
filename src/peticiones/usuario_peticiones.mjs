@@ -12,7 +12,7 @@ export async function getAllUsuarios(){
 
 export async function getUsuarioInfo(email) {
   try {
-    const respuesta = await axios.get('http://localhost:3000/usuario/datosUsuario', {
+    const respuesta = await axios.get(`${apiURL}/usuario/datosUsuario`, {
       params: { email }
     });
     return respuesta.data;
