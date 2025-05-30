@@ -12,6 +12,7 @@ import CrearGuia from './pages/CrearGuia'
 import ScrollToTop from './components/ScrollToTop';
 import Navbar from './components/Navbar';
 import Footer from './components/Footer';
+import Grid from './components/Guias/SkillsGrid'
 
 
 function App() {
@@ -31,6 +32,7 @@ function App() {
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/usuario/datosUsuario" element={<PerfilUsuario />} />
         <Route path="/LoginError" element={<LoginError/>}/>
+        <Route path="/grid" element={<Grid />} />
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
       </Routes>
 
