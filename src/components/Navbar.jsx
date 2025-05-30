@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { FaDiscord, FaGoogle } from 'react-icons/fa';
 import AuthService from '../services/authService';
 
+const apiURL = import.meta.env.VITE_API_URL;
+
 function Navbar() {
 
   const [user, setUser] = useState(null);
@@ -84,13 +86,13 @@ function Navbar() {
           <div style={{ display: 'flex' }}>
             <button 
               className={styles.discordButton}
-              onClick={() => window.location.href = 'http://localhost:3000/auth/discord'}
+              onClick={() => window.location.href = `${apiURL}/auth/discord`}
             >
               <FaDiscord /> Discord
             </button>
             <button
               className={styles.googleButton}
-              onClick={() => window.location.href = 'http://localhost:3000/auth/google'}
+              onClick={() => window.location.href = `${apiURL}/auth/google`}
             >
               <FaGoogle /> Google
             </button>

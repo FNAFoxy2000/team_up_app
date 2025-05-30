@@ -10,6 +10,8 @@ import AuthService from "../services/authService.mjs"
 import { getUserIdByEmail } from "../peticiones/usuario_peticiones"
 import "../components/Chat/Chat.css"
 
+const apiURL = import.meta.env.VITE_API_URL
+
 const ChatPage = () => {
   // Estados de autenticación
   const [user, setUser] = useState(null)
@@ -63,7 +65,7 @@ const ChatPage = () => {
     if (!userId || !user) return
 
     console.log("Inicializando Socket.io con usuario:", { userId, username: user.username })
-    const newSocket = io("http://localhost:3000", {
+    const newSocket = io(`${apiURL}`, {
       auth: { serverOffset: 0 },
     })
 

@@ -1,10 +1,10 @@
 import axios from 'axios'; 
 
-const API_URL = 'http://localhost:3000';
+const apiURL = import.meta.env.VITE_API_URL
 
 export async function getUsuarioInfo(email) {
   try {
-    const respuesta = await axios.get(`${API_URL}/usuario/datosUsuario`, {
+    const respuesta = await axios.get(`${apiURL}/usuario/datosUsuario`, {
       params: { email }
     });
     return respuesta.data;
