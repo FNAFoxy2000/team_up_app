@@ -1,4 +1,4 @@
-import axios from 'axios'; 
+import axios from 'axios';
 
 const apiURL = import.meta.env.VITE_API_URL
 
@@ -16,7 +16,7 @@ export async function getUsuarioInfo(email) {
 
 export async function getUserIdByEmail(email) {
   try {
-    const response = await axios.get(`${API_URL}/usuario/obtenerId?email=${email}`);
+    const response = await axios.get(`${apiURL}/usuario/obtenerId?email=${email}`);
 
     if (response.data && response.data.id_usuario !== undefined) {
       return response.data.id_usuario;

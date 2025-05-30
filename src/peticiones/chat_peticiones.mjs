@@ -34,7 +34,22 @@ export async function getChatMessages(chatId) {
 
 export async function createChat(chatData) {
   try {
-    const response = await axios.post(`${API_URL}/chat/crearChat`, chatData);
+    const response = await axios.post(`${apiURL}/chat/crearChat`, chatData);
+    return response.data;
+  } catch (error) {
+    console.error('Error en createChat:', error);
+    throw error;
+  }
+}
+
+export async function abandonarChat(id_usuario, id_chat) {
+  try {
+    const response = await axios.delete(`${apiURL}/chat/abandonarChat`, {
+      data: {
+        id_usuario,
+        id_chat,
+      },
+    });
     return response.data;
   } catch (error) {
     console.error('Error en createChat:', error);
