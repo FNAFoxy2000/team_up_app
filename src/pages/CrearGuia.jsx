@@ -5,12 +5,20 @@ import axios from 'axios';
 import SkillsGrid from '../components/Guias/SkillsGrid';  
 import ItemSelector from '../components/Guias/ItemSelector';
 
-
 const GuiaCampeon = () => {
   const { championId } = useParams();
   const [campeon, setCampeon] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+
+  const [campeonNombre, setCampeonNombre] = useState('');
+
+  // 🔽 NUEVO ESTADO PARA ITEMS SELECCIONADOS
+  const [selectedItems, setSelectedItems] = useState({
+    starterItems: [],
+    boots: [],
+    items: []
+  });
 
   useEffect(() => {
     const fetchCampeon = async () => {
@@ -21,6 +29,7 @@ const GuiaCampeon = () => {
         );
         const champData = res.data.data[championId];
         setCampeon(champData);
+        setCampeonNombre(champData.name);
       } catch (err) {
         setError('Error al cargar los datos del campeón.');
         console.error(err);
@@ -34,6 +43,14 @@ const GuiaCampeon = () => {
 
   const handleSkillChange = (orden) => {
     console.log('Orden de habilidades:', orden);
+  };
+
+  // 🔽 NUEVA FUNCIÓN PARA GUARDAR LOS ITEMS SELECCIONADOS
+  const handleItemChange = (seleccion) => {
+    setSelectedItems(seleccion);
+    console.log('Starter:', seleccion.starterItems);
+    console.log('Boots:', seleccion.boots);
+    console.log('Items:', seleccion.items);
   };
 
   if (loading) return <p style={{ color: 'white' }}>Cargando datos del campeón...</p>;
@@ -61,13 +78,15 @@ const GuiaCampeon = () => {
 
       <div style={{ marginTop: '2rem' }}>
         <h2>Configura el orden de habilidades</h2>
-        <SkillsGrid onChange={handleSkillChange} />
+        <SkillsGrid onChange={handleSkillChange} campeonNombre={campeon.name} />
       </div>
 
-      <ItemSelector onChange={(seleccion) => console.log(seleccion)} />
+      <div style={{ marginTop: '2rem' }}>
+        <h2>Selecciona los objetos</h2>
+        <ItemSelector onSelectionChange={handleItemChange} />
+      </div>
 
-
-      {/* Aquí seguirías con otras secciones como Runas, Objetos, etc. */}
+      {/* Aquí seguirías con otras secciones como Runas, Hechizos, etc. */}
     </div>
   );
 };

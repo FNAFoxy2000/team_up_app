@@ -100,9 +100,9 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
         )}
       </p>
 
-      <pre style={{ color: 'white', marginTop: '1rem', fontSize: '0.9rem' }}>
+      {/* <pre style={{ color: 'white', marginTop: '1rem', fontSize: '0.9rem' }}>
         {JSON.stringify(seleccion, null, 2)}
-      </pre>
+      </pre> */}
     </div>
   );
 };
