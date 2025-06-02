@@ -16,7 +16,7 @@ export async function getUsuarioPorJuego(id_juego, id_usuario){
 
 export async function getJuegosPorUsuario(id_usuario) {
   try {
-    const respuesta = await axios.get(`${apiURL}/usuarios_juego/usuario/${id_usuario}`);
+    const respuesta = await axios.get(`${apiURL}/usuarios_juegos/usuario/${id_usuario}`);
     return respuesta.data;
     // success = true => data con listado de juegos para montar los cards
   } catch (err) {
