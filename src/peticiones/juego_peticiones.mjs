@@ -53,3 +53,13 @@ export async function borrarJuego(juego) {
         throw err;
     }
 }
+
+export async function getChatsJuego(id_juego){
+    try{
+        const respuesta = await axios.get(`${apiURL}/juegos/chatsJuego/${id_juego}`)
+        return respuesta.data
+    }catch(err){
+        console.error('Error al obtener los datos del juego:', err);
+        throw err;
+    }
+}

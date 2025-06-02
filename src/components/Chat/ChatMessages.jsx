@@ -1,9 +1,11 @@
 "use client"
 
 import { useState, useRef, useEffect } from "react"
+import ChatInfo from "./ChatInfo"
 
 const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userId }) => {
   const [newMessage, setNewMessage] = useState("")
+  const [showChatInfo, setShowChatInfo] = useState(false)
   const messagesEndRef = useRef(null)
 
   // Auto-scroll al último mensaje
@@ -23,9 +25,7 @@ const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userI
   const isOwnMessage = (message) => {
     // Asegurarse de que estamos comparando el mismo tipo de datos
     const messageUserId = typeof message.id_usuario === "string" ? message.id_usuario : String(message.id_usuario)
-
     const currentUserId = typeof userId === "string" ? userId : String(userId)
-
     return messageUserId === currentUserId
   }
 
@@ -45,6 +45,19 @@ const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userI
     return `temp-${Date.now()}-${index}`
   }
 
+  const handleHeaderClick = () => {
+    setShowChatInfo(true)
+  }
+
+  const handleBackToChat = () => {
+    setShowChatInfo(false)
+  }
+
+  // Si se está mostrando la información del chat, renderizar ChatInfo
+  if (showChatInfo) {
+    return <ChatInfo currentChat={currentChat} onBack={handleBackToChat} userId={userId} />
+  }
+
   if (!currentChat) {
     return (
       <div className="chat-messages empty-chat">
@@ -58,9 +71,10 @@ const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userI
 
   return (
     <div className="chat-messages">
-      <div className="chat-messages-header">
+      <div className="chat-messages-header" onClick={handleHeaderClick}>
         <h2>{currentChat.nombre}</h2>
         <p>{currentChat.descripcion}</p>
+        <span className="header-hint">Haz clic para ver información del chat</span>
       </div>
 
       <div className="messages-container">

@@ -1,17 +1,24 @@
 "use client"
 
 import { useState } from "react"
+import { useNavigate } from "react-router-dom"
 
 const ChatList = ({ chats, currentChat, onSelectChat }) => {
   const [searchTerm, setSearchTerm] = useState("")
+  const navigate = useNavigate()
 
-  const filteredChats = chats.filter((chat) => 
-    chat.nombre.toLowerCase().includes(searchTerm.toLowerCase())
-  )
+  const filteredChats = chats.filter((chat) => chat.nombre.toLowerCase().includes(searchTerm.toLowerCase()))
+
+  const handleCreateGroup = () => {
+    navigate("/crearChat")
+  }
 
   return (
     <div className="chat-list">
       <div className="chat-list-header">
+        <button onClick={handleCreateGroup} className="create-group-button">
+          Crear grupo
+        </button>
         <h2>Mis Chats</h2>
         <input
           type="text"
@@ -37,9 +44,7 @@ const ChatList = ({ chats, currentChat, onSelectChat }) => {
             </li>
           ))
         ) : (
-          <li className="no-chats">
-            {searchTerm ? "No se encontraron chats" : "No tienes chats activos"}
-          </li>
+          <li className="no-chats">{searchTerm ? "No se encontraron chats" : "No tienes chats activos"}</li>
         )}
       </ul>
     </div>
