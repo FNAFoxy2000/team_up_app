@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react"
 import "./Juego.css"
 import { getDatosJuego, borrarJuego, getChatsJuego } from "../peticiones/juego_peticiones.mjs"
-import { getUserChats, abandonarChat } from "../peticiones/chat_peticiones.mjs"
+import { getUserChats, abandonarChat, unirseChat } from "../peticiones/chat_peticiones.mjs"
 import AuthService from "../services/authService.mjs"
 import { getUserIdByEmail } from "../peticiones/usuario_peticiones.mjs"
 import { Link, useParams, useNavigate } from "react-router-dom"
@@ -83,17 +83,28 @@ const GameProfilePage = () => {
     }
   }
 
-  const handleUnirseChat = (chatId) => {
-    // Redirigir al chat específico
-    navigate(`/chat?chatId=${chatId}`)
+  const handleUnirseChat = async (chatId) => {
+    try {
+      const response = await unirseChat(userId, chatId)
+      if (response.success) {
+        console.log("Unido correctamente el chat:", chatId)
+
+        // Actualizar la lista de chats del usuario después de unirse
+        if (juego && juego.id_juego && userId) {
+          await fetchChatsData(juego.id_juego, userId)
+        }
+      }
+
+    } catch (error) {
+      console.error("Error al unirse al chat:", error)
+      alert("Error al unirse al chat")
+    }
   }
 
   const handleAbandonarChat = async (chatId, chatNombre) => {
     const confirmacion = window.confirm(`¿Estás seguro de que quieres abandonar el chat "${chatNombre}"?`)
     if (confirmacion) {
       try {
-        // Aquí harías la petición para abandonar el chat
-        console.log(`Abandonando chat ${chatId}`)
         const response = await abandonarChat(userId, chatId)
         if (response.success) {
           console.log("Abandonado correctamente el chat:", chatId)

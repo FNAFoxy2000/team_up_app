@@ -56,3 +56,16 @@ export async function abandonarChat(id_usuario, id_chat) {
     throw error;
   }
 }
+
+export async function unirseChat(id_usuario, id_chat) {
+  try {
+    const response = await axios.post(`${apiURL}/chat/unirseChat`, {
+      id_usuario,
+      id_chat,
+    });
+    return response.data;
+  } catch (error) {
+    console.error('Error en unirseChat:', error);
+    throw error;
+  }
+}
