@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './guias.css';
+import styles from './niveles.module.css';
 
 const habilidades = ['Q', 'W', 'E', 'R'];
 const niveles = 18;
@@ -55,22 +55,20 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
   }, [seleccion, onChange]);
 
   return (
-    <div className="skill-grid-container">
-      <h3 style={{ color: 'white', textAlign: 'center' }}>Nivel 18</h3>
-
-      <div className="skill-grid">
-        <div className="skill-grid-header">
-          <div className="skill-grid-corner"></div>
+    <div className={styles.skillGridContainer}>
+      <div className={styles.skillGrid}>
+        <div className={styles.skillGridHeader}>
+          <div className={styles.skillGridCorner}></div>
           {Array.from({ length: niveles }).map((_, i) => (
-            <div key={i} className="skill-grid-header-cell">
+            <div key={i} className={styles.skillGridHeaderCell}>
               {i + 1}
             </div>
           ))}
         </div>
 
         {habilidades.map(hab => (
-          <div key={hab} className="skill-grid-row">
-            <div className="skill-grid-row-label">{hab}</div>
+          <div key={hab} className={styles.skillGridRow}>
+            <div className={styles.skillGridRowLabel}>{hab}</div>
             {Array.from({ length: niveles }).map((_, nivel) => {
               const activo = seleccion[nivel] === hab;
               const isNivelR = nivelesR.includes(nivel + 1);
@@ -82,7 +80,9 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
               return (
                 <div
                   key={nivel}
-                  className={`skill-grid-cell ${activo ? 'active' : ''} ${disabled ? 'disabled' : ''}`}
+                  className={`${styles.skillGridCell} ${
+                    activo ? styles.active : ''
+                  } ${disabled ? styles.disabled : ''}`}
                   onClick={() => !disabled && handleSelect(nivel, hab)}
                 />
               );
@@ -91,7 +91,7 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
         ))}
       </div>
 
-      <p style={{ color: 'white', marginTop: '1rem' }}>
+      <p className={styles.restriccionesTexto}>
         Restricciones:
         {esUdyr ? (
           <> Udyr puede subir su R como cualquier otra habilidad hasta 5 veces.</>
@@ -99,10 +99,6 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
           <> Máximo 5 puntos en Q/W/E, 3 en R (solo niveles 6, 11, 16).</>
         )}
       </p>
-
-      {/* <pre style={{ color: 'white', marginTop: '1rem', fontSize: '0.9rem' }}>
-        {JSON.stringify(seleccion, null, 2)}
-      </pre> */}
     </div>
   );
 };

@@ -1,0 +1,120 @@
+.skillGridContainer {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.skillGrid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #444;
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.skillGridHeader {
+  display: flex;
+  background-color: #333;
+}
+
+.skillGridCorner {
+  width: 40px;
+  border-right: 1px solid #444;
+}
+
+.skillGridHeaderCell {
+  flex: 1;
+  min-width: 30px;
+  text-align: center;
+  padding: 8px 0;
+  border-left: 1px solid #444;
+  font-weight: bold;
+  color: #f0a400;
+  font-size: 0.9rem;
+}
+
+.skillGridRow {
+  display: flex;
+  border-top: 1px solid #444;
+}
+
+.skillGridRowLabel {
+  width: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  background-color: #2a2a2a;
+  color: #f0a400;
+}
+
+.skillGridCell {
+  flex: 1;
+  min-width: 30px;
+  height: 40px;
+  border-left: 1px solid #444;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  background-color: #2a2a2a;
+}
+
+.skillGridCell:hover:not(.disabled) {
+  background-color: #333;
+}
+
+.skillGridCell.active {
+  background-color: #00bcd4;
+}
+
+.skillGridCell.disabled {
+  background-color: #1a1a1a;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.restriccionesTexto {
+  color: white;
+  margin-top: 1rem;
+  font-size: 0.9rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .skillGridHeaderCell {
+    font-size: 0.8rem;
+    padding: 6px 0;
+  }
+  
+  .skillGridRowLabel {
+    font-size: 0.9rem;
+  }
+  
+  .skillGridCell {
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .skillGridContainer {
+    padding: 15px;
+  }
+  
+  .skillGridHeaderCell {
+    font-size: 0.7rem;
+    padding: 4px 0;
+  }
+  
+  .skillGridRowLabel {
+    font-size: 0.8rem;
+  }
+  
+  .skillGridCell {
+    height: 30px;
+  }
+}

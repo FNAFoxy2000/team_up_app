@@ -1,0 +1,132 @@
+.guiaContainer {
+  padding: 2rem;
+  color: white;
+  max-width: 1200px;
+  margin: 0 auto;
+  background-color: #1a1a1a;
+  min-height: 100vh;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #333;
+}
+
+.championImage {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 3px solid #f0a400;
+}
+
+.headerInfo {
+  flex: 1;
+}
+
+.championName {
+  margin: 0;
+  color: #f0a400;
+  font-size: 2rem;
+}
+
+.championRoles {
+  margin: 0.5rem 0 0;
+  color: #ccc;
+}
+
+.section {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color: #252525;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.sectionTitle {
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  color: #f0a400;
+  font-size: 1.5rem;
+  border-bottom: 2px solid #333;
+  padding-bottom: 0.5rem;
+}
+
+.descriptionText {
+  line-height: 1.6;
+  color: #ddd;
+}
+
+.loadingText {
+  color: white;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+.errorText {
+  color: #ff6b6b;
+  text-align: center;
+  padding: 2rem;
+  font-size: 1.2rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .guiaContainer {
+    padding: 1rem;
+  }
+  
+  .header {
+    flex-direction: column;
+    text-align: center;
+  }
+  
+  .championImage {
+    width: 100px;
+    height: 100px;
+  }
+  
+  .section {
+    padding: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .championName {
+    font-size: 1.5rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.3rem;
+  }
+}
+
+.printButton {
+  background-color: #f0a400;
+  color: #1e1e1e;
+  border: none;
+  padding: 12px 24px;
+  font-size: 1rem;
+  font-weight: bold;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: block;
+  margin: 2rem auto 0;
+  width: fit-content;
+}
+
+.printButton:hover {
+  background-color: #ffbb29;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.printButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}

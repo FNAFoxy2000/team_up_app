@@ -1,0 +1,193 @@
+/* Contenedor principal */
+.spellsGridContainer {
+  width: 100%;
+  max-width: 700px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: #1e1e1e;
+  border-radius: 8px;
+  color: white;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Grid de hechizos */
+.skillGrid {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #444;
+  background: #222;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Cabecera */
+.skillGridHeader {
+  display: flex;
+  background-color: #333;
+}
+
+.skillGridCorner {
+  width: 40px;
+  border-right: 1px solid #444;
+}
+
+.skillGridHeaderCell {
+  flex: 1;
+  text-align: center;
+  padding: 12px 0;
+  border-left: 1px solid #444;
+  font-weight: bold;
+  color: #f0a400;
+  font-size: 1.1rem;
+}
+
+/* Contenido de hechizos */
+.spellsContent {
+  padding: 15px;
+}
+
+/* Cambio principal: Grid de 2 filas */
+.spellsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
+  grid-template-rows: repeat(2, 1fr);    /* 2 filas */
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+/* Celdas de hechizos */
+.skillGridCell {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  background-color: #2a2a2a;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: 2px solid #333;
+}
+
+.skillGridCell:hover {
+  transform: scale(1.05);
+  border-color: #555;
+}
+
+.skillGridCell.active {
+  border-color: #00bcd4;
+  background-color: rgba(0, 188, 212, 0.1);
+}
+
+.spellImage {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: contain;
+}
+
+/* Sección de hechizos seleccionados */
+.selectedSpellsSection {
+  margin-top: 20px;
+  padding: 15px;
+  background-color: #252525;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.selectedSpellsSection h4 {
+  margin-top: 0;
+  margin-bottom: 12px;
+  color: #f0a400;
+  font-size: 1rem;
+}
+
+.selectedSpellsGrid {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.selectedSpell {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 80px;
+}
+
+.selectedSpell img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #00bcd4;
+}
+
+.selectedSpell span {
+  margin-top: 6px;
+  font-size: 0.8rem;
+  color: #ccc;
+  text-align: center;
+}
+
+/* Mensajes */
+.noSpells {
+  color: #888;
+  font-style: italic;
+  margin: 0;
+}
+
+.spellsLoading, .spellsError {
+  text-align: center;
+  padding: 20px;
+  background-color: #222;
+  border-radius: 8px;
+  border: 1px solid #444;
+}
+
+.spellsLoading {
+  color: #ccc;
+}
+
+.spellsError {
+  color: #ff6b6b;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .spellsGrid {
+    grid-template-columns: repeat(4, 1fr); /* Mantener 4 columnas */
+    grid-template-rows: repeat(2, 1fr);   /* Mantener 2 filas */
+  }
+  
+  .skillGridCell {
+    height: 70px;
+  }
+  
+  .spellImage {
+    width: 56px;
+    height: 56px;
+  }
+}
+
+@media (max-width: 480px) {
+  .spellsGridContainer {
+    padding: 15px;
+  }
+  
+  .spellsGrid {
+    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
+    grid-template-rows: repeat(4, 1fr);    /* 4 filas en móviles */
+  }
+  
+  .skillGridCell {
+    height: 60px;
+  }
+  
+  .spellImage {
+    width: 48px;
+    height: 48px;
+  }
+  
+  .selectedSpell {
+    min-width: 70px;
+  }
+}

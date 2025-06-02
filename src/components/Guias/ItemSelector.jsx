@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import './guias.css';
+import styles from './items.module.css';
 
 const ItemSelector = ({ 
   onSelectionChange,
@@ -19,17 +19,17 @@ const ItemSelector = ({
   const [role, setRole] = useState('');
   const [search, setSearch] = useState('');
 
-  const botas = ["Grebas de berserker", "Botas de rapidez", "Suelas simbióticas", "Botas de hechicero", "Botas blindadas", "Botas de mercurio", "Botas jonias de la lucidez"]
+  const botas = ["Grebas de berserker", "Botas de rapidez", "Suelas simbióticas", "Botas de hechicero", "Botas blindadas", "Botas de mercurio", "Botas jonias de la lucidez"];
 
-  const starter = ["Escudo de Doran", "Espada de Doran", "Anillo de Doran", "Poción de vida", "Sello oscuro", "Poción reutilizable"]
+  const starter = ["Escudo de Doran", "Espada de Doran", "Anillo de Doran", "Poción de vida", "Sello oscuro", "Poción reutilizable"];
 
-  const jungle_start = ["Cachorro de Garra ígnea", "Cría de Caminabrisas", "Brote de Brincamontes", "Poción de vida", "Poción reutilizable"]
+  const jungle_start = ["Cachorro de Garra ígnea", "Cría de Caminabrisas", "Brote de Brincamontes", "Poción de vida", "Poción reutilizable"];
 
-  const suport_start = ["Atlas mundial", "Poción de vida", "Poción reutilizable"]
+  const suport_start = ["Atlas mundial", "Poción de vida", "Poción reutilizable"];
 
-  const suport_completos = ["Detracción celestial", "Tejesueños", "Perforaplanos de Zaz'Zak", "Trineo del solsticio", "Tonada sanguina"]
+  const suport_completos = ["Detracción celestial", "Tejesueños", "Perforaplanos de Zaz'Zak", "Trineo del solsticio", "Tonada sanguina"];
 
-  const pociones = ["Poción de vida", "Poción reutilizable"]
+  const pociones = ["Poción de vida", "Poción reutilizable"];
 
   const objetos = [
     "Canción de batalla de Shurelya", "Sangría del soberano",
@@ -63,22 +63,9 @@ const ItemSelector = ({
     "Soberbia", "Hidra profana", "Espada ciclovoltaica", "Oportunidades"
   ];
 
-  const objetos_suport_completos = objetos.concat(suport_completos)
-
-  // // Función para mostrar las selecciones en consola
-  // const logSelections = () => {
-  //   console.log("Items iniciales seleccionados:", selectedStarterItems);
-  //   console.log("Botas seleccionadas:", selectedBoots);
-  //   console.log("Items completos seleccionados:", selectedItems);
-  // };
-
-  // // Llama a logSelections cada vez que cambian las selecciones
-  // useEffect(() => {
-  //   logSelections();
-  // }, [selectedStarterItems, selectedBoots, selectedItems]);
+  const objetos_suport_completos = objetos.concat(suport_completos);
 
   useEffect(() => {
-
     const fetchItems = async () => {
       try {
         const res = await axios.get(
@@ -97,7 +84,7 @@ const ItemSelector = ({
 
         setItems(itemList);
 
-        const boots = itemList.filter(item => botas.includes(item.name))
+        const boots = itemList.filter(item => botas.includes(item.name));
         setBootOptions(boots);
       } catch (err) {
         console.error('Error al cargar objetos:', err);
@@ -120,10 +107,10 @@ const ItemSelector = ({
   useEffect(() => {
     const filteredStarters = items.filter(item => {
       if (role === 'Jungla')
-        return jungle_start.includes(item.name)
+        return jungle_start.includes(item.name);
       if (role === 'Support')
-        return suport_start.includes(item.name)
-      return starter.includes(item.name)
+        return suport_start.includes(item.name);
+      return starter.includes(item.name);
     });
     setStarterOptions(filteredStarters);
   }, [role, items]);
@@ -141,33 +128,6 @@ const ItemSelector = ({
   const isCompleteItem = (item) => {
     if (isBoot(item) || isStarter(item) || isPotion(item)) return false;
     return true;
-    //   const excludedItems = [
-    //     '1026', '1027', '1028', '1029', '1031', '1033', '1036', '1037', 
-    //     '1038', '1039', '1040', '1041', '1042', '1043', '1052', '1053',
-    //     '1054', '1055', '1056', '1057', '1058', '1082', '1083', '1400',
-    //     '1401', '1402', '1412', '1413', '1414', '1416', '1418', '1419',
-    //     '3330', '3340', '3363', '3364', '3513', '3633', '3636', '3690',
-    //     '3029', '2065',
-    //     '3850', '3851', '3853', '3854', '3855', '3857', '3858', '3859'
-    //   ];
-
-    //   const excludedKeywords = [
-    //     'poción', 'pocion', 'ward', 'totem', 'effigy', 'trinket', 
-    //     'lens', 'elixir', 'corrupting', 'stealth', 'vision', 'component'
-    //   ];
-
-    //   if (
-    //     item.depth > 1 ||
-    //     excludedItems.includes(item.id) ||
-    //     excludedKeywords.some(keyword => item.name.toLowerCase().includes(keyword)) ||
-    //     item.tags?.includes('Trinket') ||
-    //     item.tags?.includes('Jungle') ||
-    //     (role === 'Support' && item.tags?.includes('GoldPer'))
-    //   ) {
-    //     return false;
-    //   }
-
-    //   return true;
   };
 
   const filteredCompleteItems = items
@@ -181,70 +141,61 @@ const ItemSelector = ({
     .filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
 
   const handleAddItem = (item) => {
+    // Si es bota
     if (isBoot(item)) {
-      if (!selectedBoots.find(i => i.id === item.id) && selectedBoots.length < 3) {
+      const alreadySelected = selectedBoots.find(i => i.id === item.id);
+      if (alreadySelected) {
+        const newBoots = selectedBoots.filter(i => i.id !== item.id);
+        setSelectedBoots(newBoots);
+        notifyParent(selectedStarterItems, newBoots, selectedItems);
+      } else if (selectedBoots.length < 3) {
         const newBoots = [...selectedBoots, item];
         setSelectedBoots(newBoots);
         notifyParent(selectedStarterItems, newBoots, selectedItems);
-
       }
-    } else if (isStarter(item) || isPotion(item)) {
-      if (isPotion(item)) {
-        if (!selectedStarterItems.find(i => i.id === item.id)) {
-          const newStarters = [...selectedStarterItems, item];
-          setSelectedStarterItems(newStarters);
-          notifyParent(newStarters, selectedBoots, selectedItems);
-
-        }
+    } 
+    // Si es ítem inicial o poción
+    else if (isStarter(item) || isPotion(item)) {
+      const alreadySelected = selectedStarterItems.find(i => i.id === item.id);
+      if (alreadySelected) {
+        const newStarters = selectedStarterItems.filter(i => i.id !== item.id);
+        setSelectedStarterItems(newStarters);
+        notifyParent(newStarters, selectedBoots, selectedItems);
       } else {
-        if (!selectedStarterItems.find(i => isStarter(i) && !isPotion(i))) {
+        if (isPotion(item)) {
           const newStarters = [...selectedStarterItems, item];
           setSelectedStarterItems(newStarters);
           notifyParent(newStarters, selectedBoots, selectedItems);
-
+        } else {
+          if (!selectedStarterItems.find(i => isStarter(i) && !isPotion(i))) {
+            const newStarters = [...selectedStarterItems, item];
+            setSelectedStarterItems(newStarters);
+            notifyParent(newStarters, selectedBoots, selectedItems);
+          }
         }
       }
-    } else {
-      if (!selectedItems.find(i => i.id === item.id) && selectedItems.length < 5) {
+    } 
+    // Si es ítem completo
+    else {
+      const alreadySelected = selectedItems.find(i => i.id === item.id);
+      if (alreadySelected) {
+        const newItems = selectedItems.filter(i => i.id !== item.id);
+        setSelectedItems(newItems);
+        notifyParent(selectedStarterItems, selectedBoots, newItems);
+      } else if (selectedItems.length < 5) {
         const newItems = [...selectedItems, item];
         setSelectedItems(newItems);
         notifyParent(selectedStarterItems, selectedBoots, newItems);
-
       }
     }
   };
 
-  const handleRemoveStarterItem = (id) => {
-    const newList = selectedStarterItems.filter(item => item.id !== id);
-    setSelectedStarterItems(newList);
-    notifyParent(newList, selectedBoots, selectedItems);
-
-  };
-
-  const handleRemoveBoot = (id) => {
-    const newList = selectedBoots.filter(item => item.id !== id);
-    setSelectedBoots(newList);
-    notifyParent(selectedStarterItems, newList, selectedItems);
-
-  };
-
-  const handleRemoveItem = (id) => {
-    const newList = selectedItems.filter(item => item.id !== id);
-    setSelectedItems(newList);
-    notifyParent(selectedStarterItems, selectedBoots, newList);
-
-  };
-
-
-
   return (
-    
-    <div className="item-selector">
-
+    <div className={styles.itemSelector}>
       <select
         value={role}
         onChange={e => setRole(e.target.value)}
-        className="role-select"
+        className={styles.roleSelect}
       >
         <option value="">Selecciona un rol</option>
         <option value="Top">Top</option>
@@ -254,13 +205,15 @@ const ItemSelector = ({
         <option value="Support">Support</option>
       </select>
 
-      <div className="boot-selector">
+      <div className={styles.bootSelector}>
         <h4>Selecciona hasta 3 botas</h4>
-        <div className="items-grid">
+        <div className={styles.itemsGrid}>
           {bootOptions.map(item => (
             <div
               key={item.id}
-              className={`item-card ${selectedBoots.find(i => i.id === item.id) ? 'selected' : ''}`}
+              className={`${styles.itemCard} ${
+                selectedBoots.find(i => i.id === item.id) ? styles.selected : ''
+              }`}
               onClick={() => handleAddItem(item)}
             >
               <img
@@ -272,14 +225,15 @@ const ItemSelector = ({
         </div>
       </div>
       
-
-      <div className="starter-selector">
+      <div className={styles.starterSelector}>
         <h4>Selecciona objeto inicial y pociones</h4>
-        <div className="items-grid">
+        <div className={styles.itemsGrid}>
           {starterOptions.map(item => (
             <div
               key={item.id}
-              className={`item-card ${selectedStarterItems.find(i => i.id === item.id) ? 'selected' : ''}`}
+              className={`${styles.itemCard} ${
+                selectedStarterItems.find(i => i.id === item.id) ? styles.selected : ''
+              }`}
               onClick={() => handleAddItem(item)}
             >
               <img
@@ -296,44 +250,16 @@ const ItemSelector = ({
         placeholder="Buscar objeto..."
         value={search}
         onChange={e => setSearch(e.target.value)}
-        className="search-input"
+        className={styles.searchInput}
       />
 
-      <div className="selected-items">
+      <div className={styles.selectedItems}>
         <h3>Objetos iniciales seleccionados</h3>
-        <div className="items-grid">
+        <div className={styles.itemsGrid}>
           {selectedStarterItems.map(item => (
-            <div key={item.id} className="item-card" onClick={() => handleRemoveStarterItem(item.id)}>
-              <img
-                src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
-                alt={item.name}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="selected-items">
-        <h3>Botas seleccionadas</h3>
-        <div className="items-grid">
-          {selectedBoots.map(item => (
-            <div key={item.id} className="item-card" onClick={() => handleRemoveBoot(item.id)}>
-              <img
-                src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
-                alt={item.name}
-              />
-            </div>
-          ))}
-        </div>
-      </div>
-
-      <div className="complete-item-selector">
-        <h4>Selecciona hasta 5 objetos completos</h4>
-        <div className="items-grid">
-          {filteredCompleteItems.map(item => (
-            <div
-              key={item.id}
-              className={`item-card ${selectedItems.find(i => i.id === item.id) ? 'selected' : ''}`}
+            <div 
+              key={item.id} 
+              className={`${styles.itemCard} ${styles.selected}`}
               onClick={() => handleAddItem(item)}
             >
               <img
@@ -345,11 +271,53 @@ const ItemSelector = ({
         </div>
       </div>
 
-      <div className="selected-items">
+      <div className={styles.selectedItems}>
+        <h3>Botas seleccionadas</h3>
+        <div className={styles.itemsGrid}>
+          {selectedBoots.map(item => (
+            <div 
+              key={item.id} 
+              className={`${styles.itemCard} ${styles.selected}`}
+              onClick={() => handleAddItem(item)}
+            >
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
+                alt={item.name}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.completeItemSelector}>
+        <h4>Selecciona hasta 5 objetos completos</h4>
+        <div className={styles.itemsGrid}>
+          {filteredCompleteItems.map(item => (
+            <div
+              key={item.id}
+              className={`${styles.itemCard} ${
+                selectedItems.find(i => i.id === item.id) ? styles.selected : ''
+              }`}
+              onClick={() => handleAddItem(item)}
+            >
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
+                alt={item.name}
+              />
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.selectedItems}>
         <h3>Objetos completos seleccionados</h3>
-        <div className="items-grid">
+        <div className={styles.itemsGrid}>
           {selectedItems.map(item => (
-            <div key={item.id} className="item-card" onClick={() => handleRemoveItem(item.id)}>
+            <div 
+              key={item.id} 
+              className={`${styles.itemCard} ${styles.selected}`}
+              onClick={() => handleAddItem(item)}
+            >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
                 alt={item.name}
