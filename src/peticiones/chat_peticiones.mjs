@@ -2,6 +2,16 @@ import axios from 'axios';
 
 const apiURL = import.meta.env.VITE_API_URL
 
+export async function getInfoChat(id_chat) {
+  try {
+    const response = await axios.get(`${apiURL}/chat/${id_chat}`);
+    return response.data;
+  } catch (error) {
+    console.error('Error en getInfoChats:', error);
+    throw error;
+  }
+}
+
 export async function getUserChats(userId) {
   try {
     const response = await axios.get(`${apiURL}/chat/usuario/${userId}`);
@@ -66,6 +76,16 @@ export async function unirseChat(id_usuario, id_chat) {
     return response.data;
   } catch (error) {
     console.error('Error en unirseChat:', error);
+    throw error;
+  }
+}
+
+export async function getChatUsers(chatId) {
+  try {
+    const response = await axios.get(`${apiURL}/chat/${chatId}/usuarios`);
+    return response.data;
+  } catch (error) {
+    console.error('Error en getChatUsers:', error);
     throw error;
   }
 }
