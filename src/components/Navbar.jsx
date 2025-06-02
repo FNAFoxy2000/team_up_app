@@ -62,7 +62,7 @@ function Navbar() {
         <li><Link to="/juegos/listadoJuegos">Juegos</Link></li>
         <li><Link to="/busqueda">Búsqueda</Link></li>
         <li><a href="/chat">Chats</a></li>
-        <li><a href="#">Guias</a></li>
+        <li><a href="/guias/crear">Guias</a></li>
       </ul>
 
 

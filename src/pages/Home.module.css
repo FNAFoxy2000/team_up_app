@@ -98,3 +98,116 @@
   border-radius: 8px;
   margin-bottom: 10px;
 }
+
+
+/* Parte de guias y campeones */
+
+.championGridContainer {
+  padding: 1rem;
+}
+
+.searchInput, .roleSelect {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+}
+
+.searchInput {
+  width: 200px;
+}
+
+.roleSelect {
+  width: 150px;
+}
+
+.championGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+  gap: 1rem;
+}
+
+.championCard {
+  background-color: #333;
+  border-radius: 12px;
+  padding: 1rem;
+  cursor: pointer;
+  text-align: center;
+  color: white;
+  transition: transform 0.3s ease;
+  box-shadow: 0 0 10px rgba(0,0,0,0.7);
+}
+
+.championCard:hover {
+  transform: scale(1.05);
+}
+
+.championImage {
+  width: 80px;
+  height: 80px;
+  object-fit: contain;
+  margin-bottom: 0.5rem;
+}
+
+.championName {
+  font-weight: bold;
+}
+
+.rolesFilter {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.tabsContainer {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.tab {
+  background-color: #333333;
+  border: none;
+  padding: 0.5rem 1.2rem;
+  border-radius: 20px;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.tab:hover {
+  background-color: #555555;
+}
+
+.activeTab {
+  background-color: #00bcd4;
+  color: #121212;
+  font-weight: 700;
+}
+
+.searchWrapper {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+
+.searchInput {
+  width: 300px; /* o el ancho que prefieras */
+  padding: 0.5rem 1rem;
+  border-radius: 20px;
+  border: none;
+  font-size: 1rem;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0,0,0,0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.searchInput:focus {
+  box-shadow: 0 0 10px #00bcd4;
+}
+
