@@ -245,14 +245,6 @@ const ItemSelector = ({
         </div>
       </div>
 
-      <input
-        type="text"
-        placeholder="Buscar objeto..."
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-        className={styles.searchInput}
-      />
-
       <div className={styles.selectedItems}>
         <h3>Objetos iniciales seleccionados</h3>
         <div className={styles.itemsGrid}>
@@ -288,6 +280,14 @@ const ItemSelector = ({
           ))}
         </div>
       </div>
+
+            <input
+        type="text"
+        placeholder="Buscar objeto..."
+        value={search}
+        onChange={e => setSearch(e.target.value)}
+        className={styles.searchInput}
+      />
 
       <div className={styles.completeItemSelector}>
         <h4>Selecciona hasta 5 objetos completos</h4>
