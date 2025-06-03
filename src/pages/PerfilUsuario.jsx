@@ -15,8 +15,10 @@ import {
   sonAmigos,
   cancelarAmistad
 } from '../peticiones/amistades_peticiones.mjs';
+import { getJuegosPorUsuario } from '../peticiones/usuarios-juegos_peticiones.mjs';
 import AuthService from '../services/authService';
 import TablaSolicitudes from '../components/tablaSolicitudes';
+import JuegoCard from '../components/CardUsuario-Juego';
 
 const PerfilUsuario = () => {
   const [usuario, setUsuario] = useState(null);
@@ -26,6 +28,8 @@ const PerfilUsuario = () => {
   const [solicitudesEnviadas, setSolicitudesEnviadas] = useState([]);
   const [esAmigo, setEsAmigo] = useState(false);
   const [estadoSolicitud, setEstadoSolicitud] = useState({ estado: 0, id_solicitud: null });
+  const [juegosFavoritos, setJuegosFavoritos] = useState([]);
+
   const location = useLocation();
 
   const userFromToken = AuthService.getUserFromToken();
@@ -46,6 +50,12 @@ const PerfilUsuario = () => {
         const userFromToken = AuthService.getUserFromToken();
         if (userFromToken) {
           setUsuarioActivo(userFromToken);
+
+          // Obtener juegos favoritos
+          const juegos = await getJuegosPorUsuario(usuarioData.id_usuario);
+          if (juegos.success) {
+            setJuegosFavoritos(juegos.data);
+          }
 
           if (userFromToken.email === email) {
             const [amistadesData, recibidas, enviadas] = await Promise.all([
@@ -238,6 +248,19 @@ const PerfilUsuario = () => {
           />
         </div>
       )}
+
+      <div className="juegos-section">
+        <h3>Juegos favoritos</h3>
+        <div className="juegos-grid">
+          {juegosFavoritos.length === 0 ? (
+            <p>Este usuario no ha agregado juegos aún.</p>
+          ) : (
+            juegosFavoritos.map((juego, index) => (
+              <JuegoCard key={index} juego={juego} />
+            ))
+          )}
+        </div>
+      </div>
     </div>
   );
 };

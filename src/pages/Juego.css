@@ -177,6 +177,32 @@
   flex-wrap: wrap;
 }
 
+.info-extra-textarea {
+  width: 100%;
+  margin-top: 8px;
+  padding: 12px 15px;
+  border-radius: 10px;
+  background-color: #111827;
+  color: #ffffff;
+  border: 1px solid #3b82f6;
+  font-size: 1rem;
+  resize: vertical;
+  transition: border-color 0.3s ease;
+  min-height: 120px;
+}
+
+.info-extra-textarea:focus {
+  outline: none;
+  border-color: #60a5fa;
+  background-color: #1e293b;
+}
+
+.info-extra-textarea::placeholder {
+  color: #6b7280;
+  font-style: italic;
+}
+
+
 
 /* Media Queries para hacer la página responsive */
 
