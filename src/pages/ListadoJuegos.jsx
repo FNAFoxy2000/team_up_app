@@ -8,7 +8,7 @@ const ListadoJuegos = () => {
   const [juegos, setJuegos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [busqueda, setBusqueda] = useState('');
-  const [categoriaFiltro, setCategoriaFiltro] = useState([]); // ahora es un array
+  const [categoriaFiltro, setCategoriaFiltro] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
