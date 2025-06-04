@@ -1,0 +1,39 @@
+.runePreview {
+  padding: 1rem;
+  font-family: Arial, sans-serif;
+  text-align: center; /* centra los textos y elementos inline */
+}
+
+.primaryRunes {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.subRunes {
+  display: flex;
+  justify-content: center; /* centramos las runas horizontalmente */
+  gap: 0.5rem;
+}
+
+.previewRune {
+  width: 48px;
+  height: 48px;
+  border-radius: 6px;
+  border: 2px solid transparent;
+  cursor: default;
+}
+
+.previewRune:hover {
+  border-color: #aaa;
+}
+
+.previewFragment {
+  display: inline-block;
+  margin-right: 0.5rem;
+  padding: 0.3rem 0.6rem;
+  background-color: #ddd;
+  border-radius: 4px;
+  font-size: 0.9rem;
+}

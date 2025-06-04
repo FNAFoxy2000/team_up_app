@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import './RuneSelector.css';
+import axios from 'axios';
 import RunePreview from './RunePreview';
-import runesData from './runesData.json';
+import styles from './RuneSelector.module.css';
 
 const RuneSelector = ({ onChange }) => {
+  const [runesData, setRunesData] = useState([]);
   const [primaryPath, setPrimaryPath] = useState(null);
   const [secondaryPath, setSecondaryPath] = useState(null);
   const [selectedRunes, setSelectedRunes] = useState({
@@ -12,14 +13,33 @@ const RuneSelector = ({ onChange }) => {
     fragments: []
   });
 
+  useEffect(() => {
+    const fetchRunes = async () => {
+      try {
+        const response = await axios.get(
+          'https://ddragon.leagueoflegends.com/cdn/14.10.1/data/es_ES/runesReforged.json'
+        );
+        setRunesData(response.data);
+      } catch (error) {
+        console.error('Error al cargar las runas:', error);
+      }
+    };
+
+    fetchRunes();
+  }, []);
+
+  useEffect(() => {
+    onChange({ primaryPath, secondaryPath, selectedRunes });
+  }, [primaryPath, secondaryPath, selectedRunes, onChange]);
+
   const handlePrimarySelect = (path) => {
-    setPrimaryPath(path);
+    setPrimaryPath(path.id);
     setSelectedRunes({ primary: [], secondary: [], fragments: [] });
     setSecondaryPath(null);
   };
 
   const handleSecondarySelect = (path) => {
-    if (path !== primaryPath) setSecondaryPath(path);
+    if (path.id !== primaryPath) setSecondaryPath(path.id);
   };
 
   const handleRuneSelect = (pathType, rowIndex, runeId) => {
@@ -39,36 +59,38 @@ const RuneSelector = ({ onChange }) => {
     });
   };
 
-  useEffect(() => {
-    onChange({ primaryPath, secondaryPath, selectedRunes });
-  }, [primaryPath, secondaryPath, selectedRunes, onChange]);
+  const getPathById = (id) => runesData.find(p => p.id === id);
+
+  const getTooltip = (desc) => desc ? desc.replace(/<[^>]+>/g, '') : '';
 
   return (
-    <div className="rune-selector-layout">
-      <div className="rune-column">
-        <div className="paths primary">
-          {runesData.paths.map((path) => (
+    <div className={styles.runeSelectorLayout}>
+      <div className={styles.runeColumn}>
+        <div className={`${styles.paths} ${styles.primary}`}>
+          {runesData.map((path) => (
             <img
               key={path.id}
-              src={path.icon}
+              src={`https://ddragon.leagueoflegends.com/cdn/img/${path.icon}`}
               alt={path.name}
-              className={`path-icon ${primaryPath === path.id ? 'selected' : ''}`}
-              onClick={() => handlePrimarySelect(path.id)}
+              className={`${styles.pathIcon} ${primaryPath === path.id ? styles.selected : ''}`}
+              onClick={() => handlePrimarySelect(path)}
+              title={path.name}
             />
           ))}
         </div>
 
         {primaryPath && (
-          <div className="runes">
-            {runesData.paths.find(p => p.id === primaryPath).slots.map((slot, i) => (
-              <div key={i} className="rune-row">
+          <div className={styles.runes}>
+            {getPathById(primaryPath).slots.map((slot, i) => (
+              <div key={i} className={styles.runeRow}>
                 {slot.runes.map(rune => (
                   <img
                     key={rune.id}
-                    src={rune.icon}
+                    src={`https://ddragon.leagueoflegends.com/cdn/img/${rune.icon}`}
                     alt={rune.name}
-                    className={`rune-icon ${selectedRunes.primary[i]?.includes(rune.id) ? 'selected' : ''}`}
+                    className={`${styles.runeIcon} ${selectedRunes.primary[i]?.includes(rune.id) ? styles.selected : ''}`}
                     onClick={() => handleRuneSelect('primary', i, rune.id)}
+                    title={getTooltip(rune.shortDesc)}
                   />
                 ))}
               </div>
@@ -78,32 +100,34 @@ const RuneSelector = ({ onChange }) => {
       </div>
 
       {primaryPath && (
-        <div className="rune-column">
-          <div className="paths secondary">
-            {runesData.paths.map((path) => (
+        <div className={styles.runeColumn}>
+          <div className={`${styles.paths} ${styles.secondary}`}>
+            {runesData.map((path) => (
               path.id !== primaryPath && (
                 <img
                   key={path.id}
-                  src={path.icon}
+                  src={`https://ddragon.leagueoflegends.com/cdn/img/${path.icon}`}
                   alt={path.name}
-                  className={`path-icon ${secondaryPath === path.id ? 'selected' : ''}`}
-                  onClick={() => handleSecondarySelect(path.id)}
+                  className={`${styles.pathIcon} ${secondaryPath === path.id ? styles.selected : ''}`}
+                  onClick={() => handleSecondarySelect(path)}
+                  title={path.name}
                 />
               )
             ))}
           </div>
 
           {secondaryPath && (
-            <div className="runes secondary">
-              {runesData.paths.find(p => p.id === secondaryPath).slots.slice(1).map((slot, i) => (
-                <div key={i} className="rune-row">
+            <div className={`${styles.runes} ${styles.secondary}`}>
+              {getPathById(secondaryPath).slots.slice(1).map((slot, i) => (
+                <div key={i} className={styles.runeRow}>
                   {slot.runes.map(rune => (
                     <img
                       key={rune.id}
-                      src={rune.icon}
+                      src={`https://ddragon.leagueoflegends.com/cdn/img/${rune.icon}`}
                       alt={rune.name}
-                      className={`rune-icon ${selectedRunes.secondary[i]?.includes(rune.id) ? 'selected' : ''}`}
+                      className={`${styles.runeIcon} ${selectedRunes.secondary[i]?.includes(rune.id) ? styles.selected : ''}`}
                       onClick={() => handleRuneSelect('secondary', i, rune.id)}
+                      title={getTooltip(rune.shortDesc)}
                     />
                   ))}
                 </div>
@@ -113,11 +137,11 @@ const RuneSelector = ({ onChange }) => {
         </div>
       )}
 
-      <div className="rune-column preview">
-        <RunePreview 
-          primaryPath={primaryPath} 
-          secondaryPath={secondaryPath} 
-          selectedRunes={selectedRunes} 
+      <div className={styles.runeColumn}>
+        <RunePreview
+          primaryPath={primaryPath}
+          secondaryPath={secondaryPath}
+          selectedRunes={selectedRunes}
           runesData={runesData}
         />
       </div>

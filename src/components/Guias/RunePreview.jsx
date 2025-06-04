@@ -1,13 +1,25 @@
 import React from 'react';
-import './RunePreview.css';
+import styles from './RunePreview.module.css';
 
 const RunePreview = ({ primaryPath, secondaryPath, selectedRunes, runesData }) => {
-  const getPathById = (id) => runesData.paths.find(p => p.id === id);
-  const getRuneById = (id) => {
-    for (const path of runesData.paths) {
+  if (!runesData || runesData.length === 0) {
+    return <div className={styles.runePreview}>Cargando runas...</div>;
+  }
+
+  const renderRune = (id) => {
+    for (const path of runesData) {
       for (const slot of path.slots) {
-        for (const rune of slot.runes) {
-          if (rune.id === id) return rune;
+        const rune = slot.runes.find(r => r.id === id);
+        if (rune) {
+          return (
+            <img
+              key={id}
+              src={`https://ddragon.leagueoflegends.com/cdn/img/${rune.icon}`}
+              alt={rune.name}
+              className={styles.previewRune}
+              title={rune.name}
+            />
+          );
         }
       }
     }
@@ -15,49 +27,44 @@ const RunePreview = ({ primaryPath, secondaryPath, selectedRunes, runesData }) =
   };
 
   return (
-    <div className="rune-preview">
-      <h3>Runas seleccionadas</h3>
+    <div className={styles.runePreview}>
+      <h4>Runas seleccionadas</h4>
 
       {primaryPath && (
-        <div className="rune-section">
-          <p className="rune-title">Principal: {getPathById(primaryPath)?.name}</p>
-          <div className="rune-icons">
-            {selectedRunes.primary.map((row, i) =>
-              row?.map(id => {
-                const rune = getRuneById(id);
-                return (
-                  <img
-                    key={id}
-                    src={rune?.icon}
-                    alt={rune?.name}
-                    className="rune-preview-icon"
-                  />
-                );
-              })
-            )}
+        <>
+          <h5>Principal</h5>
+          {/* No mostramos icono de rama principal */}
+          <div className={styles.primaryRunes}>
+            {/* Runa clave principal (slot 0, runa única) */}
+            {selectedRunes.primary[0]?.length > 0 && renderRune(selectedRunes.primary[0][0])}
+            {/* Las 3 subrunas siguientes (slots 1, 2 y 3) en horizontal */}
+            <div className={styles.subRunes}>
+              {[1, 2, 3].map(i => 
+                selectedRunes.primary[i]?.length > 0 ? renderRune(selectedRunes.primary[i][0]) : null
+              )}
+            </div>
           </div>
-        </div>
+        </>
       )}
 
       {secondaryPath && (
-        <div className="rune-section">
-          <p className="rune-title">Secundaria: {getPathById(secondaryPath)?.name}</p>
-          <div className="rune-icons">
-            {selectedRunes.secondary.map((row, i) =>
-              row?.map(id => {
-                const rune = getRuneById(id);
-                return (
-                  <img
-                    key={id}
-                    src={rune?.icon}
-                    alt={rune?.name}
-                    className="rune-preview-icon"
-                  />
-                );
-              })
-            )}
+        <>
+          <h5>Secundaria</h5>
+          {/* No mostramos icono de rama secundaria */}
+          {/* Subrunas en horizontal (slots 0,1,2 tras slice(1) en selección) */}
+          <div className={styles.subRunes}>
+            {selectedRunes.secondary.flat().map(id => renderRune(id))}
           </div>
-        </div>
+        </>
+      )}
+
+      {selectedRunes.fragments.length > 0 && (
+        <>
+          <h5>Fragmentos</h5>
+          {selectedRunes.fragments.map((frag, i) =>
+            frag ? <span key={i} className={styles.previewFragment}>{frag}</span> : null
+          )}
+        </>
       )}
     </div>
   );
