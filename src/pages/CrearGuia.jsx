@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../components/Guias/guias.module.css';
@@ -6,6 +6,8 @@ import styles from '../components/Guias/guias.module.css';
 import SkillsGrid from '../components/Guias/SkillsGrid';
 import ItemSelector from '../components/Guias/ItemSelector';
 import SummonerSpellsSelector from '../components/Guias/SummonersSpellsSelector';
+import RuneSelector from '../components/Guias/RuneSelector';
+
 
 const GuiaCampeon = () => {
   const { championId } = useParams();
@@ -15,7 +17,8 @@ const GuiaCampeon = () => {
   const [summonerSpells, setSummonerSpells] = useState([]);
   const [campeonNombre, setCampeonNombre] = useState('');
   const [skillOrder, setSkillOrder] = useState([]);
-
+  const [runes, setRunesData] = useState({});
+  
   const [selectedItems, setSelectedItems] = useState({
     starterItems: [],
     boots: [],
@@ -61,6 +64,12 @@ const GuiaCampeon = () => {
     setSummonerSpells(selectedSpells);
   };
 
+  const handleRunesChange = useCallback((data) => {
+    setRunesData(data);
+  }, []);
+
+  
+
   const handlePrintSelections = () => {
     const dataToPrint = {
       campeon: campeonNombre,
@@ -68,7 +77,8 @@ const GuiaCampeon = () => {
       ordenHabilidades: skillOrder,
       objetosIniciales: selectedItems.starterItems,
       botas: selectedItems.boots,
-      objetosCompletos: selectedItems.items
+      objetosCompletos: selectedItems.items,
+      runas: runes
     };
 
     console.log('----- GUARDAR GUÍA -----');
@@ -103,6 +113,13 @@ const GuiaCampeon = () => {
           onSpellsChange={handleSpellsChange}
           initialSpells={summonerSpells}
           maxSelections={2}
+        />
+      </div>
+
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Selecciona las runas</h2>
+        <RuneSelector
+           onChange={handleRunesChange}
         />
       </div>
 
