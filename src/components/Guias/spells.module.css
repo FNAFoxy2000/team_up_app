@@ -191,3 +191,39 @@
     min-width: 70px;
   }
 }
+
+/* Estilos para la advertencia de jungla */
+.jungleWarning {
+  background-color: #2a3a5a;
+  color: #fff;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+/* Estilo para el hechizo obligatorio */
+.requiredSpell {
+  position: relative;
+  border: 2px solid #4a90e2;
+}
+
+.requiredBadge {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: #4a90e2;
+  color: white;
+  font-size: 0.7rem;
+  padding: 2px;
+  text-align: center;
+  border-bottom-left-radius: 5px;
+  border-bottom-right-radius: 5px;
+}
+
+.requiredTag {
+  color: #4a90e2;
+  font-size: 0.8rem;
+  margin-left: 5px;
+}

@@ -8,7 +8,6 @@ import ItemSelector from '../components/Guias/ItemSelector';
 import SummonerSpellsSelector from '../components/Guias/SummonersSpellsSelector';
 import RuneSelector from '../components/Guias/RuneSelector';
 
-
 const GuiaCampeon = () => {
   const { championId } = useParams();
   const [campeon, setCampeon] = useState(null);
@@ -18,12 +17,22 @@ const GuiaCampeon = () => {
   const [campeonNombre, setCampeonNombre] = useState('');
   const [skillOrder, setSkillOrder] = useState([]);
   const [runes, setRunesData] = useState({});
+  const [selectedPosition, setSelectedPosition] = useState('');
+  const [guideDescription, setGuideDescription] = useState('');
   
   const [selectedItems, setSelectedItems] = useState({
     starterItems: [],
     boots: [],
     items: []
   });
+
+  const positions = [
+    { id: 'top', name: 'Top' },
+    { id: 'jungle', name: 'Jungla' },
+    { id: 'mid', name: 'Mid' },
+    { id: 'adc', name: 'ADC' },
+    { id: 'support', name: 'Support' }
+  ];
 
   // Referencia para el nombre del campeón en el título de la página
   useEffect(() => {
@@ -68,11 +77,19 @@ const GuiaCampeon = () => {
     setRunesData(data);
   }, []);
 
-  
+  const handlePositionSelect = (position) => {
+    setSelectedPosition(position);
+  };
+
+  const handleDescriptionChange = (e) => {
+    setGuideDescription(e.target.value);
+  };
 
   const handlePrintSelections = () => {
     const dataToPrint = {
       campeon: campeonNombre,
+      posicion: selectedPosition,
+      descripcion: guideDescription,
       hechizosInvocador: summonerSpells,
       ordenHabilidades: skillOrder,
       objetosIniciales: selectedItems.starterItems,
@@ -108,18 +125,47 @@ const GuiaCampeon = () => {
       </header>
 
       <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Selecciona la posición</h2>
+        <div className={styles.positionSelector}>
+          {positions.map((position) => (
+            <button
+              key={position.id}
+              className={`${styles.positionButton} ${
+                selectedPosition === position.id ? styles.selectedPosition : ''
+              }`}
+              onClick={() => handlePositionSelect(position.id)}
+            >
+              {position.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Descripción de la guía</h2>
+        <textarea
+          className={styles.descriptionInput}
+          value={guideDescription}
+          onChange={handleDescriptionChange}
+          placeholder="Escribe aquí los detalles de tu guía, consejos, matchups importantes, etc."
+          rows={5}
+        />
+      </div>
+
+      <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Selecciona los Hechizos de invocador</h2>
         <SummonerSpellsSelector
           onSpellsChange={handleSpellsChange}
           initialSpells={summonerSpells}
           maxSelections={2}
+          selectedPosition={selectedPosition}  // <-- Añade esta prop
         />
       </div>
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Selecciona las runas</h2>
         <RuneSelector
-           onChange={handleRunesChange}
+          onChange={handleRunesChange}
         />
       </div>
 
@@ -137,6 +183,7 @@ const GuiaCampeon = () => {
         <button 
           onClick={handlePrintSelections}
           className={styles.printButton}
+          disabled={!selectedPosition} // Deshabilitar si no se ha seleccionado posición
         >
           Guardar Guía
         </button>

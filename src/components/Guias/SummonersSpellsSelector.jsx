@@ -1,13 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import styles from './spells.module.css'; // Importamos los estilos como módulo
+import styles from './spells.module.css';
 
 const SummonerSpellsSelector = ({ 
   onSpellsChange, 
   initialSpells = [], 
   maxSelections = 2,
   version = '14.10.1',
-  language = 'es_ES'
+  language = 'es_ES',
+  selectedPosition = ''
 }) => {
   const [spells, setSpells] = useState([]);
   const [selectedSpells, setSelectedSpells] = useState(initialSpells);
@@ -24,7 +25,6 @@ const SummonerSpellsSelector = ({
           `https://ddragon.leagueoflegends.com/cdn/${version}/data/${language}/summoner.json`
         );
 
-        console.log(response.data.data)
         const filteredSpells = Object.values(response.data.data)
           .filter(spell => filtro.includes(spell.name));
         
@@ -40,12 +40,34 @@ const SummonerSpellsSelector = ({
     fetchSpells();
   }, [version, language]);
 
+  // Encontrar el hechizo Aplastar (Smite)
+  const smiteSpell = spells.find(spell => spell.name === "Aplastar");
+
   const handleSpellClick = (spell) => {
+    // Si es jungla y se intenta deseleccionar Smite, no hacer nada
+    if (selectedPosition === 'jungle' && 
+        spell.name === "Aplastar" && 
+        selectedSpells.some(s => s.id === spell.id)) {
+      return;
+    }
+
     setSelectedSpells(prev => {
+      // Si ya está seleccionado, lo quitamos
       if (prev.some(s => s.id === spell.id)) {
         return prev.filter(s => s.id !== spell.id);
       }
       
+      // Si es jungla, forzar a mantener Smite y añadir otro hechizo
+      if (selectedPosition === 'jungle') {
+        const hasSmite = prev.some(s => s.name === "Aplastar");
+        if (hasSmite) {
+          return [...prev.filter(s => s.name !== "Aplastar"), spell, smiteSpell].slice(-maxSelections);
+        } else {
+          return [spell, smiteSpell].slice(-maxSelections);
+        }
+      }
+      
+      // Selección normal (no jungla)
       if (prev.length < maxSelections) {
         return [...prev, spell];
       }
@@ -53,6 +75,20 @@ const SummonerSpellsSelector = ({
       return [...prev.slice(1), spell];
     });
   };
+
+  // Efecto para forzar Smite si se selecciona jungla
+  useEffect(() => {
+    if (selectedPosition === 'jungle' && smiteSpell) {
+      setSelectedSpells(prev => {
+        const hasSmite = prev.some(s => s.name === "Aplastar");
+        if (!hasSmite) {
+          // Si no tiene Smite, lo añadimos y mantenemos otro hechizo si existe
+          return [...prev.filter(s => s.name !== "Aplastar"), smiteSpell].slice(-maxSelections);
+        }
+        return prev;
+      });
+    }
+  }, [selectedPosition, smiteSpell, maxSelections]);
 
   useEffect(() => {
     if (onSpellsChange) {
@@ -72,12 +108,20 @@ const SummonerSpellsSelector = ({
         </div>
         
         <div className={styles.spellsContent}>
+          {selectedPosition === 'jungle' && (
+            <div className={styles.jungleWarning}>
+              <strong>Jungla seleccionada:</strong> Debes llevar el hechizo "Aplastar" (Smite)
+            </div>
+          )}
+          
           <div className={styles.spellsGrid}>
             {spells.map(spell => (
               <div
                 key={spell.id}
                 className={`${styles.skillGridCell} ${
                   selectedSpells.some(s => s.id === spell.id) ? styles.active : ''
+                } ${
+                  selectedPosition === 'jungle' && spell.name === "Aplastar" ? styles.requiredSpell : ''
                 }`}
                 onClick={() => handleSpellClick(spell)}
                 title={`${spell.name}: ${spell.description}`}
@@ -87,6 +131,9 @@ const SummonerSpellsSelector = ({
                   alt={spell.name}
                   className={styles.spellImage}
                 />
+                {selectedPosition === 'jungle' && spell.name === "Aplastar" && (
+                  <div className={styles.requiredBadge}>Obligatorio</div>
+                )}
               </div>
             ))}
           </div>
@@ -102,6 +149,9 @@ const SummonerSpellsSelector = ({
                       alt={spell.name}
                     />
                     <span>{spell.name}</span>
+                    {selectedPosition === 'jungle' && spell.name === "Aplastar" && (
+                      <span className={styles.requiredTag}>(Requerido)</span>
+                    )}
                   </div>
                 ))}
               </div>

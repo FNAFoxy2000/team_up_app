@@ -189,7 +189,8 @@ const ItemSelector = ({
       }
     }
   };
-
+  const getTooltip = (desc) => desc ? desc.replace(/<[^>]+>/g, '') : '';
+  
   return (
     <div className={styles.itemSelector}>
       <select
@@ -215,6 +216,8 @@ const ItemSelector = ({
                 selectedBoots.find(i => i.id === item.id) ? styles.selected : ''
               }`}
               onClick={() => handleAddItem(item)}
+              title={getTooltip(item.description)}
+
             >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
@@ -233,8 +236,10 @@ const ItemSelector = ({
               key={item.id}
               className={`${styles.itemCard} ${
                 selectedStarterItems.find(i => i.id === item.id) ? styles.selected : ''
-              }`}
+                }`}
               onClick={() => handleAddItem(item)}
+              title={getTooltip(item.description)}
+
             >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
@@ -249,10 +254,12 @@ const ItemSelector = ({
         <h3>Objetos iniciales seleccionados</h3>
         <div className={styles.itemsGrid}>
           {selectedStarterItems.map(item => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className={`${styles.itemCard} ${styles.selected}`}
               onClick={() => handleAddItem(item)}
+              title={getTooltip(item.description)}
+
             >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
@@ -267,10 +274,12 @@ const ItemSelector = ({
         <h3>Botas seleccionadas</h3>
         <div className={styles.itemsGrid}>
           {selectedBoots.map(item => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className={`${styles.itemCard} ${styles.selected}`}
               onClick={() => handleAddItem(item)}
+              title={getTooltip(item.description)}
+
             >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
@@ -295,10 +304,11 @@ const ItemSelector = ({
           {filteredCompleteItems.map(item => (
             <div
               key={item.id}
-              className={`${styles.itemCard} ${
-                selectedItems.find(i => i.id === item.id) ? styles.selected : ''
-              }`}
+              className={`${styles.itemCard} ${selectedItems.find(i => i.id === item.id) ? styles.selected : ''
+                }`}
               onClick={() => handleAddItem(item)}
+              title={getTooltip(item.description)}
+
             >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
@@ -313,10 +323,12 @@ const ItemSelector = ({
         <h3>Objetos completos seleccionados</h3>
         <div className={styles.itemsGrid}>
           {selectedItems.map(item => (
-            <div 
-              key={item.id} 
+            <div
+              key={item.id}
               className={`${styles.itemCard} ${styles.selected}`}
               onClick={() => handleAddItem(item)}
+              title={getTooltip(item.description)}
+
             >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}
