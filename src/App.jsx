@@ -15,6 +15,8 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Grid from './components/Guias/SkillsGrid'
 
+import PRB from './pages/GuiasSinApi'
+
 
 function App() {
   return (
@@ -28,14 +30,16 @@ function App() {
         <Route path="/juegos/:nombreJuego" element={<Juego />} />
         <Route path="/juegos/annadir" element={<AnnadirJuego />} />
         <Route path="/juegos/editar" element={<AnnadirJuego />} />
-        <Route path="/guias/crear" element={<ChampionGrid/>}/>
-        <Route path='/guias/crear/:championId' element={<CrearGuia/>} />
+        <Route path="/guias/crear" element={<ChampionGrid />} />
+        <Route path='/guias/crear/:championId' element={<CrearGuia />} />
         <Route path="/chat" element={<ChatPage />} />
         <Route path="/crearChat" element={<CrearChat />} />
         <Route path="/usuario/datosUsuario" element={<PerfilUsuario />} />
-        <Route path="/LoginError" element={<LoginError/>}/>
+        <Route path="/LoginError" element={<LoginError />} />
         <Route path="/grid" element={<Grid />} />
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />
+        <Route path="/guias/runas" element={<PRB />} />
+
       </Routes>
 
       <Footer />
