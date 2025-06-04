@@ -130,3 +130,109 @@
   transform: translateY(0);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
+
+
+/* Runas */
+
+/* Contenedor principal */
+.runesSelector {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Visualización de runas seleccionadas */
+.selectedRunesContainer {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  background-color: #f0f2f5;
+  border-radius: 10px;
+  margin-bottom: 20px;
+}
+
+.selectedPrimaryRunes,
+.selectedSecondaryRunes {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.selectedPrimaryRunes {
+  justify-content: flex-start;
+}
+
+.selectedSecondaryRunes {
+  justify-content: flex-end;
+}
+
+.selectedPath {
+  margin-right: 15px;
+}
+
+.selectedPathIcon {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  border: 2px solid #0d6efd;
+  background-color: white;
+}
+
+.selectedRune {
+  position: relative;
+}
+
+.selectedRuneIcon {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  border: 2px solid #6c757d;
+  background-color: white;
+  transition: all 0.2s;
+}
+
+.selectedRuneIcon:hover {
+  transform: scale(1.1);
+  border-color: #0d6efd;
+}
+
+/* Estilos para los selectores (se mantienen iguales pero con ajustes para horizontal) */
+.pathsContainer {
+  display: flex;
+  gap: 15px;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.runesContainer {
+  display: flex;
+  gap: 10px;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.rune {
+  flex: 0 0 auto;
+}
+
+/* Tooltip básico (puedes usar tu componente real) */
+.tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  z-index: 100;
+  display: none;
+}
+
+.rune:hover .tooltip,
+.selectedRune:hover .tooltip {
+  display: block;
+}
