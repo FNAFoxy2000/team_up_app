@@ -26,13 +26,33 @@ const GuiaCampeon = () => {
     items: []
   });
 
-  const positions = [
-    { id: 'top', name: 'Top' },
-    { id: 'jungle', name: 'Jungla' },
-    { id: 'mid', name: 'Mid' },
-    { id: 'adc', name: 'ADC' },
-    { id: 'support', name: 'Support' }
-  ];
+const positions = [
+  {
+    id: "top",
+    name: "Top",
+    icon: "https://wiki.leagueoflegends.com/en-us/images/Top_icon.png?58442",
+  },
+  {
+    id: "jungle",
+    name: "Jungla",
+    icon: "https://wiki.leagueoflegends.com/en-us/images/Jungle_icon_WR.png?49747",
+  },
+  {
+    id: "middle",
+    name: "Mid",
+    icon: "https://wiki.leagueoflegends.com/en-us/images/Middle_icon.png?fa3f0",
+  },
+  {
+    id: "bottom",
+    name: "ADC",
+    icon: "https://wiki.leagueoflegends.com/en-us/images/Bottom_icon.png?6d4b2",
+  },
+  {
+    id: "utility",
+    name: "Soporte",
+    icon: "https://wiki.leagueoflegends.com/en-us/images/Support_icon.png?af1ff",
+  },
+];
 
   // Referencia para el nombre del campeón en el título de la página
   useEffect(() => {
@@ -106,6 +126,7 @@ const GuiaCampeon = () => {
     alert('Datos de la guía listos para guardar. Revisa la consola para ver los detalles.');
   };
 
+
   if (loading) return <p className={styles.loadingText}>Cargando datos del campeón...</p>;
   if (error) return <p className={styles.errorText}>{error}</p>;
   if (!campeon) return null;
@@ -130,12 +151,17 @@ const GuiaCampeon = () => {
           {positions.map((position) => (
             <button
               key={position.id}
-              className={`${styles.positionButton} ${
-                selectedPosition === position.id ? styles.selectedPosition : ''
-              }`}
+              className={`${styles.positionButton} ${selectedPosition === position.id ? styles.selectedPosition : ''
+                }`}
               onClick={() => handlePositionSelect(position.id)}
+              
             >
-              {position.name}
+              <img
+                src={position.icon}
+                alt={position.name}
+                className={styles.positionIcon}
+              />
+              <span className={styles.positionLabel}>{position.name}</span>
             </button>
           ))}
         </div>
@@ -158,7 +184,7 @@ const GuiaCampeon = () => {
           onSpellsChange={handleSpellsChange}
           initialSpells={summonerSpells}
           maxSelections={2}
-          selectedPosition={selectedPosition}  // <-- Añade esta prop
+          selectedPosition={selectedPosition}  
         />
       </div>
 
@@ -183,7 +209,7 @@ const GuiaCampeon = () => {
         <button 
           onClick={handlePrintSelections}
           className={styles.printButton}
-          disabled={!selectedPosition} // Deshabilitar si no se ha seleccionado posición
+          disabled={!selectedPosition} 
         >
           Guardar Guía
         </button>
