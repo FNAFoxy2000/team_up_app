@@ -5,6 +5,8 @@ import styles from '../components/Guias/guias.module.css';
 
 import { showSuccess, showError } from '../components/Toast';
 
+import AuthService from '../services/authService';
+import {guardarGuia} from '../peticiones/guias_peticiones.mjs'
 
 import SkillsGrid from '../components/Guias/SkillsGrid';
 import ItemSelector from '../components/Guias/ItemSelector';
@@ -26,8 +28,6 @@ const GuiaCampeon = () => {
   const [guidePatch, setGuidePatch] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
 
-
-  
   const [selectedItems, setSelectedItems] = useState({
     starterItems: [],
     boots: [],
@@ -216,35 +216,60 @@ const retornarObjeto = ({dataToPrint}) =>{
   }
 }
 
-  const handlePrintSelections = () => {
-    const dataToPrint = {
-      titulo: guideTitle,
-      parche: guidePatch,
-      campeon: campeonNombre,
-      posicion: selectedPosition,
-      descripcion: guideDescription,
-      hechizosInvocador: summonerSpells,
-      ordenHabilidades: skillOrder,
-      objetosIniciales: selectedItems.starterItems,
-      botas: selectedItems.boots,
-      objetosCompletos: selectedItems.items,
-      runas: runes,
-      privada: isPrivate
-
-    };
-
-    if(!validateGuideData(dataToPrint)){
-      return;
-    }
-
-    retornarObjeto(dataToPrint);
-
-    console.log('----- GUARDAR GUÍA -----');
-    console.log('Datos para guardar:', retornarObjeto(dataToPrint));
-    console.log('-----------------------');
-    
-    showSuccess("¡Guardado correctamente!");
+ const handlePrintSelections = async () => {
+  const dataToPrint = {
+    titulo: guideTitle,
+    parche: guidePatch,
+    campeon: campeonNombre,
+    posicion: selectedPosition,
+    descripcion: guideDescription,
+    hechizosInvocador: summonerSpells,
+    ordenHabilidades: skillOrder,
+    objetosIniciales: selectedItems.starterItems,
+    botas: selectedItems.boots,
+    objetosCompletos: selectedItems.items,
+    runas: runes,
+    privada: isPrivate
   };
+
+  if (!validateGuideData(dataToPrint)) {
+    return;
+  }
+
+
+  const objetoGuardar = retornarObjeto(dataToPrint);
+
+
+  const estaLogeado = AuthService.isAuthenticated();
+  if (!estaLogeado) {
+    alert("Debes estar logueado para guardar la guía");
+    return;
+  }
+
+  const usr = AuthService.getUserFromToken();
+  const lol_id = 2; 
+
+  try {
+    await guardarGuia(
+      usr.id_usuario,
+      lol_id,
+      objetoGuardar.campeon,
+      objetoGuardar,
+      objetoGuardar.privada
+    );
+
+    showSuccess("¡Guardado correctamente!");
+  } catch (error) {
+  if (error.response && error.response.data) {
+    console.error("Error al guardar la guía:", error.response.data);
+    alert("Error al guardar la guía: " + JSON.stringify(error.response.data));
+  } else {
+    console.error("Error al guardar la guía:", error.message);
+    alert("Error al guardar la guía: " + error.message);
+  }
+}
+};
+
 
 
   if (loading) return <p className={styles.loadingText}>Cargando datos del campeón...</p>;
