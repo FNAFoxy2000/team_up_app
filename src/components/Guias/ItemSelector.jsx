@@ -6,7 +6,8 @@ const ItemSelector = ({
   onSelectionChange,
   initialSelectedStarters = [], 
   initialSelectedBoots = [],
-  initialSelectedItems = []
+  initialSelectedItems = [],
+  selectedPosition = ''  
 }) => {
   
   const [selectedStarterItems, setSelectedStarterItems] = useState(initialSelectedStarters);
@@ -16,7 +17,6 @@ const ItemSelector = ({
   const [items, setItems] = useState([]);
   const [bootOptions, setBootOptions] = useState([]);
   const [starterOptions, setStarterOptions] = useState([]);
-  const [role, setRole] = useState('');
   const [search, setSearch] = useState('');
 
   const botas = ["Grebas de berserker", "Botas de rapidez", "Suelas simbióticas", "Botas de hechicero", "Botas blindadas", "Botas de mercurio", "Botas jonias de la lucidez"];
@@ -65,6 +65,12 @@ const ItemSelector = ({
 
   const objetos_suport_completos = objetos.concat(suport_completos);
 
+  if (selectedPosition.toLowerCase() == "jungle"){
+    selectedPosition = "Jungla"
+  }else if(selectedPosition.toLowerCase() == "utility"){
+        selectedPosition = "Support"
+  }
+
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -106,20 +112,22 @@ const ItemSelector = ({
 
   useEffect(() => {
     const filteredStarters = items.filter(item => {
-      if (role === 'Jungla')
+      if (selectedPosition === 'Jungla') {
         return jungle_start.includes(item.name);
-      if (role === 'Support')
+      }
+      if (selectedPosition === 'Support') {
         return suport_start.includes(item.name);
+      } 
       return starter.includes(item.name);
     });
     setStarterOptions(filteredStarters);
-  }, [role, items]);
+  }, [selectedPosition, items]);
 
   const isBoot = item => botas.includes(item.name);
 
   const isStarter = item => {
-    if (role === 'Jungla') return jungle_start.includes(item.name);
-    if (role === 'Support') return suport_start.includes(item.name);
+    if (selectedPosition === 'Jungla') return jungle_start.includes(item.name);
+    if (selectedPosition === 'Support') return suport_start.includes(item.name);
     return starter.includes(item.name);
   };
 
@@ -132,7 +140,7 @@ const ItemSelector = ({
 
   const filteredCompleteItems = items
     .filter(item => {
-      if (role === "Support") {
+      if (selectedPosition === "Support") {
         return objetos_suport_completos.includes(item.name);
       } else {
         return objetos.includes(item.name);
@@ -175,7 +183,6 @@ const ItemSelector = ({
         }
       }
     } 
-    // Si es ítem completo
     else {
       const alreadySelected = selectedItems.find(i => i.id === item.id);
       if (alreadySelected) {
@@ -193,18 +200,6 @@ const ItemSelector = ({
   
   return (
     <div className={styles.itemSelector}>
-      <select
-        value={role}
-        onChange={e => setRole(e.target.value)}
-        className={styles.roleSelect}
-      >
-        <option value="">Selecciona un rol</option>
-        <option value="Top">Top</option>
-        <option value="Mid">Mid</option>
-        <option value="Bot">Bot</option>
-        <option value="Jungla">Jungla</option>
-        <option value="Support">Support</option>
-      </select>
 
       <div className={styles.bootSelector}>
         <h4>Selecciona hasta 3 botas</h4>
@@ -217,7 +212,6 @@ const ItemSelector = ({
               }`}
               onClick={() => handleAddItem(item)}
               title={getTooltip(item.description)}
-
             >
               <img
                 src={`https://ddragon.leagueoflegends.com/cdn/14.10.1/img/item/${item.image.full}`}

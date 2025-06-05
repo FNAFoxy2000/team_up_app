@@ -3,6 +3,9 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../components/Guias/guias.module.css';
 
+import { showSuccess, showError } from '../components/Toast';
+
+
 import SkillsGrid from '../components/Guias/SkillsGrid';
 import ItemSelector from '../components/Guias/ItemSelector';
 import SummonerSpellsSelector from '../components/Guias/SummonersSpellsSelector';
@@ -19,6 +22,9 @@ const GuiaCampeon = () => {
   const [runes, setRunesData] = useState({});
   const [selectedPosition, setSelectedPosition] = useState('');
   const [guideDescription, setGuideDescription] = useState('');
+  const [guideTitle, setGuideTitle] = useState('');
+  const [guidePatch, setGuidePatch] = useState('');
+
   
   const [selectedItems, setSelectedItems] = useState({
     starterItems: [],
@@ -105,8 +111,111 @@ const positions = [
     setGuideDescription(e.target.value);
   };
 
+  const validateGuideData = ({
+  titulo,
+  parche,
+  campeon,
+  posicion,
+  descripcion,
+  hechizosInvocador,
+  ordenHabilidades,
+  objetosIniciales,
+  botas,
+  objetosCompletos,
+  runas
+}) => {
+  if (!titulo.trim()) {
+    showError("El título de la guía no puede estar vacío.");
+    return false;
+  }
+
+  if (!/^\d+(\.\d+)*$/.test(parche)) {
+    showError("El parche debe contener solo números y puntos (ej: 14.11).");
+    return false;
+  }
+
+  if (!descripcion.trim()) {
+    showError("La descripción no puede estar vacía.");
+    return false;
+  }
+
+  if (!campeon) {
+    showError("Debes seleccionar un campeón.");
+    return false;
+  }
+
+  if (!posicion) {
+    showError("Debes seleccionar una posición.");
+    return false;
+    }
+
+    if (!Array.isArray(hechizosInvocador) || hechizosInvocador.length < 2) {
+      showError("Debes seleccionar al menos 2 hechizos de invocador.");
+      return false;
+    }
+
+    if (!Array.isArray(skillOrder) ||
+      skillOrder.length !== 18 ||
+      skillOrder.some(habilidad => habilidad === null || habilidad === undefined)) {
+      showError("Debes asignar una habilidad para cada uno de los 18 niveles.");
+      return false;
+    }
+
+    if (!Array.isArray(objetosIniciales) || objetosIniciales.length < 1 || objetosIniciales.length > 2) {
+      showError("Selecciona entre 1 y 2 objetos iniciales.");
+      return false;
+    }
+
+  if (!Array.isArray(botas) || botas.length < 1 || botas.length > 3) {
+    showError("Selecciona entre 1 y 3 botas.");
+    return false;
+  }
+
+  if (!Array.isArray(objetosCompletos) || objetosCompletos.length !== 5) {
+    showError("Debes seleccionar exactamente 5 objetos completos.");
+    return false;
+  }
+
+    if (
+      !runes ||
+      !runes.primaryPath ||
+      !runes.secondaryPath ||
+      !runes.selectedRunes ||
+      !Array.isArray(runes.selectedRunes.primary) ||
+      runes.selectedRunes.primary.length !== 4 ||
+      !Array.isArray(runes.selectedRunes.secondary) ||
+      runes.selectedRunes.secondary.length < 3
+    ) {
+      showError("Debes completar todas las runas: 4 principales, al menos 3 secundarias");
+      return false;
+    }
+
+  return true;
+};
+
+const retornarObjeto = ({dataToPrint}) =>{
+  return {
+    titulo: guideTitle,
+    parche: guidePatch,
+    campeon: campeonNombre,
+    posicion: selectedPosition,
+    descripcion: guideDescription,
+    hechizosInvocador: summonerSpells.map(spell => spell.id),
+    ordenHabilidades: skillOrder,
+    objetosIniciales: selectedItems.starterItems.map(object => object.id),
+    botas: selectedItems.boots.map(object => object.id),
+    objetosCompletos: selectedItems.items.map(object => object.id),
+    runaPrincipal: runes.primaryPath,
+    runaSecundaria: runes.secondaryPath,
+    runasRamaPrincipal: runes.selectedRunes.primary,
+    runasRamaSecundaria: runes.selectedRunes.secondary
+  }
+}
+
   const handlePrintSelections = () => {
     const dataToPrint = {
+      titulo: guideTitle,
+      parche: guidePatch,
       campeon: campeonNombre,
       posicion: selectedPosition,
       descripcion: guideDescription,
@@ -118,12 +227,17 @@ const positions = [
       runas: runes
     };
 
+    if(!validateGuideData(dataToPrint)){
+      return;
+    }
+
+    retornarObjeto(dataToPrint);
+
     console.log('----- GUARDAR GUÍA -----');
-    console.log('Datos para guardar:', dataToPrint);
+    console.log('Datos para guardar:', retornarObjeto(dataToPrint));
     console.log('-----------------------');
     
-    // Opcional: Mostrar alerta al usuario
-    alert('Datos de la guía listos para guardar. Revisa la consola para ver los detalles.');
+    showSuccess("¡Guardado correctamente!");
   };
 
 
@@ -154,7 +268,7 @@ const positions = [
               className={`${styles.positionButton} ${selectedPosition === position.id ? styles.selectedPosition : ''
                 }`}
               onClick={() => handlePositionSelect(position.id)}
-              
+
             >
               <img
                 src={position.icon}
@@ -168,6 +282,41 @@ const positions = [
       </div>
 
       <div className={styles.section}>
+        <h2 className={styles.sectionTitle}>Título y Parche</h2>
+        <div className={styles.titlePatchContainer}>
+          <div className={styles.titleWrapper}>
+            <input
+              type="text"
+              className={styles.titleInput}
+              value={guideTitle}
+              onChange={(e) => {
+                if (e.target.value.length <= 50) {
+                  setGuideTitle(e.target.value);
+                }
+              }}
+              placeholder="Ejemplo: Electrolistar"
+            />
+            <p className={styles.inputHelper}>{guideTitle.length}/50 caracteres</p>
+          </div>
+          <div className={styles.patchWrapper}>
+            <input
+              type="text"
+              className={styles.patchInput}
+              value={guidePatch}
+              onChange={(e) => {
+                const regex = /^[0-9.]*$/;
+                if (regex.test(e.target.value)) {
+                  setGuidePatch(e.target.value);
+                }
+              }}
+              placeholder="Parche 00.00"
+            />
+          </div>
+        </div>
+      </div>
+
+
+      <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Descripción de la guía</h2>
         <textarea
           className={styles.descriptionInput}
@@ -177,6 +326,8 @@ const positions = [
           rows={5}
         />
       </div>
+
+
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Selecciona los Hechizos de invocador</h2>
@@ -202,7 +353,10 @@ const positions = [
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Selecciona los objetos</h2>
-        <ItemSelector onSelectionChange={handleItemChange} />
+        <ItemSelector 
+          onSelectionChange={handleItemChange}
+          selectedPosition={selectedPosition}  
+        />
       </div>
 
       <div className={styles.section}>

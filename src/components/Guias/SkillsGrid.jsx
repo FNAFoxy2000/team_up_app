@@ -12,8 +12,14 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
   const [loading, setLoading] = useState(true);
   const nivelCampeon = 18;
   const esUdyr = campeonNombre?.toLowerCase() === 'udyr';
+  const esBardo = campeonNombre?.toLowerCase() === 'bardo';
+  const esNunu = campeonNombre?.toLowerCase() === 'nunu y willump';
+  const esMundo = campeonNombre?.toLowerCase() === 'dr. mundo';
 
-  // Cargar datos del campeón de DDragon en español
+  if(esBardo) campeonNombre= 'Bard';
+  if(esNunu) campeonNombre= 'Nunu';
+  if(esMundo) campeonNombre= 'DrMundo';
+
   useEffect(() => {
     if (!campeonNombre) return;
 

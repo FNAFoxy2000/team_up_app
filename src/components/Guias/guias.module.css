@@ -195,3 +195,43 @@
   outline: none;
   border-color: #4a90e2;
 }
+
+.titlePatchContainer {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.titleWrapper {
+  flex: 2;
+  min-width: 200px;
+}
+
+.patchWrapper {
+  flex: 1;
+  min-width: 100px;
+}
+
+.titleInput,
+.patchInput {
+  width: 100%;
+  padding: 12px;
+  font-size: 1rem;
+  border-radius: 5px;
+  border: 2px solid #3a3a3a;
+  background-color: #2a2a2a;
+  color: #fff;
+  font-family: inherit;
+}
+
+.titleInput:focus,
+.patchInput:focus {
+  outline: none;
+  border-color: #4a90e2;
+}
+
+.inputHelper {
+  font-size: 0.85rem;
+  color: #888;
+  margin-top: 4px;
+}
