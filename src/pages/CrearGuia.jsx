@@ -24,6 +24,8 @@ const GuiaCampeon = () => {
   const [guideDescription, setGuideDescription] = useState('');
   const [guideTitle, setGuideTitle] = useState('');
   const [guidePatch, setGuidePatch] = useState('');
+  const [isPrivate, setIsPrivate] = useState(false);
+
 
   
   const [selectedItems, setSelectedItems] = useState({
@@ -208,7 +210,9 @@ const retornarObjeto = ({dataToPrint}) =>{
     runaPrincipal: runes.primaryPath,
     runaSecundaria: runes.secondaryPath,
     runasRamaPrincipal: runes.selectedRunes.primary,
-    runasRamaSecundaria: runes.selectedRunes.secondary
+    runasRamaSecundaria: runes.selectedRunes.secondary,
+    privada: isPrivate
+
   }
 }
 
@@ -224,7 +228,9 @@ const retornarObjeto = ({dataToPrint}) =>{
       objetosIniciales: selectedItems.starterItems,
       botas: selectedItems.boots,
       objetosCompletos: selectedItems.items,
-      runas: runes
+      runas: runes,
+      privada: isPrivate
+
     };
 
     if(!validateGuideData(dataToPrint)){
@@ -311,8 +317,19 @@ const retornarObjeto = ({dataToPrint}) =>{
               }}
               placeholder="Parche 00.00"
             />
+
+          </div>
+          <div className={styles.privacyWrapper}>
+            <input
+              type="checkbox"
+              id="privacyCheckbox"
+              checked={isPrivate}
+              onChange={(e) => setIsPrivate(e.target.checked)}
+            />
+            <label htmlFor="privacyCheckbox">Privada</label>
           </div>
         </div>
+
       </div>
 
 

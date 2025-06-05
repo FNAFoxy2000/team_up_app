@@ -235,3 +235,79 @@
   color: #888;
   margin-top: 4px;
 }
+
+
+.privacyWrapper {
+  display: flex;
+  align-items: center;
+  margin-left: 15px; /* espacio con elementos a la izquierda */
+  gap: 8px; /* espacio entre checkbox y texto */
+  position: relative;
+  user-select: none;
+}
+
+/* Ocultar el checkbox nativo pero mantenerlo accesible */
+.privacyWrapper label {
+  position: relative;
+  padding-left: 32px;
+  color: #ddd;
+  font-size: 1rem;
+  cursor: pointer;
+  line-height: 24px;
+  display: inline-block;
+  margin-bottom: 12px;
+  transform: translateY(-5px); /* sube un poco más */
+}
+
+.privacyWrapper input[type="checkbox"] {
+  position: absolute;
+  opacity: 0;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  margin: 0;
+  z-index: 2;
+  transform: translateY(0px); /* sube un poco más */
+}
+
+/* Caja personalizada del checkbox */
+.privacyWrapper label::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  background-color: #2a2a2a;
+  border: 2px solid #3a3a3a;
+  border-radius: 5px;
+  box-sizing: border-box;
+  transition: background-color 0.3s, border-color 0.3s;
+}
+
+/* Hover en checkbox: cambia el color del recuadro */
+.privacyWrapper input[type="checkbox"]:hover + label::before {
+  background-color: #3a3a3a;
+  border-color: #f0a400;
+}
+
+/* Cuando está checked cambia colores */
+.privacyWrapper input[type="checkbox"]:checked + label::before {
+  background-color: #f0a400;
+  border-color: #f0a400;
+}
+
+/* La marca de check */
+.privacyWrapper input[type="checkbox"]:checked + label::after {
+  content: "";
+  position: absolute;
+  left: 7px;
+  top: 5px;
+  width: 6px;
+  height: 12px;
+  border: solid #1e1e1e;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  pointer-events: none;
+}
+
