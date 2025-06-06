@@ -11,6 +11,7 @@ import AnnadirJuego from './pages/AnnadirJuegos';
 import ChatPage from './pages/ChatPage';
 import CrearChat from './pages/CrearChat';
 import PerfilUsuario from './pages/PerfilUsuario';
+import Guias from './pages/ListadoGuias';
 import ChampionGrid from './pages/ChampionGrid';
 import CrearGuia from './pages/CrearGuia'
 import ScrollToTop from './components/ScrollToTop';
@@ -33,6 +34,7 @@ function App() {
         <Route path="/juegos/:nombreJuego" element={<Juego />} />
         <Route path="/juegos/annadir" element={<AnnadirJuego />} />
         <Route path="/juegos/editar" element={<AnnadirJuego />} />
+        <Route path="/guias/listadoGuias" element={<Guias />} />
         <Route path="/guias/crear" element={<ChampionGrid />} />
         <Route path='/guias/crear/:championId' element={<CrearGuia />} />
         <Route path="/chat" element={<ChatPage />} />

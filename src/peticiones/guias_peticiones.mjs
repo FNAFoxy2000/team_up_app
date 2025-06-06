@@ -22,3 +22,12 @@ export async function guardarGuia(id_usuario, id_juego, campeon_nombre, objGuia,
   }
 }
 
+export async function getAllGuias(){
+    try{
+        const respuesta = await axios.get(`${apiURL}/guias/`);
+        return respuesta.data;
+    }catch(err){
+        console.error('Error al obtener las guias:', err);
+        return [];
+    }
+}

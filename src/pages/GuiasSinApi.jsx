@@ -1,10 +1,15 @@
 import React, { useState, useCallback } from 'react';
 import styles from '../components/Guias/guias.module.css';
-
+import AuthService from '../services/authService';
 import RuneSelector from '../components/Guias/RuneSelector';
 
 const GuiasSinApi = () => {
   const [runes, setRunesData] = useState({});
+  const userFromToken = AuthService.getUserFromToken();
+  if (!userFromToken) {
+      navigate('/LoginError', { replace: true });
+      return;
+  }
 
   const handleRunesChange = useCallback((data) => {
     setRunesData(data);
