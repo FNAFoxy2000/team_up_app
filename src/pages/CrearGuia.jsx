@@ -2,12 +2,9 @@ import React, { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import styles from '../components/Guias/guias.module.css';
-
-import { showSuccess, showError } from '../components/Toast';
-
+import { showSuccess, showError, showInfo } from '../components/Toast';
 import AuthService from '../services/authService';
 import {guardarGuia} from '../peticiones/guias_peticiones.mjs'
-
 import SkillsGrid from '../components/Guias/SkillsGrid';
 import ItemSelector from '../components/Guias/ItemSelector';
 import SummonerSpellsSelector from '../components/Guias/SummonersSpellsSelector';
@@ -242,7 +239,7 @@ const retornarObjeto = ({dataToPrint}) =>{
 
   const estaLogeado = AuthService.isAuthenticated();
   if (!estaLogeado) {
-    alert("Debes estar logueado para guardar la guía");
+    showInfo("Debes estar logueado para guardar la guía");
     return;
   }
 
@@ -262,10 +259,10 @@ const retornarObjeto = ({dataToPrint}) =>{
   } catch (error) {
   if (error.response && error.response.data) {
     console.error("Error al guardar la guía:", error.response.data);
-    alert("Error al guardar la guía: " + JSON.stringify(error.response.data));
+    showError("Error al guardar la guía: " + JSON.stringify(error.response.data));
   } else {
     console.error("Error al guardar la guía:", error.message);
-    alert("Error al guardar la guía: " + error.message);
+    showError("Error al guardar la guía: " + error.message);
   }
 }
 };

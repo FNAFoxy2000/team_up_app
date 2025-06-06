@@ -19,6 +19,7 @@ import { getJuegosPorUsuario } from '../peticiones/usuarios-juegos_peticiones.mj
 import AuthService from '../services/authService';
 import TablaSolicitudes from '../components/tablaSolicitudes';
 import JuegoCard from '../components/CardUsuario-Juego';
+import { showSuccess, showError } from '../components/Toast';
 
 const PerfilUsuario = () => {
   const [usuario, setUsuario] = useState(null);
@@ -94,7 +95,7 @@ const PerfilUsuario = () => {
   const handleCambiarNombre = async () => {
     const nuevoNombre = prompt("Introduce tu nuevo nombre de usuario:");
     if (!nuevoNombre || nuevoNombre.trim() === "") {
-      alert("Nombre no válido");
+      showError("Nombre no válido");
       return;
     }
 
@@ -109,7 +110,7 @@ const PerfilUsuario = () => {
         nombre_usuario_app: nuevoNombre.trim()
       }));
     } catch (err) {
-      alert("Hubo un error al cambiar el nombre.");
+      showError("Hubo un error al cambiar el nombre.");
       console.error(err);
     }
   };
@@ -121,16 +122,16 @@ const PerfilUsuario = () => {
       const respuesta = await nuevaSolicitudAmistad(usuarioActivo.id_usuario, usuario.id_usuario);
       if (respuesta.success) {
         if (respuesta.data.success) {
-          alert("Solicitud de amistad enviada correctamente.");
+          showSuccess("Solicitud de amistad enviada correctamente.");
           setEstadoSolicitud({ estado: 1, id_solicitud: respuesta.data.id_solicitud });
         } else {
-          alert("No puedes solicitar amistad porque ya lo has hecho recientemente");
+          showError("No puedes solicitar amistad porque ya lo has hecho recientemente");
         }
       } else {
-        alert("No se pudo enviar la solicitud.");
+        showError("No se pudo enviar la solicitud.");
       }
     } catch (error) {
-      alert("Error al enviar la solicitud de amistad.");
+      showError("Error al enviar la solicitud de amistad.");
       console.error(error);
     }
   };
@@ -144,14 +145,14 @@ const PerfilUsuario = () => {
     try {
       const respuesta = await cancelarAmistad(usuarioActivo.id_usuario, usuario.id_usuario);
       if (respuesta.success) {
-        alert("Amistad cancelada correctamente.");
+        showSuccess("Amistad cancelada correctamente.");
         setEsAmigo(false);
         setEstadoSolicitud({ estado: 0, id_solicitud: null });
       } else {
-        alert("No se pudo cancelar la amistad.");
+        showError("No se pudo cancelar la amistad.");
       }
     } catch (error) {
-      alert("Error al cancelar la amistad.");
+      showError("Error al cancelar la amistad.");
       console.error(error);
     }
   };
@@ -161,15 +162,15 @@ const PerfilUsuario = () => {
     try {
       const respuesta = await aceptarSolicitud(estadoSolicitud.id_solicitud);
       if (respuesta.result.success) {
-        alert("Solicitud aceptada.");
+        showSuccess("Solicitud aceptada.");
         setEsAmigo(true);
         setEstadoSolicitud({ estado: 0, id_solicitud: null });
       } else {
-        alert("No se pudo aceptar la solicitud.");
+        showError("No se pudo aceptar la solicitud.");
       }
     } catch (err) {
       console.error('Error al aceptar la solicitud:', err);
-      alert("Error al aceptar la solicitud.");
+      showError("Error al aceptar la solicitud.");
     }
   };
 
@@ -181,14 +182,14 @@ const PerfilUsuario = () => {
     try {
       const respuesta = await rechazarSolicitud(estadoSolicitud.id_solicitud);
       if (respuesta.result.success) {
-        alert("Solicitud cancelada.");
+        showSuccess("Solicitud cancelada.");
         setEstadoSolicitud({ estado: 0, id_solicitud: null });
       } else {
-        alert("No se pudo cancelar la solicitud.");
+        showError("No se pudo cancelar la solicitud.");
       }
     } catch (err) {
       console.error('Error al cancelar la solicitud:', err);
-      alert("Error al cancelar la solicitud.");
+      showError("Error al cancelar la solicitud.");
     }
   };
 

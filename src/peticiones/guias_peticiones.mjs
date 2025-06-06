@@ -31,3 +31,19 @@ export async function getAllGuias(){
         return [];
     }
 }
+
+export async function eliminarGuia(id_guia, id_usuario) {
+  try {
+    const response = await axios.delete(`${apiURL}/guias/delete`, {
+      data: {
+        id: id_guia,
+        id_usuario: id_usuario
+      }
+    });
+    return response.data;
+  } catch (err) {
+    console.error('Error al eliminar la guía:', err);
+    throw err;
+  }
+}
+

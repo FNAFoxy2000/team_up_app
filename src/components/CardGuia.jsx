@@ -1,6 +1,8 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CardGuia.css';
+import AuthService from '../services/AuthService';
+import { eliminarGuia } from '../peticiones/guias_peticiones.mjs';
 
 function formatearNombreCampeon(nombre) {
   if (!nombre) return '';
@@ -23,8 +25,16 @@ function formatearNombreCampeon(nombre) {
 
 const CardGuia = ({ guia }) => {
   const navigate = useNavigate();
+  const [usuarioActivo, setUsuarioActivo] = useState(null);
   const [showDescription, setShowDescription] = useState(false);
   const hoverTimeout = useRef(null);
+
+  useEffect(() => {
+    const user = AuthService.getUserFromToken();
+    if (user) {
+      setUsuarioActivo(user);
+    }
+  }, []);
 
   const contenido = JSON.parse(guia.contenido_guia);
 
@@ -42,6 +52,15 @@ const CardGuia = ({ guia }) => {
   const handleClick = () => {
     navigate(`/guias/${guia.id_guia}`);
   };
+
+  const handleDelete = (e) => {
+    const confirmed = window.confirm(`¿Estás seguro de que deseas eliminar esta guía? ${contenido.titulo}`);
+    if (confirmed) {
+      eliminarGuia(guia.id_guia, usuarioActivo.id_usuario);
+      window.location.reload();
+    }
+  };
+
 
   return (
     <div
@@ -62,6 +81,12 @@ const CardGuia = ({ guia }) => {
         <p className={`descripcion-guia ${showDescription ? 'visible' : ''}`}>
           {contenido.descripcion}
         </p>
+
+        {usuarioActivo && usuarioActivo.id_usuario === guia.id_usuario && (
+          <button className="borrar-btn" onClick={handleDelete}>
+            Borrar guía
+          </button>
+        )}
       </div>
     </div>
   );

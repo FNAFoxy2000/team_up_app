@@ -1,5 +1,4 @@
 "use client";
-
 import React, { useEffect, useState } from "react";
 import "./Juego.css";
 import { Link, useParams, useNavigate } from "react-router-dom";
@@ -22,6 +21,7 @@ import {
 } from "../peticiones/usuarios-juegos_peticiones.mjs";
 import { getUserIdByEmail } from "../peticiones/usuario_peticiones.mjs";
 import AuthService from "../services/authService";
+import { showSuccess, showError } from '../components/Toast';
 
 const GameProfilePage = () => {
   const { nombreJuego } = useParams();
@@ -100,11 +100,11 @@ const GameProfilePage = () => {
     if (confirmacion) {
       try {
         await borrarJuego(juego);
-        alert("Juego borrado correctamente");
+        showSuccess("Juego borrado correctamente");
         navigate("/");
       } catch (error) {
         console.error("Error al borrar el juego:", error);
-        alert("Error al borrar el juego");
+        showError("Error al borrar el juego");
       }
     }
   };
@@ -124,7 +124,7 @@ const GameProfilePage = () => {
       });
     } catch (err) {
       console.error("Error al marcar como favorito:", err);
-      alert("No se pudo marcar como favorito.");
+      showError("No se pudo marcar como favorito.");
     }
   };
 
@@ -137,7 +137,7 @@ const GameProfilePage = () => {
       setInfoExtra("");
     } catch (err) {
       console.error("Error al quitar favorito:", err);
-      alert("No se pudo quitar de favoritos.");
+      showError("No se pudo quitar de favoritos.");
     }
   };
 
@@ -174,10 +174,10 @@ const GameProfilePage = () => {
             info_extra: infoExtra
           }
         );
-        alert("Información extra actualizada.");
+        showSuccess("Información extra actualizada.");
       } catch (err) {
         console.error("Error al actualizar info extra:", err);
-        alert("No se pudo guardar la información extra.");
+        showError("No se pudo guardar la información extra.");
       }
     }
   };
@@ -190,7 +190,7 @@ const GameProfilePage = () => {
       }
     } catch (error) {
       console.error("Error al unirse al chat:", error);
-      alert("Error al unirse al chat");
+      showError("Error al unirse al chat");
     }
   };
 
@@ -204,7 +204,7 @@ const GameProfilePage = () => {
         }
       } catch (error) {
         console.error("Error al abandonar el chat:", error);
-        alert("Error al abandonar el chat");
+        showError("Error al abandonar el chat");
       }
     }
   };
@@ -304,41 +304,44 @@ const GameProfilePage = () => {
           )}
         </div>
 
-        <div className="chats-juego-section">
-          <h3>Chats de {juego.nombre}</h3>
+        {isLoggedIn && (
+          <div className="chats-juego-section">
+            <h3>Chats de {juego.nombre}</h3>
 
-          {loadingChats ? (
-            <p>Cargando chats...</p>
-          ) : chatsJuego.length > 0 ? (
-            <div className="chats-grid">
-              {chatsJuego.map((chat) => (
-                <div key={chat.id_chat} className="chat-card">
-                  <div className="chat-info">
-                    <h4 className="chat-nombre">{chat.nombre}</h4>
-                    <p className="chat-descripcion">{chat.descripcion}</p>
+            {loadingChats ? (
+              <p>Cargando chats...</p>
+            ) : chatsJuego.length > 0 ? (
+              <div className="chats-grid">
+                {chatsJuego.map((chat) => (
+                  <div key={chat.id_chat} className="chat-card">
+                    <div className="chat-info">
+                      <h4 className="chat-nombre">{chat.nombre}</h4>
+                      <p className="chat-descripcion">{chat.descripcion}</p>
+                    </div>
+                    <div className="chat-actions">
+                      {isUserInChat(chat.id_chat) ? (
+                        <button onClick={() => handleAbandonarChat(chat.id_chat, chat.nombre)} className="btn-abandonar">
+                          Abandonar Chat
+                        </button>
+                      ) : (
+                        <button onClick={() => handleUnirseChat(chat.id_chat)} className="btn-unirse">
+                          Unirse
+                        </button>
+                      )}
+                    </div>
                   </div>
-                  <div className="chat-actions">
-                    {isUserInChat(chat.id_chat) ? (
-                      <button onClick={() => handleAbandonarChat(chat.id_chat, chat.nombre)} className="btn-abandonar">
-                        Abandonar Chat
-                      </button>
-                    ) : (
-                      <button onClick={() => handleUnirseChat(chat.id_chat)} className="btn-unirse">
-                        Unirse
-                      </button>
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            ) : (
+              <p>No hay chats disponibles para este juego.</p>
+            )}
+
+            <div className="crear-comunidad-section">
+              <Link to="/crearChat" className="btn-crear-comunidad">Crear Comunidad</Link>
             </div>
-          ) : (
-            <p>No hay chats disponibles para este juego.</p>
-          )}
-
-          <div className="crear-comunidad-section">
-            <Link to="/crearChat" className="btn-crear-comunidad">Crear Comunidad</Link>
           </div>
-        </div>
+        )}
+
       </div>
     </div>
   );

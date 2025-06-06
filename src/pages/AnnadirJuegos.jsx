@@ -3,11 +3,17 @@ import { useLocation } from 'react-router-dom';
 import './AnnadirJuegos.css';
 import { annadirJuego, editarJuego } from '../peticiones/juego_peticiones.mjs';
 import { getCategorias, annadirCategoria } from '../peticiones/categoria_peticiones.mjs';
+import { showSuccess, showError } from '../components/Toast';
+import AuthService from '../services/authService';
 
 const AnnadirJuego = () => {
   const location = useLocation();
-  const juegoExistente = location.state?.juego;
+  const userFromToken = AuthService.getUserFromToken();
+  if (!userFromToken || !userFromToken.is_admin) {
+    window.location.href = '/LoginError';
+  }
 
+  const juegoExistente = location.state?.juego;
   const [categorias, setCategorias] = useState([]);
   const [nuevaCategoria, setNuevaCategoria] = useState('');
   const [usarNuevaCategoria, setUsarNuevaCategoria] = useState(false);
@@ -99,7 +105,7 @@ const AnnadirJuego = () => {
       }
 
       if (!categoriaID) {
-        alert("No se pudo obtener el ID de la categoría.");
+        showError("No se pudo obtener el ID de la categoría.");
         return;
       }
 
@@ -110,10 +116,10 @@ const AnnadirJuego = () => {
       console.log(datosJuego);
       if (juegoExistente) {
         await editarJuego(datosJuego);
-        alert('Juego actualizado correctamente');
+        showSuccess('Juego actualizado correctamente');
       } else {
         await annadirJuego(datosJuego);
-        alert('Juego añadido correctamente');
+        showSuccess('Juego añadido correctamente');
       }
 
       setFormData({
@@ -129,7 +135,7 @@ const AnnadirJuego = () => {
       setUsarNuevaCategoria(false);
 
     } catch (error) {
-      alert('Error al procesar el juego.');
+      showError('Error al procesar el juego.');
       console.error(error);
     }
   };

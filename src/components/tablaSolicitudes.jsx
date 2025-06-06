@@ -6,6 +6,7 @@ import {
 } from '../peticiones/solicitudes_amistad_peticiones.mjs';
 import { cancelarAmistad } from '../peticiones/amistades_peticiones.mjs';
 import AuthService from '../services/authService';
+import { showError } from './Toast';
 
 const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => {
   const [pestañaActiva, setPestañaActiva] = useState('amistades');
@@ -30,13 +31,13 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
 
       const usuarioActual = AuthService.getUserFromToken();
       if (!usuarioActual) {
-        alert("No se pudo obtener el usuario actual.");
+        showError("No se pudo obtener el usuario actual.");
         return;
       }
 
       const amigo = amistades.find((a) => a.email === email);
       if (!amigo) {
-        alert("No se encontró la amistad.");
+        showError("No se encontró la amistad.");
         return;
       }
 
