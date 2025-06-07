@@ -32,6 +32,16 @@ export async function getAllGuias(){
     }
 }
 
+export async function getAllGuiasUsuario(id_usuario){
+    try{
+        const respuesta = await axios.get(`${apiURL}/guias/user/${id_usuario}`);
+        return respuesta.data;
+    }catch(err){
+        console.error('Error al obtener las guias:', err);
+        return [];
+    }
+}
+
 export async function eliminarGuia(id_guia, id_usuario) {
   try {
     const response = await axios.delete(`${apiURL}/guias/delete`, {
@@ -47,3 +57,23 @@ export async function eliminarGuia(id_guia, id_usuario) {
   }
 }
 
+export async function getGuiaPorId(id_guia) {
+  try {
+    const response = await axios.get(`${apiURL}/guias/${id_guia}`);
+    return response.data.guia;
+  } catch (error) {
+    console.error('Error al buscar la guía:', error);
+    throw error;
+  }
+}
+
+export async function getCampeones() {
+  try {
+
+    const response = await axios.get(`${apiURL}/guias/campeones`);
+    return response.data.campeones;
+  } catch (error) {
+    console.error('Error al buscar la guía:', error);
+    throw error;
+  }
+}

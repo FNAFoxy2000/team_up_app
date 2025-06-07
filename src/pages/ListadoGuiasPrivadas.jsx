@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ListadoGuias.css';
 import GuiaCard from '../components/CardGuia';
-import { getAllGuias, getCampeones } from '../peticiones/guias_peticiones.mjs';
+import {  getAllGuiasUsuario, getCampeones } from '../peticiones/guias_peticiones.mjs';
 import AuthService from '../services/authService';
 import { showSuccess, showError, showInfo } from '../components/Toast';
 
@@ -19,15 +19,16 @@ function Guias() {
   const [selectedChampion, setSelectedChampion] = useState('');
 
 
-
   useEffect(() => {
     const userFromToken = AuthService.getUserFromToken();
     setUsuario(userFromToken); // Guardamos si está logueado o no
 
+
     const cargarGuias = async () => {
       setLoading(true);
       try {
-        const response = await getAllGuias();
+        const response = await getAllGuiasUsuario(userFromToken.id_usuario);
+        console.log(response)
         const guiasData = response.data.map((guia) => ({
           ...guia,
           contenido: JSON.parse(guia.contenido_guia)
@@ -96,14 +97,6 @@ function Guias() {
     }
   };
 
-    const handleVerPrivadas = () => {
-    if (usuario) {
-      navigate('/guias/privadas');
-    } else {
-      showError('Si no has iniciado sesion no puedes ver tus guias');
-    }
-  };
-
   return (
     <div className="container">
       <h1 className="title">Busca Guias en TeamUp</h1>
@@ -111,15 +104,12 @@ function Guias() {
         Usa los filtros para encontrar guías de tus juegos favoritos.
       </p>
 
-
-<div className="botonesGuiaContainer">
-  <button onClick={handleCrearGuia} className="crearGuiaBtn">
-    Crear Guía
-  </button>
-  <button onClick={handleVerPrivadas} className="crearGuiaBtn">
-    Ver Mis Guias
-  </button>
-</div>
+      <button
+        onClick={handleCrearGuia}
+        className="crearGuiaBtn"
+      >
+        Crear Guía
+      </button>
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="inputGroup">

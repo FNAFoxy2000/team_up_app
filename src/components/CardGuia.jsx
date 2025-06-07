@@ -76,7 +76,7 @@ const CardGuia = ({ guia }) => {
         referrerPolicy="no-referrer"
       />
       <div className="info-guia">
-        <h3 className="nombre-guia">{contenido.titulo}</h3>
+        <h3 className="nombre-guia">{contenido.titulo}   {guia.privada === 1 && <span title="Guía privada" className="icono-privada"> 🔒</span>}</h3>
         <p className="campeon-guia">Creador: {guia.nombre_usuario}</p>
         <p className={`descripcion-guia ${showDescription ? 'visible' : ''}`}>
           {contenido.descripcion}
