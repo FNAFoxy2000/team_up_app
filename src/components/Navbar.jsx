@@ -63,7 +63,6 @@ function Navbar() {
         <li><Link to="/busqueda">Búsqueda</Link></li>
         <li><a href="/chat">Chats</a></li>
         <li><a href="/guias/listadoGuias">Guias</a></li>
-        <li><a href="/guias/runas">Runes</a></li>
       </ul>
 
 
