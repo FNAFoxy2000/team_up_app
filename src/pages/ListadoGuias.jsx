@@ -107,19 +107,15 @@ function Guias() {
   return (
     <div className="container">
       <h1 className="title">Busca Guias en TeamUp</h1>
-      <p className="description">
-        Usa los filtros para encontrar guías de tus juegos favoritos.
-      </p>
 
-
-<div className="botonesGuiaContainer">
-  <button onClick={handleCrearGuia} className="crearGuiaBtn">
-    Crear Guía
-  </button>
-  <button onClick={handleVerPrivadas} className="crearGuiaBtn">
-    Ver Mis Guias
-  </button>
-</div>
+      <div className="botonesGuiaContainer">
+        <button onClick={handleCrearGuia} className="crearGuiaBtn">
+          Crear Guía
+        </button>
+        <button onClick={handleVerPrivadas} className="crearGuiaBtn">
+          Ver Mis Guias
+        </button>
+      </div>
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="inputGroup">

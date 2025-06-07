@@ -2,18 +2,19 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './Busqueda.module.css';
 import UsuarioCard from '../components/CardUsuario';
+import { getAllJuegos } from '../peticiones/juego_peticiones.mjs';
 import { getAllUsuarios } from '../peticiones/usuario_peticiones.mjs';
 import AuthService from '../services/authService';
 
 function Busqueda() {
   const navigate = useNavigate();
 
-  // Estados para los filtros
   const [searchText, setSearchText] = useState('');
   const [selectedGame, setSelectedGame] = useState('');
   const [isRegistered, setIsRegistered] = useState('');
   const [orderBy, setOrderBy] = useState('');
   const [usuarios, setUsuarios] = useState([]);
+  const [juegos, setJuegos] = useState([]);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -23,36 +24,55 @@ function Busqueda() {
       return;
     }
 
-    const cargarUsuarios = async () => {
+    const cargarDatos = async () => {
       setLoading(true);
       try {
-        const usuariosData = await getAllUsuarios();
+        const [usuariosData, juegosData] = await Promise.all([
+          getAllUsuarios(),
+          getAllJuegos()
+        ]);
         setUsuarios(usuariosData);
+        setJuegos(juegosData);
       } catch (error) {
-        console.error('Error al cargar usuarios:', error);
+        console.error('Error al cargar datos:', error);
       } finally {
         setLoading(false);
       }
     };
 
-    cargarUsuarios();
+    cargarDatos();
   }, [navigate]);
 
-  // Filtrar usuarios por nombre
-  const usuariosFiltrados = usuarios.filter((usuario) =>
+  const handleSubmit = (e) => e.preventDefault();
+  
+  // Aplicar filtros
+  const usuariosFiltrados = usuarios
+  .filter((usuario) =>
     usuario.nombre_usuario?.toLowerCase().includes(searchText.toLowerCase())
-  );
+  )
+  .filter((usuario) => {
+    if (!selectedGame) return true;
+    const gameId = parseInt(selectedGame);
+    return Array.isArray(usuario.juegos) && usuario.juegos.includes(gameId);
+  })
+  .filter((usuario) =>
+    isRegistered === ''
+      ? true
+      : isRegistered === 'true'
+      ? usuario.registrado === true
+      : usuario.registrado === false
+  )
+  .sort((a, b) => {
+    if (orderBy === 'asc') return a.nombre_usuario.localeCompare(b.nombre_usuario);
+    if (orderBy === 'desc') return b.nombre_usuario.localeCompare(a.nombre_usuario);
+    if (orderBy === 'date') return new Date(b.fecha_registro) - new Date(a.fecha_registro);
+    return 0;
+  });
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-  };
 
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Busca jugadores en TeamUp</h1>
-      <p className={styles.description}>
-        Usa los filtros para encontrar jugadores que coincidan con tu estilo y preferencias de juego.
-      </p>
 
       <form className={styles.form} onSubmit={handleSubmit}>
         <div className={styles.inputGroup}>
@@ -76,19 +96,11 @@ function Busqueda() {
             className={styles.select}
           >
             <option value="">Todos los juegos</option>
-            <option value="LoL">League of Legends</option>
-            <option value="CS">Counter Strike</option>
-            <option value="CR">Clash Royale</option>
-          </select>
-
-          <select
-            value={isRegistered}
-            onChange={(e) => setIsRegistered(e.target.value)}
-            className={styles.select}
-          >
-            <option value="">Registrado en TeamUp?</option>
-            <option value="true">Registrado</option>
-            <option value="false">No registrado</option>
+            {juegos.map((juego) => (
+              <option key={juego.id_juego} value={juego.id_juego}>
+                {juego.nombre}
+              </option>
+            ))}
           </select>
 
           <select
@@ -100,13 +112,8 @@ function Busqueda() {
             <option value="asc">Nombre (A-Z)</option>
             <option value="desc">Nombre (Z-A)</option>
             <option value="date">Fecha de registro</option>
-            <option value="rank">Rango</option>
           </select>
         </div>
-
-        <button type="submit" className={styles.button}>
-          Buscar
-        </button>
       </form>
 
       <div className={styles.listadoUsuarios}>
