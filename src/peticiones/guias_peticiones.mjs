@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 const apiURL = import.meta.env.VITE_API_URL;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 export async function guardarGuia(id_usuario, id_juego, campeon_nombre, objGuia, privada) {
   try {
@@ -12,7 +13,11 @@ export async function guardarGuia(id_usuario, id_juego, campeon_nombre, objGuia,
       privada: privada
     };
 
-    const response = await axios.post(`${apiURL}/guias/new`, body);
+    const response = await axios.post(`${apiURL}/guias/new`, body, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
     console.log(response);
     return response.data;
 
@@ -23,23 +28,31 @@ export async function guardarGuia(id_usuario, id_juego, campeon_nombre, objGuia,
 }
 
 export async function getAllGuias(){
-    try{
-        const respuesta = await axios.get(`${apiURL}/guias/`);
-        return respuesta.data;
-    }catch(err){
-        console.error('Error al obtener las guias:', err);
-        return [];
-    }
+  try {
+    const respuesta = await axios.get(`${apiURL}/guias/`, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
+    return respuesta.data;
+  } catch (err) {
+    console.error('Error al obtener las guias:', err);
+    return [];
+  }
 }
 
 export async function getAllGuiasUsuario(id_usuario){
-    try{
-        const respuesta = await axios.get(`${apiURL}/guias/user/${id_usuario}`);
-        return respuesta.data;
-    }catch(err){
-        console.error('Error al obtener las guias:', err);
-        return [];
-    }
+  try {
+    const respuesta = await axios.get(`${apiURL}/guias/user/${id_usuario}`, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
+    return respuesta.data;
+  } catch (err) {
+    console.error('Error al obtener las guias:', err);
+    return [];
+  }
 }
 
 export async function eliminarGuia(id_guia, id_usuario) {
@@ -48,6 +61,9 @@ export async function eliminarGuia(id_guia, id_usuario) {
       data: {
         id: id_guia,
         id_usuario: id_usuario
+      },
+      headers: {
+        'x-api-key': apiKey
       }
     });
     return response.data;
@@ -59,7 +75,11 @@ export async function eliminarGuia(id_guia, id_usuario) {
 
 export async function getGuiaPorId(id_guia) {
   try {
-    const response = await axios.get(`${apiURL}/guias/${id_guia}`);
+    const response = await axios.get(`${apiURL}/guias/${id_guia}`, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
     return response.data.guia;
   } catch (error) {
     console.error('Error al buscar la guía:', error);
@@ -69,8 +89,11 @@ export async function getGuiaPorId(id_guia) {
 
 export async function getCampeones() {
   try {
-
-    const response = await axios.get(`${apiURL}/guias/campeones`);
+    const response = await axios.get(`${apiURL}/guias/campeones`, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
     return response.data.campeones;
   } catch (error) {
     console.error('Error al buscar la guía:', error);

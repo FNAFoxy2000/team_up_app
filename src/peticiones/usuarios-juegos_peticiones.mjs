@@ -1,10 +1,15 @@
 import axios from 'axios'; 
 
-const apiURL = import.meta.env.VITE_API_URL
+const apiURL = import.meta.env.VITE_API_URL;
+const apiKey = import.meta.env.VITE_API_KEY;
 
 export async function getUsuarioPorJuego(id_juego, id_usuario){
   try {
-    const respuesta = await axios.get(`${apiURL}/usuarios_juegos/juego/${id_juego}/${id_usuario}`);
+    const respuesta = await axios.get(`${apiURL}/usuarios_juegos/juego/${id_juego}/${id_usuario}`, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
     return respuesta.data;
     // success = true && data != null => hay datos del juego
     // success = true && data == null => no es favorito el juego para este user
@@ -16,7 +21,11 @@ export async function getUsuarioPorJuego(id_juego, id_usuario){
 
 export async function getJuegosPorUsuario(id_usuario) {
   try {
-    const respuesta = await axios.get(`${apiURL}/usuarios_juegos/usuario/${id_usuario}`);
+    const respuesta = await axios.get(`${apiURL}/usuarios_juegos/usuario/${id_usuario}`, {
+      headers: {
+        'x-api-key': apiKey
+      }
+    });
     return respuesta.data;
     // success = true => data con listado de juegos para montar los cards
   } catch (err) {
@@ -33,7 +42,12 @@ export async function insertarJuegoDeUsuario(id_usuario, id_juego, game_tag, dat
               id_usuario : id_usuario,
               game_tag : game_tag,
               datosExtraJuego : datosExtra 
-          } 
+          }, 
+          {
+            headers: {
+              'x-api-key': apiKey
+            }
+          }
       );
       return response.data;
   } catch (err) {
@@ -48,6 +62,9 @@ export async function eliminarJuegoDeUsuario(id_usuario, id_juego) {
       data: {
         id_juego: id_juego,
         id_usuario: id_usuario
+      },
+      headers: {
+        'x-api-key': apiKey
       }
     });
     return response.data;
