@@ -3,14 +3,19 @@
 import { useState, useRef, useEffect } from "react"
 import ChatInfo from "./ChatInfo"
 
-const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userId }) => {
+const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userId, userEmail }) => {
   const [newMessage, setNewMessage] = useState("")
   const [showChatInfo, setShowChatInfo] = useState(false)
   const messagesEndRef = useRef(null)
 
   // Auto-scroll al último mensaje
   useEffect(() => {
-    messagesEndRef.current?.scrollIntoView({ behavior: "smooth" })
+    if (messagesEndRef.current) {
+      const messagesContainer = messagesEndRef.current.closest(".messages-container")
+      if (messagesContainer) {
+        messagesContainer.scrollTop = messagesContainer.scrollHeight
+      }
+    }
   }, [messages])
 
   const handleSubmit = (e) => {
@@ -55,7 +60,7 @@ const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userI
 
   // Si se está mostrando la información del chat, renderizar ChatInfo
   if (showChatInfo) {
-    return <ChatInfo currentChat={currentChat} onBack={handleBackToChat} userId={userId} />
+    return <ChatInfo currentChat={currentChat} onBack={handleBackToChat} userId={userId} userEmail={userEmail} />
   }
 
   if (!currentChat) {

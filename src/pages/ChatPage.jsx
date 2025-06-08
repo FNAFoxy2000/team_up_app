@@ -176,7 +176,6 @@ const ChatPage = () => {
   return (
     <div className="chat-page">
       <div className="chat-container">
-
         <div className="chat-content">
           <ChatList chats={chats} currentChat={currentChat} onSelectChat={joinChat} />
 
@@ -186,6 +185,7 @@ const ChatPage = () => {
             onSendMessage={sendMessage}
             isConnected={isConnected}
             userId={userId}
+            userEmail={user.email}
           />
         </div>
       </div>
