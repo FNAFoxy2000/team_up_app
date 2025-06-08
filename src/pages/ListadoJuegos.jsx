@@ -8,7 +8,8 @@ const ListadoJuegos = () => {
   const [juegos, setJuegos] = useState([]);
   const [categorias, setCategorias] = useState([]);
   const [busqueda, setBusqueda] = useState('');
-  const [categoriaFiltro, setCategoriaFiltro] = useState([]);
+  const [categoriaFiltro, setCategoriaFiltro] = useState('');
+  const [orden, setOrden] = useState('az');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,61 +25,63 @@ const ListadoJuegos = () => {
     fetchData();
   }, []);
 
-  const toggleCategoria = (nombre) => {
-    setCategoriaFiltro((prev) =>
-      prev.includes(nombre)
-        ? prev.filter(cat => cat !== nombre)
-        : [...prev, nombre]
-    );
-  };
-
-  const juegosFiltrados = juegos.filter(juego => {
-    const coincideBusqueda = juego.nombre.toLowerCase().includes(busqueda.toLowerCase());
-    const coincideCategoria =
-      categoriaFiltro.length === 0 || categoriaFiltro.includes(juego.categoria);
-    return coincideBusqueda && coincideCategoria;
-  });
+  const juegosFiltrados = juegos
+    .filter(juego => {
+      const coincideBusqueda = juego.nombre.toLowerCase().includes(busqueda.toLowerCase());
+      const coincideCategoria = !categoriaFiltro || juego.categoria === categoriaFiltro;
+      return coincideBusqueda && coincideCategoria;
+    })
+    .sort((a, b) => {
+      if (orden === 'az') return a.nombre.localeCompare(b.nombre);
+      if (orden === 'za') return b.nombre.localeCompare(a.nombre);
+      return 0;
+    });
 
   return (
-    <div className="listado-juegos">
-      <div className="topbar">
+    <div className="container">
+      <h1 className="title">Todos los Juegos</h1>
+
+      <div className="form">
         <input
           type="text"
+          className="input"
           placeholder="Buscar juegos..."
           value={busqueda}
           onChange={(e) => setBusqueda(e.target.value)}
         />
       </div>
 
-      <div className="contenido">
-        <aside className="sidebar">
-          <h3>Filtrar por Categoría</h3>
-          <ul>
-            {categorias.map(cat => (
-              <li key={cat.id_categoria}>
-                <label>
-                  <input
-                    type="checkbox"
-                    checked={categoriaFiltro.includes(cat.nombre)}
-                    onChange={() => toggleCategoria(cat.nombre)}
-                  />
-                  {cat.nombre}
-                </label>
-              </li>
-            ))}
-          </ul>
-        </aside>
+      <div className="form filtersRow">
+        <select
+          className="select"
+          value={categoriaFiltro}
+          onChange={(e) => setCategoriaFiltro(e.target.value)}
+        >
+          <option value="">Todas las categorías</option>
+          {categorias.map(cat => (
+            <option key={cat.id_categoria} value={cat.nombre}>
+              {cat.nombre}
+            </option>
+          ))}
+        </select>
 
-        <main className="main-content">
-          <h1 className="titulo-listado">Todos los Juegos</h1>
-          <div className="grid-juegos">
-            {juegosFiltrados.map((juego) => (
-              <CardJuego key={juego.id_juego} juego={juego} categorias={categorias} />
-            ))}
-          </div>
-        </main>
+        <select
+          className="select"
+          value={orden}
+          onChange={(e) => setOrden(e.target.value)}
+        >
+          <option value="az">A-Z</option>
+          <option value="za">Z-A</option>
+        </select>
+      </div>
+
+      <div className="listadoGuias grid-juegos">
+        {juegosFiltrados.map((juego) => (
+          <CardJuego key={juego.id_juego} juego={juego} categorias={categorias} />
+        ))}
       </div>
     </div>
+
   );
 };
 

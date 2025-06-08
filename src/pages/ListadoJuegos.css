@@ -1,121 +1,73 @@
-.listado-juegos {
-  padding: 0;
+.container {
+  padding: 80px 20px 40px 20px;
   min-height: 100vh;
-  background-color: #0d1117;
-  color: white;
+  background-color: #121212;
+  color: #f5f5f5;
+  max-width: 1200px;
+  margin: 0 auto;
   font-family: 'Poppins', 'Segoe UI', sans-serif;
+}
+
+.title {
+  font-size: 2.5rem;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+  color: #00bcd4;
+}
+
+.form {
   display: flex;
   flex-direction: column;
-}
-
-.topbar {
-  background-color: #161b22;
-  padding: 20px;
-  text-align: center;
-}
-
-.topbar input {
-  width: 50%;
-  padding: 10px;
-  border-radius: 8px;
-  border: none;
-  font-size: 1rem;
-}
-
-.contenido {
-  display: flex;
-  flex-grow: 1;
-}
-
-.sidebar {
-  width: 20%;
-  max-width: 20%;
-  background-color: #1f2631;
-  padding: 20px;
-}
-
-.sidebar h3 {
-  margin-bottom: 15px;
-  font-size: 1.2rem;
-  color: #00bcd4;
-}
-
-.sidebar ul {
-  list-style: none;
-  padding: 0;
-}
-
-.sidebar li {
-  margin-bottom: 12px;
-}
-
-.sidebar label {
-  display: flex;
   align-items: center;
-  gap: 10px;
-  cursor: pointer;
-  color: #ccc;
-  transition: color 0.2s;
-  font-size: 0.95rem;
+  gap: 16px;
+  margin-bottom: 20px;
 }
 
-.sidebar label:hover {
-  color: #00bcd4;
-}
-
-.sidebar input[type="checkbox"] {
-  appearance: none;
-  width: 16px;
-  height: 16px;
-  border: 2px solid #00bcd4;
-  border-radius: 4px;
-  background-color: transparent;
-  cursor: pointer;
-  transition: background-color 0.2s, border-color 0.2s;
-  position: relative;
-}
-
-.sidebar input[type="checkbox"]:checked {
-  background-color: #00bcd4;
-  border-color: #00bcd4;
-}
-
-.sidebar input[type="checkbox"]::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 5px;
-  width: 4px;
-  height: 8px;
-  border: solid #0d1117;
-  border-width: 0 2px 2px 0;
-  transform: rotate(45deg);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-
-.sidebar input[type="checkbox"]:checked::after {
-  opacity: 1;
-}
-
-
-.main-content {
-  flex-grow: 1;
-  padding: 40px 20px;
-}
-
-.titulo-listado {
-  text-align: center;
-  font-size: 2.5rem;
-  color: #00bcd4;
+.filtersRow {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
   margin-bottom: 40px;
+  width: 100%;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.input, .select {
+  padding: 10px 14px;
+  background-color: #333333;
+  border: none;
+  border-radius: 6px;
+  color: #f5f5f5;
+  font-size: 1rem;
+  transition: background-color 0.2s ease;
+  width: 300px;
+}
+
+.input:focus, .select:focus {
+  outline: 2px solid #00bcd4;
+  background-color: #222;
 }
 
 .grid-juegos {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 30px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px 13px;
   justify-content: center;
-  max-width: 100%;
-  margin:5px;
+  margin: 0 auto;
+}
+
+.listadoGuias {
+  padding: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .input, .select {
+    width: 100%;
+    max-width: 300px;
+  }
 }
