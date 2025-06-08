@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getGuiaPorId, eliminarGuia } from '../peticiones/guias_peticiones.mjs';
-import AuthService from '../services/AuthService';
+import AuthService from '../services/authService';
 import { useParams } from 'react-router-dom';
 
 import styles from "./GuiaDetalle.module.css"

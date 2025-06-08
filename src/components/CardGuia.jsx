@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './CardGuia.css';
-import AuthService from '../services/AuthService';
+import AuthService from '../services/authService';
 import { eliminarGuia } from '../peticiones/guias_peticiones.mjs';
 
 function formatearNombreCampeon(nombre) {
