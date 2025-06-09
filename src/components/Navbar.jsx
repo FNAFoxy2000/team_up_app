@@ -26,7 +26,7 @@ function Navbar() {
       const decoded = AuthService.decodeToken(token)
 
       if(decoded){
-        setUser(decoded); // Lo guardamos en el local storage
+        setUser(decoded); 
         setIsAuthenticated(true) // Marcamos como que hay un usuario autenticado
         
         // Limpiamos la url
