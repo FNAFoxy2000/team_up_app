@@ -5,11 +5,171 @@
   box-sizing: border-box;
 }
 
-html, body {
+html,
+body {
   width: 100%;
   height: 100%;
   background-color: #121212;
   color: white;
-  font-family: 'Segoe UI', sans-serif;
+  font-family: "Segoe UI", sans-serif;
   overflow-x: hidden;
+}
+
+/* ===== SOLO AJUSTES PARA MÓVILES ===== */
+
+/* Móviles: hasta 767px */
+@media (max-width: 767px) {
+  /* Contenedores principales */
+  [class*="container"] {
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+  }
+
+  /* Grids se vuelven de 1 columna */
+  [class*="grid"],
+  [class*="Grid"] {
+    grid-template-columns: 1fr !important;
+    gap: 1rem !important;
+  }
+
+  /* Formularios en columna */
+  [class*="form"],
+  [class*="Form"] {
+    flex-direction: column !important;
+  }
+
+  [class*="filtersRow"],
+  [class*="filters-row"] {
+    flex-direction: column !important;
+    gap: 0.5rem !important;
+  }
+
+  /* Inputs y selects al ancho completo */
+  input,
+  select,
+  textarea {
+    width: 100% !important;
+    max-width: 100% !important;
+    font-size: 16px; /* Evita zoom en iOS */
+  }
+
+  /* Botones al ancho completo */
+  button,
+  [class*="btn"],
+  [class*="Btn"],
+  [class*="button"],
+  [class*="Button"] {
+    width: 100% !important;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Títulos más pequeños */
+  h1 {
+    font-size: 1.8rem !important;
+  }
+
+  h2 {
+    font-size: 1.5rem !important;
+  }
+
+  h3 {
+    font-size: 1.3rem !important;
+  }
+
+  /* Padding reducido en móvil */
+  [class*="container"],
+  [class*="Container"] {
+    padding: 1rem 0.5rem !important;
+  }
+
+  /* Cards con menos padding */
+  [class*="card"],
+  [class*="Card"] {
+    padding: 1rem !important;
+    margin-bottom: 1rem !important;
+  }
+
+  /* Headers más compactos */
+  [class*="header"],
+  [class*="Header"] {
+    padding: 0.5rem !important;
+  }
+
+  /* Flex containers en columna */
+  [class*="flex"],
+  [class*="Flex"] {
+    flex-direction: column !important;
+  }
+
+  /* Chat específico para móvil */
+  [class*="chat-content"],
+  [class*="chatContent"] {
+    flex-direction: column !important;
+  }
+
+  [class*="chat-list"],
+  [class*="chatList"] {
+    width: 100% !important;
+    height: 40% !important;
+  }
+
+  [class*="chat-messages"],
+  [class*="chatMessages"] {
+    width: 100% !important;
+    height: 60% !important;
+  }
+
+  /* Tablas responsivas */
+  table {
+    font-size: 0.8rem;
+    overflow-x: auto;
+    display: block;
+    white-space: nowrap;
+  }
+
+  /* Imágenes responsivas */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* Navegación en móvil */
+  nav ul {
+    flex-direction: column;
+  }
+
+  nav li {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  /* Modales en móvil */
+  [class*="modal"],
+  [class*="Modal"] {
+    width: 95% !important;
+    margin: 1rem auto !important;
+  }
+
+  /* Scrollbar más delgada en móvil */
+  ::-webkit-scrollbar {
+    width: 4px;
+  }
+}
+
+/* Scrollbar normal (mantener como estaba) */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #1e1e1e;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #555;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #777;
 }
