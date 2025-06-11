@@ -18,7 +18,7 @@ export async function guardarGuia(id_usuario, id_juego, campeon_nombre, objGuia,
         'x-api-key': apiKey
       }
     });
-    console.log(response);
+    // console.log(response);
     return response.data;
 
   } catch (error) {

@@ -319,14 +319,16 @@ const GameProfilePage = () => {
                       <p className="chat-descripcion">{chat.descripcion}</p>
                     </div>
                     <div className="chat-actions">
-                      {isUserInChat(chat.id_chat) ? (
-                        <button onClick={() => handleAbandonarChat(chat.id_chat, chat.nombre)} className="btn-abandonar">
-                          Abandonar Chat
-                        </button>
-                      ) : (
-                        <button onClick={() => handleUnirseChat(chat.id_chat)} className="btn-unirse">
-                          Unirse
-                        </button>
+                      {!isAdmin && (
+                        isUserInChat(chat.id_chat) ? (
+                          <button onClick={() => handleAbandonarChat(chat.id_chat, chat.nombre)} className="btn-abandonar">
+                            Abandonar Chat
+                          </button>
+                        ) : (
+                          <button onClick={() => handleUnirseChat(chat.id_chat)} className="btn-unirse">
+                            Unirse
+                          </button>
+                        )
                       )}
                     </div>
                   </div>

@@ -113,7 +113,7 @@ const AnnadirJuego = () => {
         ...formData,
         categoria: categoriaID
       };
-      console.log(datosJuego);
+      // console.log(datosJuego);
       if (juegoExistente) {
         await editarJuego(datosJuego);
         showSuccess('Juego actualizado correctamente');

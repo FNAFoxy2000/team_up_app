@@ -28,7 +28,7 @@ function Guias() {
       setLoading(true);
       try {
         const response = await getAllGuiasUsuario(userFromToken.id_usuario);
-        console.log(response)
+        // console.log(response)
         const guiasData = response.data.map((guia) => ({
           ...guia,
           contenido: JSON.parse(guia.contenido_guia)

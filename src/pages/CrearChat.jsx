@@ -90,9 +90,9 @@ const CrearChat = () => {
         comunidad: formData.esComunidad ? 1 : 0,
       }
 
-      console.log("Datos del chat a crear:", chatData)
+      // console.log("Datos del chat a crear:", chatData)
       const result = await createChat(chatData)
-      console.log("Chat creado:", result)
+      // console.log("Chat creado:", result)
 
       // Redirigir de vuelta al chat
       navigate("/chat")

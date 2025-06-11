@@ -64,7 +64,7 @@ const ChatPage = () => {
   useEffect(() => {
     if (!userId || !user) return
 
-    console.log("Inicializando Socket.io con usuario:", { userId, username: user.username })
+    // console.log("Inicializando Socket.io con usuario:", { userId, username: user.username })
     const newSocket = io(`${apiURL}`, {
       auth: { serverOffset: 0 },
     })

@@ -16,9 +16,9 @@ const GuiasSinApi = () => {
   }, []);
 
   const handlePrintSelections = () => {
-    console.log('----- GUARDAR GUÍA -----');
+    /* console.log('----- GUARDAR GUÍA -----');
     console.log('Datos para guardar:', runes);
-    console.log('-----------------------');
+    console.log('-----------------------'); */
     alert('Datos de la guía listos para guardar. Revisa la consola para ver los detalles.');
   };
 
