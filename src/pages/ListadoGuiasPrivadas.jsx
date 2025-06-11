@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './ListadoGuias.css';
 import GuiaCard from '../components/CardGuia';
-import {  getAllGuiasUsuario, getCampeones } from '../peticiones/guias_peticiones.mjs';
+import { getAllGuiasUsuario, getCampeones } from '../peticiones/guias_peticiones.mjs';
 import AuthService from '../services/authService';
 import { showSuccess, showError, showInfo } from '../components/Toast';
 
@@ -46,7 +46,7 @@ function Guias() {
     const cargarCampeones = async () => {
       try {
         const response = await getCampeones();
-        setCampeones(response); 
+        setCampeones(response);
       } catch (error) {
         console.error('Error al cargar campeones:', error);
       }
@@ -104,12 +104,14 @@ function Guias() {
         Usa los filtros para encontrar guías de tus juegos favoritos.
       </p>
 
-      <button
-        onClick={handleCrearGuia}
-        className="crearGuiaBtn"
-      >
-        Crear Guía
-      </button>
+      <div className="botonesGuiaContainer">
+        <button
+          onClick={handleCrearGuia}
+          className="crearGuiaBtn"
+        >
+          Crear Guía
+        </button>
+      </div>
 
       <form className="form" onSubmit={handleSubmit}>
         <div className="inputGroup">
