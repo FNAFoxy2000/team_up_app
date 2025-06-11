@@ -27,7 +27,7 @@ export async function guardarGuia(id_usuario, id_juego, campeon_nombre, objGuia,
   }
 }
 
-export async function getAllGuias(){
+export async function getAllGuias() {
   try {
     const respuesta = await axios.get(`${apiURL}/guias/`, {
       headers: {
@@ -41,7 +41,7 @@ export async function getAllGuias(){
   }
 }
 
-export async function getAllGuiasUsuario(id_usuario){
+export async function getAllGuiasUsuario(id_usuario) {
   try {
     const respuesta = await axios.get(`${apiURL}/guias/user/${id_usuario}`, {
       headers: {

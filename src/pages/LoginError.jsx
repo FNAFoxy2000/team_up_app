@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './LoginError.module.css';
-import errorImage from '../assets/pingLol.png'; 
+import errorImage from '../assets/pingLol.png';
 
 function LoginError() {
   const navigate = useNavigate();

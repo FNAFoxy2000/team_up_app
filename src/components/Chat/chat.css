@@ -219,7 +219,8 @@
 /* Mensajes propios (a la derecha) */
 .own-message {
   align-self: flex-end;
-  background-color: #1a5276; /* Azul más oscuro para mensajes propios */
+  background-color: #1a5276;
+  /* Azul más oscuro para mensajes propios */
   border-bottom-right-radius: 2px;
 }
 

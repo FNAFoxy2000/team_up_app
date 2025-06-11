@@ -54,7 +54,7 @@ export async function getSolicitudesRecibidas(id_destinatario) {
 
 export async function aceptarSolicitud(id) {
   try {
-    const response = await axios.put(`${apiURL}/solicitudes/aceptar`, {id}, {
+    const response = await axios.put(`${apiURL}/solicitudes/aceptar`, { id }, {
       headers: {
         'x-api-key': apiKey
       }
@@ -68,7 +68,7 @@ export async function aceptarSolicitud(id) {
 
 export async function rechazarSolicitud(id) {
   try {
-    const response = await axios.put(`${apiURL}/solicitudes/rechazar`, {id}, {
+    const response = await axios.put(`${apiURL}/solicitudes/rechazar`, { id }, {
       headers: {
         'x-api-key': apiKey
       }

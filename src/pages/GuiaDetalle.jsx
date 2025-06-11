@@ -113,8 +113,8 @@ function DatosGuia() {
     <div className={styles.guiaContainer}>
       <div className={styles.header}>
         {campeonData && (
-          <img 
-            src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/champion/${campeonData.image.full}`} 
+          <img
+            src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/champion/${campeonData.image.full}`}
             alt={campeonData.name}
             className={styles.championImage}
           />
@@ -211,10 +211,10 @@ function DatosGuia() {
             <div className={styles.itemsContainer}>
               {objetosInicialesInfo.map(item => (
                 <div key={item.name} className={styles.item}>
-                  <img 
-                    src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.image.full}`} 
+                  <img
+                    src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.image.full}`}
                     alt={item.name}
-                    title={`${item.name}: ${item.description.replace(/<[^>]*>/g, ' ')}`} 
+                    title={`${item.name}: ${item.description.replace(/<[^>]*>/g, ' ')}`}
                   />
                 </div>
               ))}
@@ -226,10 +226,10 @@ function DatosGuia() {
             <div className={styles.itemsContainer}>
               {botasInfo.map(item => (
                 <div key={item.name} className={styles.item}>
-                  <img 
-                    src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.image.full}`} 
+                  <img
+                    src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.image.full}`}
                     alt={item.name}
-                    title={`${item.name}: ${item.description.replace(/<[^>]*>/g, ' ')}`} 
+                    title={`${item.name}: ${item.description.replace(/<[^>]*>/g, ' ')}`}
                   />
                 </div>
               ))}
@@ -241,12 +241,12 @@ function DatosGuia() {
       <div className={styles.section}>
         <h3 className={styles.sectionTitle}>Objetos Completos</h3>
         <div className={styles.itemsContainer}>
-          {objetosCompletosInfo.map((item,index )=> (
+          {objetosCompletosInfo.map((item, index) => (
             <div key={item.name} className={styles.item}>
-              <img 
-                src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.image.full}`} 
+              <img
+                src={`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/img/item/${item.image.full}`}
                 alt={item.name}
-                title={`${item.name}: ${item.description.replace(/<[^>]*>/g, ' ')}`} 
+                title={`${item.name}: ${item.description.replace(/<[^>]*>/g, ' ')}`}
               />
             </div>
 

@@ -79,17 +79,17 @@
   .guiaContainer {
     padding: 1rem;
   }
-  
+
   .header {
     flex-direction: column;
     text-align: center;
   }
-  
+
   .championImage {
     width: 100px;
     height: 100px;
   }
-  
+
   .section {
     padding: 1rem;
   }
@@ -99,7 +99,7 @@
   .championName {
     font-size: 1.5rem;
   }
-  
+
   .sectionTitle {
     font-size: 1.3rem;
   }
@@ -155,7 +155,8 @@
   cursor: pointer;
   font-weight: bold;
   transition: all 0.3s ease;
-  width: 80px; /* ajusta si necesitas */
+  width: 80px;
+  /* ajusta si necesitas */
 }
 
 .positionButton:hover {
@@ -240,8 +241,10 @@
 .privacyWrapper {
   display: flex;
   align-items: center;
-  margin-left: 15px; /* espacio con elementos a la izquierda */
-  gap: 8px; /* espacio entre checkbox y texto */
+  margin-left: 15px;
+  /* espacio con elementos a la izquierda */
+  gap: 8px;
+  /* espacio entre checkbox y texto */
   position: relative;
   user-select: none;
 }
@@ -256,7 +259,8 @@
   line-height: 24px;
   display: inline-block;
   margin-bottom: 12px;
-  transform: translateY(-5px); /* sube un poco más */
+  transform: translateY(-5px);
+  /* sube un poco más */
 }
 
 .privacyWrapper input[type="checkbox"] {
@@ -267,7 +271,8 @@
   cursor: pointer;
   margin: 0;
   z-index: 2;
-  transform: translateY(0px); /* sube un poco más */
+  transform: translateY(0px);
+  /* sube un poco más */
 }
 
 /* Caja personalizada del checkbox */
@@ -286,19 +291,19 @@
 }
 
 /* Hover en checkbox: cambia el color del recuadro */
-.privacyWrapper input[type="checkbox"]:hover + label::before {
+.privacyWrapper input[type="checkbox"]:hover+label::before {
   background-color: #3a3a3a;
   border-color: #f0a400;
 }
 
 /* Cuando está checked cambia colores */
-.privacyWrapper input[type="checkbox"]:checked + label::before {
+.privacyWrapper input[type="checkbox"]:checked+label::before {
   background-color: #f0a400;
   border-color: #f0a400;
 }
 
 /* La marca de check */
-.privacyWrapper input[type="checkbox"]:checked + label::after {
+.privacyWrapper input[type="checkbox"]:checked+label::after {
   content: "";
   position: absolute;
   left: 7px;
@@ -310,4 +315,3 @@
   transform: rotate(45deg);
   pointer-events: none;
 }
-

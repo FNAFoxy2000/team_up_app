@@ -1,5 +1,5 @@
 import './GoogleBoton.css';
-import {FaGoogle } from 'react-icons/fa';
+import { FaGoogle } from 'react-icons/fa';
 
 
 const BotonGoogle = ({ onClick }) => {
@@ -9,7 +9,7 @@ const BotonGoogle = ({ onClick }) => {
       <button className="google" onClick={onClick}>
         <div className="svg-wrapper-1">
           <div className="svg-wrapper">
-            <FaGoogle className="icon"/>
+            <FaGoogle className="icon" />
           </div>
         </div>
         <span>Google</span>

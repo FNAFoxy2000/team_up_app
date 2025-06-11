@@ -42,7 +42,7 @@ const JuegoCard = ({ juego }) => {
         alt={`Imagen de ${juego.nombre_juego}`}
         className="juego-img"
         referrerPolicy="no-referrer"
-        
+
       />
       <div className="juego-info">
         <h4 className="game-tag">{juego.game_tag}</h4>

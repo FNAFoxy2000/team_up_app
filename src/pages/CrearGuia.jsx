@@ -4,7 +4,7 @@ import axios from 'axios';
 import styles from '../components/Guias/guias.module.css';
 import { showSuccess, showError, showInfo } from '../components/Toast';
 import AuthService from '../services/authService';
-import {guardarGuia} from '../peticiones/guias_peticiones.mjs'
+import { guardarGuia } from '../peticiones/guias_peticiones.mjs'
 import SkillsGrid from '../components/Guias/SkillsGrid';
 import ItemSelector from '../components/Guias/ItemSelector';
 import SummonerSpellsSelector from '../components/Guias/SummonersSpellsSelector';
@@ -31,33 +31,33 @@ const GuiaCampeon = () => {
     items: []
   });
 
-const positions = [
-  {
-    id: "top",
-    name: "Top",
-    icon: "https://wiki.leagueoflegends.com/en-us/images/Top_icon.png?58442",
-  },
-  {
-    id: "jungle",
-    name: "Jungla",
-    icon: "https://wiki.leagueoflegends.com/en-us/images/Jungle_icon_WR.png?49747",
-  },
-  {
-    id: "middle",
-    name: "Mid",
-    icon: "https://wiki.leagueoflegends.com/en-us/images/Middle_icon.png?fa3f0",
-  },
-  {
-    id: "bottom",
-    name: "ADC",
-    icon: "https://wiki.leagueoflegends.com/en-us/images/Bottom_icon.png?6d4b2",
-  },
-  {
-    id: "utility",
-    name: "Soporte",
-    icon: "https://wiki.leagueoflegends.com/en-us/images/Support_icon.png?af1ff",
-  },
-];
+  const positions = [
+    {
+      id: "top",
+      name: "Top",
+      icon: "https://wiki.leagueoflegends.com/en-us/images/Top_icon.png?58442",
+    },
+    {
+      id: "jungle",
+      name: "Jungla",
+      icon: "https://wiki.leagueoflegends.com/en-us/images/Jungle_icon_WR.png?49747",
+    },
+    {
+      id: "middle",
+      name: "Mid",
+      icon: "https://wiki.leagueoflegends.com/en-us/images/Middle_icon.png?fa3f0",
+    },
+    {
+      id: "bottom",
+      name: "ADC",
+      icon: "https://wiki.leagueoflegends.com/en-us/images/Bottom_icon.png?6d4b2",
+    },
+    {
+      id: "utility",
+      name: "Soporte",
+      icon: "https://wiki.leagueoflegends.com/en-us/images/Support_icon.png?af1ff",
+    },
+  ];
 
   // Referencia para el nombre del campeón en el título de la página
   useEffect(() => {
@@ -111,41 +111,41 @@ const positions = [
   };
 
   const validateGuideData = ({
-  titulo,
-  parche,
-  campeon,
-  posicion,
-  descripcion,
-  hechizosInvocador,
-  ordenHabilidades,
-  objetosIniciales,
-  botas,
-  objetosCompletos,
-  runas
-}) => {
-  if (!titulo.trim()) {
-    showError("El título de la guía no puede estar vacío.");
-    return false;
-  }
+    titulo,
+    parche,
+    campeon,
+    posicion,
+    descripcion,
+    hechizosInvocador,
+    ordenHabilidades,
+    objetosIniciales,
+    botas,
+    objetosCompletos,
+    runas
+  }) => {
+    if (!titulo.trim()) {
+      showError("El título de la guía no puede estar vacío.");
+      return false;
+    }
 
-  if (!/^\d+(\.\d+)*$/.test(parche)) {
-    showError("El parche debe contener solo números y puntos (ej: 14.11).");
-    return false;
-  }
+    if (!/^\d+(\.\d+)*$/.test(parche)) {
+      showError("El parche debe contener solo números y puntos (ej: 14.11).");
+      return false;
+    }
 
-  if (!descripcion.trim()) {
-    showError("La descripción no puede estar vacía.");
-    return false;
-  }
+    if (!descripcion.trim()) {
+      showError("La descripción no puede estar vacía.");
+      return false;
+    }
 
-  if (!campeon) {
-    showError("Debes seleccionar un campeón.");
-    return false;
-  }
+    if (!campeon) {
+      showError("Debes seleccionar un campeón.");
+      return false;
+    }
 
-  if (!posicion) {
-    showError("Debes seleccionar una posición.");
-    return false;
+    if (!posicion) {
+      showError("Debes seleccionar una posición.");
+      return false;
     }
 
     if (!Array.isArray(hechizosInvocador) || hechizosInvocador.length < 2) {
@@ -165,15 +165,15 @@ const positions = [
       return false;
     }
 
-  if (!Array.isArray(botas) || botas.length < 1 || botas.length > 3) {
-    showError("Selecciona entre 1 y 3 botas.");
-    return false;
-  }
+    if (!Array.isArray(botas) || botas.length < 1 || botas.length > 3) {
+      showError("Selecciona entre 1 y 3 botas.");
+      return false;
+    }
 
-  if (!Array.isArray(objetosCompletos) || objetosCompletos.length !== 5) {
-    showError("Debes seleccionar exactamente 5 objetos completos.");
-    return false;
-  }
+    if (!Array.isArray(objetosCompletos) || objetosCompletos.length !== 5) {
+      showError("Debes seleccionar exactamente 5 objetos completos.");
+      return false;
+    }
 
     if (
       !runes ||
@@ -189,83 +189,83 @@ const positions = [
       return false;
     }
 
-  return true;
-};
-
-const retornarObjeto = ({dataToPrint}) =>{
-  return {
-    titulo: guideTitle,
-    parche: guidePatch,
-    campeon: campeonNombre,
-    posicion: selectedPosition,
-    descripcion: guideDescription,
-    hechizosInvocador: summonerSpells.map(spell => spell.id),
-    ordenHabilidades: skillOrder,
-    objetosIniciales: selectedItems.starterItems.map(object => object.id),
-    botas: selectedItems.boots.map(object => object.id),
-    objetosCompletos: selectedItems.items.map(object => object.id),
-    runaPrincipal: runes.primaryPath,
-    runaSecundaria: runes.secondaryPath,
-    runasRamaPrincipal: runes.selectedRunes.primary,
-    runasRamaSecundaria: runes.selectedRunes.secondary,
-    privada: isPrivate
-
-  }
-}
-
- const handlePrintSelections = async () => {
-  const dataToPrint = {
-    titulo: guideTitle,
-    parche: guidePatch,
-    campeon: campeonNombre,
-    posicion: selectedPosition,
-    descripcion: guideDescription,
-    hechizosInvocador: summonerSpells,
-    ordenHabilidades: skillOrder,
-    objetosIniciales: selectedItems.starterItems,
-    botas: selectedItems.boots,
-    objetosCompletos: selectedItems.items,
-    runas: runes,
-    privada: isPrivate
+    return true;
   };
 
-  if (!validateGuideData(dataToPrint)) {
-    return;
+  const retornarObjeto = ({ dataToPrint }) => {
+    return {
+      titulo: guideTitle,
+      parche: guidePatch,
+      campeon: campeonNombre,
+      posicion: selectedPosition,
+      descripcion: guideDescription,
+      hechizosInvocador: summonerSpells.map(spell => spell.id),
+      ordenHabilidades: skillOrder,
+      objetosIniciales: selectedItems.starterItems.map(object => object.id),
+      botas: selectedItems.boots.map(object => object.id),
+      objetosCompletos: selectedItems.items.map(object => object.id),
+      runaPrincipal: runes.primaryPath,
+      runaSecundaria: runes.secondaryPath,
+      runasRamaPrincipal: runes.selectedRunes.primary,
+      runasRamaSecundaria: runes.selectedRunes.secondary,
+      privada: isPrivate
+
+    }
   }
 
+  const handlePrintSelections = async () => {
+    const dataToPrint = {
+      titulo: guideTitle,
+      parche: guidePatch,
+      campeon: campeonNombre,
+      posicion: selectedPosition,
+      descripcion: guideDescription,
+      hechizosInvocador: summonerSpells,
+      ordenHabilidades: skillOrder,
+      objetosIniciales: selectedItems.starterItems,
+      botas: selectedItems.boots,
+      objetosCompletos: selectedItems.items,
+      runas: runes,
+      privada: isPrivate
+    };
 
-  const objetoGuardar = retornarObjeto(dataToPrint);
+    if (!validateGuideData(dataToPrint)) {
+      return;
+    }
 
 
-  const estaLogeado = AuthService.isAuthenticated();
-  if (!estaLogeado) {
-    showInfo("Debes estar logueado para guardar la guía");
-    return;
-  }
+    const objetoGuardar = retornarObjeto(dataToPrint);
 
-  const usr = AuthService.getUserFromToken();
-  const lol_id = 2; 
 
-  try {
-    await guardarGuia(
-      usr.id_usuario,
-      lol_id,
-      objetoGuardar.campeon,
-      objetoGuardar,
-      objetoGuardar.privada
-    );
+    const estaLogeado = AuthService.isAuthenticated();
+    if (!estaLogeado) {
+      showInfo("Debes estar logueado para guardar la guía");
+      return;
+    }
 
-    showSuccess("¡Guardado correctamente!");
-  } catch (error) {
-  if (error.response && error.response.data) {
-    console.error("Error al guardar la guía:", error.response.data);
-    showError("Error al guardar la guía: " + JSON.stringify(error.response.data));
-  } else {
-    console.error("Error al guardar la guía:", error.message);
-    showError("Error al guardar la guía: " + error.message);
-  }
-}
-};
+    const usr = AuthService.getUserFromToken();
+    const lol_id = 2;
+
+    try {
+      await guardarGuia(
+        usr.id_usuario,
+        lol_id,
+        objetoGuardar.campeon,
+        objetoGuardar,
+        objetoGuardar.privada
+      );
+
+      showSuccess("¡Guardado correctamente!");
+    } catch (error) {
+      if (error.response && error.response.data) {
+        console.error("Error al guardar la guía:", error.response.data);
+        showError("Error al guardar la guía: " + JSON.stringify(error.response.data));
+      } else {
+        console.error("Error al guardar la guía:", error.message);
+        showError("Error al guardar la guía: " + error.message);
+      }
+    }
+  };
 
 
 
@@ -374,7 +374,7 @@ const retornarObjeto = ({dataToPrint}) =>{
           onSpellsChange={handleSpellsChange}
           initialSpells={summonerSpells}
           maxSelections={2}
-          selectedPosition={selectedPosition}  
+          selectedPosition={selectedPosition}
         />
       </div>
 
@@ -392,17 +392,17 @@ const retornarObjeto = ({dataToPrint}) =>{
 
       <div className={styles.section}>
         <h2 className={styles.sectionTitle}>Selecciona los objetos</h2>
-        <ItemSelector 
+        <ItemSelector
           onSelectionChange={handleItemChange}
-          selectedPosition={selectedPosition}  
+          selectedPosition={selectedPosition}
         />
       </div>
 
       <div className={styles.section}>
-        <button 
+        <button
           onClick={handlePrintSelections}
           className={styles.printButton}
-          disabled={!selectedPosition} 
+          disabled={!selectedPosition}
         >
           Guardar Guía
         </button>

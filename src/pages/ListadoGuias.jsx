@@ -45,7 +45,7 @@ function Guias() {
     const cargarCampeones = async () => {
       try {
         const response = await getCampeones();
-        setCampeones(response); 
+        setCampeones(response);
       } catch (error) {
         console.error('Error al cargar campeones:', error);
       }
@@ -96,7 +96,7 @@ function Guias() {
     }
   };
 
-    const handleVerPrivadas = () => {
+  const handleVerPrivadas = () => {
     if (usuario) {
       navigate('/guias/privadas');
     } else {

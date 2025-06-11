@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import styles from './spells.module.css';
 
-const SummonerSpellsSelector = ({ 
-  onSpellsChange, 
-  initialSpells = [], 
+const SummonerSpellsSelector = ({
+  onSpellsChange,
+  initialSpells = [],
   maxSelections = 2,
   version = '14.10.1',
   language = 'es_ES',
@@ -15,7 +15,7 @@ const SummonerSpellsSelector = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const filtro = ["Limpiar","Extenuación","Destello","Prender","Barrera","Fantasmal","Curar","Aplastar","Teleportar"];
+  const filtro = ["Limpiar", "Extenuación", "Destello", "Prender", "Barrera", "Fantasmal", "Curar", "Aplastar", "Teleportar"];
 
   useEffect(() => {
     const fetchSpells = async () => {
@@ -27,7 +27,7 @@ const SummonerSpellsSelector = ({
 
         const filteredSpells = Object.values(response.data.data)
           .filter(spell => filtro.includes(spell.name));
-        
+
         setSpells(filteredSpells);
       } catch (err) {
         setError('Error al cargar los hechizos');
@@ -45,9 +45,9 @@ const SummonerSpellsSelector = ({
 
   const handleSpellClick = (spell) => {
     // Si es jungla y se intenta deseleccionar Smite, no hacer nada
-    if (selectedPosition === 'jungle' && 
-        spell.name === "Aplastar" && 
-        selectedSpells.some(s => s.id === spell.id)) {
+    if (selectedPosition === 'jungle' &&
+      spell.name === "Aplastar" &&
+      selectedSpells.some(s => s.id === spell.id)) {
       return;
     }
 
@@ -56,7 +56,7 @@ const SummonerSpellsSelector = ({
       if (prev.some(s => s.id === spell.id)) {
         return prev.filter(s => s.id !== spell.id);
       }
-      
+
       // Si es jungla, forzar a mantener Smite y añadir otro hechizo
       if (selectedPosition === 'jungle') {
         const hasSmite = prev.some(s => s.name === "Aplastar");
@@ -66,12 +66,12 @@ const SummonerSpellsSelector = ({
           return [spell, smiteSpell].slice(-maxSelections);
         }
       }
-      
+
       // Selección normal (no jungla)
       if (prev.length < maxSelections) {
         return [...prev, spell];
       }
-      
+
       return [...prev.slice(1), spell];
     });
   };
@@ -106,23 +106,21 @@ const SummonerSpellsSelector = ({
           <div className={styles.skillGridCorner}></div>
           <div className={styles.skillGridHeaderCell}>Hechizos de Invocador</div>
         </div>
-        
+
         <div className={styles.spellsContent}>
           {selectedPosition === 'jungle' && (
             <div className={styles.jungleWarning}>
               <strong>Jungla seleccionada:</strong> Debes llevar el hechizo "Aplastar" (Smite)
             </div>
           )}
-          
+
           <div className={styles.spellsGrid}>
             {spells.map(spell => (
               <div
                 key={spell.id}
-                className={`${styles.skillGridCell} ${
-                  selectedSpells.some(s => s.id === spell.id) ? styles.active : ''
-                } ${
-                  selectedPosition === 'jungle' && spell.name === "Aplastar" ? styles.requiredSpell : ''
-                }`}
+                className={`${styles.skillGridCell} ${selectedSpells.some(s => s.id === spell.id) ? styles.active : ''
+                  } ${selectedPosition === 'jungle' && spell.name === "Aplastar" ? styles.requiredSpell : ''
+                  }`}
                 onClick={() => handleSpellClick(spell)}
                 title={`${spell.name}: ${spell.description}`}
               >

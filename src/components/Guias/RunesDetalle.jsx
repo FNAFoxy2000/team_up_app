@@ -79,7 +79,7 @@ function RunesDetalle({ contenido }) {
         8300: 'Inspiration',
         8400: 'Resolve'
       }[tree] || 'Precision';
-      
+
       return `https://ddragon.leagueoflegends.com/cdn/img/perk-images/Styles/${treeName}/${secondaryRunes[runeId]}`;
     }
 
@@ -94,15 +94,15 @@ function RunesDetalle({ contenido }) {
         {/* Rama Principal */}
         <div className="rune-tree">
           <h4>Rama Principal</h4>
-          <img 
-            src={getRuneTreeImage(contenido.runaPrincipal)} 
-            alt="Primary Rune Tree" 
+          <img
+            src={getRuneTreeImage(contenido.runaPrincipal)}
+            alt="Primary Rune Tree"
             className="rune-tree-image"
           />
           <div className="keystone">
-            <img 
-              src={getRuneImage(contenido.runasRamaPrincipal[0][0])} 
-              alt="Keystone" 
+            <img
+              src={getRuneImage(contenido.runasRamaPrincipal[0][0])}
+              alt="Keystone"
               className="rune-image"
             />
           </div>
@@ -121,9 +121,9 @@ function RunesDetalle({ contenido }) {
         {/* Rama Secundaria */}
         <div className="rune-tree">
           <h4>Rama Secundaria</h4>
-          <img 
-            src={getRuneTreeImage(contenido.runaSecundaria)} 
-            alt="Secondary Rune Tree" 
+          <img
+            src={getRuneTreeImage(contenido.runaSecundaria)}
+            alt="Secondary Rune Tree"
             className="rune-tree-image"
           />
           <div className="secondary-runes">

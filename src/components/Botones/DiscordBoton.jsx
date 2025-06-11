@@ -1,5 +1,5 @@
 import './DiscordBoton.css';
-import {FaDiscord } from 'react-icons/fa';
+import { FaDiscord } from 'react-icons/fa';
 
 const BotonDiscord = ({ onClick }) => {
   return (
@@ -8,7 +8,7 @@ const BotonDiscord = ({ onClick }) => {
       <button className="discord" onClick={onClick}>
         <div className="svg-wrapper-1">
           <div className="svg-wrapper">
-            <FaDiscord className="icon"/>
+            <FaDiscord className="icon" />
           </div>
         </div>
         <span>Discord</span>

@@ -44,30 +44,30 @@ function Busqueda() {
   }, [navigate]);
 
   const handleSubmit = (e) => e.preventDefault();
-  
+
   // Aplicar filtros
   const usuariosFiltrados = usuarios
-  .filter((usuario) =>
-    usuario.nombre_usuario?.toLowerCase().includes(searchText.toLowerCase())
-  )
-  .filter((usuario) => {
-    if (!selectedGame) return true;
-    const gameId = parseInt(selectedGame);
-    return Array.isArray(usuario.juegos) && usuario.juegos.includes(gameId);
-  })
-  .filter((usuario) =>
-    isRegistered === ''
-      ? true
-      : isRegistered === 'true'
-      ? usuario.registrado === true
-      : usuario.registrado === false
-  )
-  .sort((a, b) => {
-    if (orderBy === 'asc') return a.nombre_usuario.localeCompare(b.nombre_usuario);
-    if (orderBy === 'desc') return b.nombre_usuario.localeCompare(a.nombre_usuario);
-    if (orderBy === 'date') return new Date(b.fecha_registro) - new Date(a.fecha_registro);
-    return 0;
-  });
+    .filter((usuario) =>
+      usuario.nombre_usuario?.toLowerCase().includes(searchText.toLowerCase())
+    )
+    .filter((usuario) => {
+      if (!selectedGame) return true;
+      const gameId = parseInt(selectedGame);
+      return Array.isArray(usuario.juegos) && usuario.juegos.includes(gameId);
+    })
+    .filter((usuario) =>
+      isRegistered === ''
+        ? true
+        : isRegistered === 'true'
+          ? usuario.registrado === true
+          : usuario.registrado === false
+    )
+    .sort((a, b) => {
+      if (orderBy === 'asc') return a.nombre_usuario.localeCompare(b.nombre_usuario);
+      if (orderBy === 'desc') return b.nombre_usuario.localeCompare(a.nombre_usuario);
+      if (orderBy === 'date') return new Date(b.fecha_registro) - new Date(a.fecha_registro);
+      return 0;
+    });
 
 
   return (

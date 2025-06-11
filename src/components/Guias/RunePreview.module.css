@@ -1,7 +1,8 @@
 .runePreview {
   padding: 1rem;
   font-family: Arial, sans-serif;
-  text-align: center; /* centra los textos y elementos inline */
+  text-align: center;
+  /* centra los textos y elementos inline */
 }
 
 .primaryRunes {
@@ -13,7 +14,8 @@
 
 .subRunes {
   display: flex;
-  justify-content: center; /* centramos las runas horizontalmente */
+  justify-content: center;
+  /* centramos las runas horizontalmente */
   gap: 0.5rem;
 }
 

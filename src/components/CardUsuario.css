@@ -34,7 +34,8 @@
 }
 
 .usuario-nombre {
-  font-size: 1rem;   /* letra más pequeña */
+  font-size: 1rem;
+  /* letra más pequeña */
   font-weight: 600;
   color: #00bcd4;
   white-space: nowrap;

@@ -279,13 +279,17 @@
 
 .actionsContainer {
   display: flex;
-  justify-content: center; /* centra horizontalmente */
-  margin-top: 16px; /* espacio arriba para separarlo */
+  justify-content: center;
+  /* centra horizontalmente */
+  margin-top: 16px;
+  /* espacio arriba para separarlo */
 }
 
 .deleteButton {
-  background-color: #e63946; /* rojo intenso */
-  color: white; /* letras blancas */
+  background-color: #e63946;
+  /* rojo intenso */
+  color: white;
+  /* letras blancas */
   border: none;
   padding: 10px 20px;
   border-radius: 6px;
@@ -296,5 +300,6 @@
 }
 
 .deleteButton:hover {
-  background-color: #b22234; /* rojo más oscuro al pasar el mouse */
+  background-color: #b22234;
+  /* rojo más oscuro al pasar el mouse */
 }

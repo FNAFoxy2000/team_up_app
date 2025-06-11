@@ -7,8 +7,8 @@ const GuiasSinApi = () => {
   const [runes, setRunesData] = useState({});
   const userFromToken = AuthService.getUserFromToken();
   if (!userFromToken) {
-      navigate('/LoginError', { replace: true });
-      return;
+    navigate('/LoginError', { replace: true });
+    return;
   }
 
   const handleRunesChange = useCallback((data) => {
@@ -31,7 +31,7 @@ const GuiasSinApi = () => {
       <RuneSelector onChange={handleRunesChange} />
 
       <div className={styles.section}>
-        <button 
+        <button
           onClick={handlePrintSelections}
           className={styles.printButton}
         >

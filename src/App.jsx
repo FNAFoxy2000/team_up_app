@@ -37,7 +37,7 @@ function App() {
         <Route path="/juegos/annadir" element={<AnnadirJuego />} />
         <Route path="/juegos/editar" element={<AnnadirJuego />} />
         <Route path="/guias/listadoGuias" element={<Guias />} />
-                <Route path="/guias/privadas" element={<GuiasPrivadas />} />
+        <Route path="/guias/privadas" element={<GuiasPrivadas />} />
         <Route path="/guias/crear" element={<ChampionGrid />} />
         <Route path='/guias/crear/:championId' element={<CrearGuia />} />
         <Route path="/chat" element={<ChatPage />} />

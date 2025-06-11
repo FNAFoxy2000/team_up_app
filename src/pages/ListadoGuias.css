@@ -74,7 +74,8 @@
   width: 140px;
 }
 
-.input, .select {
+.input,
+.select {
   padding: 8px 12px;
   background-color: #333333;
   border: none;
@@ -84,7 +85,8 @@
   transition: background-color 0.2s ease;
 }
 
-.input:focus, .select:focus {
+.input:focus,
+.select:focus {
   outline: 2px solid #00bcd4;
   background-color: #222;
 }

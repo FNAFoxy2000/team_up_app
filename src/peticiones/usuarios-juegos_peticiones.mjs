@@ -1,9 +1,9 @@
-import axios from 'axios'; 
+import axios from 'axios';
 
 const apiURL = import.meta.env.VITE_API_URL;
 const apiKey = import.meta.env.VITE_API_KEY;
 
-export async function getUsuarioPorJuego(id_juego, id_usuario){
+export async function getUsuarioPorJuego(id_juego, id_usuario) {
   try {
     const respuesta = await axios.get(`${apiURL}/usuarios_juegos/juego/${id_juego}/${id_usuario}`, {
       headers: {
@@ -36,23 +36,23 @@ export async function getJuegosPorUsuario(id_usuario) {
 
 export async function insertarJuegoDeUsuario(id_usuario, id_juego, game_tag, datosExtra) {
   try {
-      const response = await axios.post(`${apiURL}/usuarios_juegos/insertar`,
-          {
-              id_juego : id_juego,
-              id_usuario : id_usuario,
-              game_tag : game_tag,
-              datosExtraJuego : datosExtra 
-          }, 
-          {
-            headers: {
-              'x-api-key': apiKey
-            }
-          }
-      );
-      return response.data;
+    const response = await axios.post(`${apiURL}/usuarios_juegos/insertar`,
+      {
+        id_juego: id_juego,
+        id_usuario: id_usuario,
+        game_tag: game_tag,
+        datosExtraJuego: datosExtra
+      },
+      {
+        headers: {
+          'x-api-key': apiKey
+        }
+      }
+    );
+    return response.data;
   } catch (err) {
-      console.error('Error al insertar los datos del juego:', err);
-      throw err;
+    console.error('Error al insertar los datos del juego:', err);
+    throw err;
   }
 }
 

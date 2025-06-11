@@ -39,7 +39,7 @@ const RunePreview = ({ primaryPath, secondaryPath, selectedRunes, runesData }) =
             {selectedRunes.primary[0]?.length > 0 && renderRune(selectedRunes.primary[0][0])}
             {/* Las 3 subrunas siguientes (slots 1, 2 y 3) en horizontal */}
             <div className={styles.subRunes}>
-              {[1, 2, 3].map(i => 
+              {[1, 2, 3].map(i =>
                 selectedRunes.primary[i]?.length > 0 ? renderRune(selectedRunes.primary[i][0]) : null
               )}
             </div>

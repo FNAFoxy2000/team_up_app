@@ -108,11 +108,11 @@
   .itemsGrid {
     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
   }
-  
+
   .itemCard {
     height: 50px;
   }
-  
+
   .itemCard img {
     width: 42px;
     height: 42px;
@@ -123,16 +123,16 @@
   .itemSelector {
     padding: 15px;
   }
-  
+
   .itemsGrid {
     grid-template-columns: repeat(auto-fill, minmax(45px, 1fr));
     gap: 8px;
   }
-  
+
   .itemCard {
     height: 45px;
   }
-  
+
   .itemCard img {
     width: 38px;
     height: 38px;

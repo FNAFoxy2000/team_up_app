@@ -49,8 +49,10 @@
 /* Cambio principal: Grid de 2 filas */
 .spellsGrid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr); /* 4 columnas */
-  grid-template-rows: repeat(2, 1fr);    /* 2 filas */
+  grid-template-columns: repeat(4, 1fr);
+  /* 4 columnas */
+  grid-template-rows: repeat(2, 1fr);
+  /* 2 filas */
   gap: 12px;
   margin-bottom: 20px;
 }
@@ -135,7 +137,8 @@
   margin: 0;
 }
 
-.spellsLoading, .spellsError {
+.spellsLoading,
+.spellsError {
   text-align: center;
   padding: 20px;
   background-color: #222;
@@ -154,14 +157,16 @@
 /* Responsive */
 @media (max-width: 768px) {
   .spellsGrid {
-    grid-template-columns: repeat(4, 1fr); /* Mantener 4 columnas */
-    grid-template-rows: repeat(2, 1fr);   /* Mantener 2 filas */
+    grid-template-columns: repeat(4, 1fr);
+    /* Mantener 4 columnas */
+    grid-template-rows: repeat(2, 1fr);
+    /* Mantener 2 filas */
   }
-  
+
   .skillGridCell {
     height: 70px;
   }
-  
+
   .spellImage {
     width: 56px;
     height: 56px;
@@ -172,21 +177,23 @@
   .spellsGridContainer {
     padding: 15px;
   }
-  
+
   .spellsGrid {
-    grid-template-columns: repeat(2, 1fr); /* 2 columnas en móviles */
-    grid-template-rows: repeat(4, 1fr);    /* 4 filas en móviles */
+    grid-template-columns: repeat(2, 1fr);
+    /* 2 columnas en móviles */
+    grid-template-rows: repeat(4, 1fr);
+    /* 4 filas en móviles */
   }
-  
+
   .skillGridCell {
     height: 60px;
   }
-  
+
   .spellImage {
     width: 48px;
     height: 48px;
   }
-  
+
   .selectedSpell {
     min-width: 70px;
   }

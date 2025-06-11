@@ -110,25 +110,25 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail }) => {
   // Filtrar amigos que no están en el chat
   const amigosDisponibles = Array.isArray(amigos)
     ? amigos.filter((amigo) => {
-        const amigoId = normalizeId(amigo.id_usuario)
-        const estaEnChat = usuarios.some((usuario) => normalizeId(usuario.id_usuario) === amigoId)
+      const amigoId = normalizeId(amigo.id_usuario)
+      const estaEnChat = usuarios.some((usuario) => normalizeId(usuario.id_usuario) === amigoId)
 
-        return !estaEnChat
-      })
+      return !estaEnChat
+    })
     : []
 
   // Filtrar usuarios que no están en el chat y no son amigos
   const usuariosDisponibles = Array.isArray(todosUsuarios)
     ? todosUsuarios.filter((usuario) => {
-        const usuarioId = normalizeId(usuario.id_usuario)
-        const currentUserIdNorm = normalizeId(userId)
+      const usuarioId = normalizeId(usuario.id_usuario)
+      const currentUserIdNorm = normalizeId(userId)
 
-        const esUsuarioActual = usuarioId === currentUserIdNorm
-        const estaEnChat = usuarios.some((chatUser) => normalizeId(chatUser.id_usuario) === usuarioId)
-        const esAmigo = Array.isArray(amigos) && amigos.some((amigo) => normalizeId(amigo.id_usuario) === usuarioId)
+      const esUsuarioActual = usuarioId === currentUserIdNorm
+      const estaEnChat = usuarios.some((chatUser) => normalizeId(chatUser.id_usuario) === usuarioId)
+      const esAmigo = Array.isArray(amigos) && amigos.some((amigo) => normalizeId(amigo.id_usuario) === usuarioId)
 
-        return !esUsuarioActual && !estaEnChat && !esAmigo
-      })
+      return !esUsuarioActual && !estaEnChat && !esAmigo
+    })
     : []
 
   const displayData = chatInfo || currentChat

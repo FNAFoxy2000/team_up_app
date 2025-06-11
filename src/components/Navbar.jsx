@@ -15,32 +15,32 @@ function Navbar() {
   const [user, setUser] = useState(null);
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
-  useEffect(() =>{
+  useEffect(() => {
     // Sacamos el token de la URL
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get(`token`);
 
     // Si el token esta en la URL lo guardamos en la sesion y lo decodificamos
-    if(token){
+    if (token) {
       AuthService.saveToken(token);
       const decoded = AuthService.decodeToken(token)
 
-      if(decoded){
-        setUser(decoded); 
+      if (decoded) {
+        setUser(decoded);
         setIsAuthenticated(true) // Marcamos como que hay un usuario autenticado
-        
+
         // Limpiamos la url
         window.history.replaceState({}, document.title, window.location.pathname);
-      } 
+      }
     } else {
       // Si no hay token en la url, intentamos sacarlo del local storage
       const decoded = AuthService.getUserFromToken();
-      if(decoded){
+      if (decoded) {
         setUser(decoded);
         setIsAuthenticated(true)
       }
     }
-  },[]); // Esto solo se ejecutara una vez al montar el componente
+  }, []); // Esto solo se ejecutara una vez al montar el componente
 
 
   // Funcion para cerrar sesion
@@ -68,18 +68,18 @@ function Navbar() {
 
       {/* Seccion para el login */}
       <div className={styles.userSection}>
-      {/* Si el usuario esta autenticado cargamos los datos */}
-        {isAuthenticated ? ( 
+        {/* Si el usuario esta autenticado cargamos los datos */}
+        {isAuthenticated ? (
           <>
             <Link to={`/usuario/datosUsuario?email=${encodeURIComponent(user.email)}`}>
-                <img
-                  src={user.avatar || userIcon}
-                  alt="Avatar"
-                  className={styles.userIcon}
-                  title={user.username}
-                  referrerPolicy="no-referrer"
-                />
-              </Link>
+              <img
+                src={user.avatar || userIcon}
+                alt="Avatar"
+                className={styles.userIcon}
+                title={user.username}
+                referrerPolicy="no-referrer"
+              />
+            </Link>
             <button onClick={handleLogout} className={styles.logoutButton}>
               Cerrar sesión
             </button>

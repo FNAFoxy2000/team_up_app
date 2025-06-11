@@ -4,22 +4,22 @@ import styles from './niveles.module.css';
 const habilidades = ['Q', 'W', 'E', 'R'];
 const niveles = 18;
 const nivelesR = [6, 11, 16];
-const ddragonVersion = '14.10.1'; 
+const ddragonVersion = '14.10.1';
 
 const SkillLevelGrid = ({ onChange, campeonNombre }) => {
   const [seleccion, setSeleccion] = useState(Array(niveles).fill(null));
   const [campeonData, setCampeonData] = useState(null);
   const [loading, setLoading] = useState(true);
   const nivelCampeon = 18;
-  
+
   const esUdyr = campeonNombre?.toLowerCase() === 'udyr';
   const esBardo = campeonNombre?.toLowerCase() === 'bardo';
   const esNunu = campeonNombre?.toLowerCase() === 'nunu y willump';
   const esMundo = campeonNombre?.toLowerCase() === 'dr. mundo';
 
-  if(esBardo) campeonNombre= 'Bard';
-  if(esNunu) campeonNombre= 'Nunu';
-  if(esMundo) campeonNombre= 'DrMundo';
+  if (esBardo) campeonNombre = 'Bard';
+  if (esNunu) campeonNombre = 'Nunu';
+  if (esMundo) campeonNombre = 'DrMundo';
 
   useEffect(() => {
     if (!campeonNombre) return;

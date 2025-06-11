@@ -19,6 +19,7 @@ body {
 
 /* Móviles: hasta 767px */
 @media (max-width: 767px) {
+
   /* Contenedores principales */
   [class*="container"] {
     padding-left: 0.5rem;
@@ -50,7 +51,8 @@ body {
   textarea {
     width: 100% !important;
     max-width: 100% !important;
-    font-size: 16px; /* Evita zoom en iOS */
+    font-size: 16px;
+    /* Evita zoom en iOS */
   }
 
   /* Botones al ancho completo */

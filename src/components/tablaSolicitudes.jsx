@@ -15,8 +15,8 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
     pestañaActiva === 'amistades'
       ? amistades
       : pestañaActiva === 'enviadas'
-      ? enviadas
-      : recibidas;
+        ? enviadas
+        : recibidas;
 
   const solicitudes = Array.isArray(solicitudesRaw) ? solicitudesRaw : [];
 
@@ -96,22 +96,22 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
                 pestañaActiva === 'amistades'
                   ? item.nombre_usuario
                   : pestañaActiva === 'enviadas'
-                  ? item.nombre_destinatario
-                  : item.nombre_remitente;
+                    ? item.nombre_destinatario
+                    : item.nombre_remitente;
 
               const email =
                 pestañaActiva === 'amistades'
                   ? item.email
                   : pestañaActiva === 'enviadas'
-                  ? item.email_destinatario
-                  : item.email_remitente;
+                    ? item.email_destinatario
+                    : item.email_remitente;
 
               const avatar =
                 pestañaActiva === 'amistades'
                   ? item.avatar
                   : pestañaActiva === 'enviadas'
-                  ? item.avatar_destinatario
-                  : item.avatar_remitente;
+                    ? item.avatar_destinatario
+                    : item.avatar_remitente;
 
               return (
                 <tr
@@ -120,9 +120,9 @@ const TablaSolicitudes = ({ amistades = [], enviadas = [], recibidas = [] }) => 
                   style={{ cursor: 'pointer' }}
                 >
                   <td>
-                    <img 
-                      src={avatar} 
-                      alt="Avatar" 
+                    <img
+                      src={avatar}
+                      alt="Avatar"
                       className="avatar-img"
                       referrerPolicy="no-referrer"
                     />

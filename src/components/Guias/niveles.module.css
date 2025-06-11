@@ -90,11 +90,11 @@
     font-size: 0.8rem;
     padding: 6px 0;
   }
-  
+
   .skillGridRowLabel {
     font-size: 0.9rem;
   }
-  
+
   .skillGridCell {
     height: 35px;
   }
@@ -104,16 +104,16 @@
   .skillGridContainer {
     padding: 15px;
   }
-  
+
   .skillGridHeaderCell {
     font-size: 0.7rem;
     padding: 4px 0;
   }
-  
+
   .skillGridRowLabel {
     font-size: 0.8rem;
   }
-  
+
   .skillGridCell {
     height: 30px;
   }

@@ -3,7 +3,7 @@ import axios from 'axios';
 const apiURL = import.meta.env.VITE_API_URL;
 const apiKey = import.meta.env.VITE_API_KEY;
 
-export async function getAllUsuarios(){
+export async function getAllUsuarios() {
   try {
     const respuesta = await axios.get(`${apiURL}/usuario/`, {
       headers: {

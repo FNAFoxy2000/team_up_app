@@ -9,33 +9,93 @@
         {
           "name": "Keystone",
           "runes": [
-            { "id": "conquistador", "name": "Conquistador", "icon": "/imgs/conquistador.png", "description": "Gana acumulaciones al atacar. Al máximo, cura y da daño adicional" },
-            { "id": "letalidad", "name": "Letalidad", "icon": "/imgs/letalidad.png", "description": "Inflige más daño a objetivos con poca vida" },
-            { "id": "velocidad", "name": "Velocidad de ataque", "icon": "/imgs/velocidad.png", "description": "Aumenta la velocidad de ataque al atacar" }
+            {
+              "id": "conquistador",
+              "name": "Conquistador",
+              "icon": "/imgs/conquistador.png",
+              "description": "Gana acumulaciones al atacar. Al máximo, cura y da daño adicional"
+            },
+            {
+              "id": "letalidad",
+              "name": "Letalidad",
+              "icon": "/imgs/letalidad.png",
+              "description": "Inflige más daño a objetivos con poca vida"
+            },
+            {
+              "id": "velocidad",
+              "name": "Velocidad de ataque",
+              "icon": "/imgs/velocidad.png",
+              "description": "Aumenta la velocidad de ataque al atacar"
+            }
           ]
         },
         {
           "name": "Slot 1",
           "runes": [
-            { "id": "triunfo", "name": "Triunfo", "icon": "/imgs/triunfo.png", "description": "Restaura vida y otorga oro adicional al participar en bajas" },
-            { "id": "presencia", "name": "Presencia de espíritu", "icon": "/imgs/presencia.png", "description": "Restaura maná al participar en bajas" },
-            { "id": "claridad", "name": "Claridad mental", "icon": "/imgs/claridad.png", "description": "Reduce enfriamientos al atacar" }
+            {
+              "id": "triunfo",
+              "name": "Triunfo",
+              "icon": "/imgs/triunfo.png",
+              "description": "Restaura vida y otorga oro adicional al participar en bajas"
+            },
+            {
+              "id": "presencia",
+              "name": "Presencia de espíritu",
+              "icon": "/imgs/presencia.png",
+              "description": "Restaura maná al participar en bajas"
+            },
+            {
+              "id": "claridad",
+              "name": "Claridad mental",
+              "icon": "/imgs/claridad.png",
+              "description": "Reduce enfriamientos al atacar"
+            }
           ]
         },
         {
           "name": "Slot 2",
           "runes": [
-            { "id": "golpe", "name": "Golpe de gracia", "icon": "/imgs/golpe.png", "description": "Más daño a objetivos con poca vida" },
-            { "id": "ultimatum", "name": "Ultimátum", "icon": "/imgs/ultimatum.png", "description": "Más daño a objetivos con máxima vida" },
-            { "id": "tenacidad", "name": "Leyenda: Tenacidad", "icon": "/imgs/tenacidad.png", "description": "Aumenta la tenacidad" }
+            {
+              "id": "golpe",
+              "name": "Golpe de gracia",
+              "icon": "/imgs/golpe.png",
+              "description": "Más daño a objetivos con poca vida"
+            },
+            {
+              "id": "ultimatum",
+              "name": "Ultimátum",
+              "icon": "/imgs/ultimatum.png",
+              "description": "Más daño a objetivos con máxima vida"
+            },
+            {
+              "id": "tenacidad",
+              "name": "Leyenda: Tenacidad",
+              "icon": "/imgs/tenacidad.png",
+              "description": "Aumenta la tenacidad"
+            }
           ]
         },
         {
           "name": "Slot 3",
           "runes": [
-            { "id": "golpeletal", "name": "Golpe letal", "icon": "/imgs/golpeletal.png", "description": "Aumenta daño después de estar en combate" },
-            { "id": "sangre", "name": "Derramamiento de sangre", "icon": "/imgs/sangre.png", "description": "Daño adicional a campeones" },
-            { "id": "cortante", "name": "Cortante", "icon": "/imgs/cortante.png", "description": "Más daño a torretas" }
+            {
+              "id": "golpeletal",
+              "name": "Golpe letal",
+              "icon": "/imgs/golpeletal.png",
+              "description": "Aumenta daño después de estar en combate"
+            },
+            {
+              "id": "sangre",
+              "name": "Derramamiento de sangre",
+              "icon": "/imgs/sangre.png",
+              "description": "Daño adicional a campeones"
+            },
+            {
+              "id": "cortante",
+              "name": "Cortante",
+              "icon": "/imgs/cortante.png",
+              "description": "Más daño a torretas"
+            }
           ]
         }
       ]
@@ -49,33 +109,93 @@
         {
           "name": "Keystone",
           "runes": [
-            { "id": "electrocutar", "name": "Electrocutar", "icon": "/imgs/electrocutar.png", "description": "3 ataques o habilidades activan daño adicional" },
-            { "id": "depredador", "name": "Depredador", "icon": "/imgs/depredador.png", "description": "Activa velocidad de movimiento y daño en tu siguiente ataque" },
-            { "id": "cosecha", "name": "Cosecha oscura", "icon": "/imgs/cosecha.png", "description": "Obtén almas de campeones derrotados para poder" }
+            {
+              "id": "electrocutar",
+              "name": "Electrocutar",
+              "icon": "/imgs/electrocutar.png",
+              "description": "3 ataques o habilidades activan daño adicional"
+            },
+            {
+              "id": "depredador",
+              "name": "Depredador",
+              "icon": "/imgs/depredador.png",
+              "description": "Activa velocidad de movimiento y daño en tu siguiente ataque"
+            },
+            {
+              "id": "cosecha",
+              "name": "Cosecha oscura",
+              "icon": "/imgs/cosecha.png",
+              "description": "Obtén almas de campeones derrotados para poder"
+            }
           ]
         },
         {
           "name": "Slot 1",
           "runes": [
-            { "id": "sabor", "name": "Sabor a sangre", "icon": "/imgs/sabor.png", "description": "Cura al dañar a un campeón" },
-            { "id": "impacto", "name": "Impacto repentino", "icon": "/imgs/impacto.png", "description": "Penetración luego de dashes o invisibilidad" },
-            { "id": "fantasma", "name": "Poro fantasmal", "icon": "/imgs/fantasma.png", "description": "Gana AD/AP al detectar enemigos" }
+            {
+              "id": "sabor",
+              "name": "Sabor a sangre",
+              "icon": "/imgs/sabor.png",
+              "description": "Cura al dañar a un campeón"
+            },
+            {
+              "id": "impacto",
+              "name": "Impacto repentino",
+              "icon": "/imgs/impacto.png",
+              "description": "Penetración luego de dashes o invisibilidad"
+            },
+            {
+              "id": "fantasma",
+              "name": "Poro fantasmal",
+              "icon": "/imgs/fantasma.png",
+              "description": "Gana AD/AP al detectar enemigos"
+            }
           ]
         },
         {
           "name": "Slot 2",
           "runes": [
-            { "id": "cazador", "name": "Cazador voraz", "icon": "/imgs/cazador.png", "description": "Oro y curación por participaciones en bajas únicas" },
-            { "id": "ojo", "name": "Colección de globos oculares", "icon": "/imgs/ojo.png", "description": "Gana AD/AP por asesinatos" },
-            { "id": "sabueso", "name": "Sabueso implacable", "icon": "/imgs/sabueso.png", "description": "Movimiento hacia campeones con poca vida" }
+            {
+              "id": "cazador",
+              "name": "Cazador voraz",
+              "icon": "/imgs/cazador.png",
+              "description": "Oro y curación por participaciones en bajas únicas"
+            },
+            {
+              "id": "ojo",
+              "name": "Colección de globos oculares",
+              "icon": "/imgs/ojo.png",
+              "description": "Gana AD/AP por asesinatos"
+            },
+            {
+              "id": "sabueso",
+              "name": "Sabueso implacable",
+              "icon": "/imgs/sabueso.png",
+              "description": "Movimiento hacia campeones con poca vida"
+            }
           ]
         },
         {
           "name": "Slot 3",
           "runes": [
-            { "id": "cazadorgenial", "name": "Cazador ingenioso", "icon": "/imgs/cazadorgenial.png", "description": "Reduce enfriamientos de objetos" },
-            { "id": "cazadorultimo", "name": "Cazador definitivo", "icon": "/imgs/cazadorultimo.png", "description": "Reduce enfriamiento de definitiva" },
-            { "id": "tesoro", "name": "Tesoro del cazador", "icon": "/imgs/tesoro.png", "description": "Oro adicional por asesinatos únicos" }
+            {
+              "id": "cazadorgenial",
+              "name": "Cazador ingenioso",
+              "icon": "/imgs/cazadorgenial.png",
+              "description": "Reduce enfriamientos de objetos"
+            },
+            {
+              "id": "cazadorultimo",
+              "name": "Cazador definitivo",
+              "icon": "/imgs/cazadorultimo.png",
+              "description": "Reduce enfriamiento de definitiva"
+            },
+            {
+              "id": "tesoro",
+              "name": "Tesoro del cazador",
+              "icon": "/imgs/tesoro.png",
+              "description": "Oro adicional por asesinatos únicos"
+            }
           ]
         }
       ]
@@ -89,33 +209,93 @@
         {
           "name": "Keystone",
           "runes": [
-            { "id": "invocar", "name": "Invocar aery", "icon": "/imgs/invocar.png", "description": "Ataques y habilidades envían a Aery a dañar o proteger" },
-            { "id": "cometa", "name": "Cometa arcano", "icon": "/imgs/cometa.png", "description": "Habilidades lanzan un cometa de daño" },
-            { "id": "faseveloz", "name": "Fase veloz", "icon": "/imgs/faseveloz.png", "description": "Habilidades otorgan velocidad de movimiento" }
+            {
+              "id": "invocar",
+              "name": "Invocar aery",
+              "icon": "/imgs/invocar.png",
+              "description": "Ataques y habilidades envían a Aery a dañar o proteger"
+            },
+            {
+              "id": "cometa",
+              "name": "Cometa arcano",
+              "icon": "/imgs/cometa.png",
+              "description": "Habilidades lanzan un cometa de daño"
+            },
+            {
+              "id": "faseveloz",
+              "name": "Fase veloz",
+              "icon": "/imgs/faseveloz.png",
+              "description": "Habilidades otorgan velocidad de movimiento"
+            }
           ]
         },
         {
           "name": "Slot 1",
           "runes": [
-            { "id": "anillo", "name": "Anillo de flujo de maná", "icon": "/imgs/anillo.png", "description": "Regenera maná al dañar campeones" },
-            { "id": "banda", "name": "Banda de maná", "icon": "/imgs/banda.png", "description": "Consume maná para escudos al dañar" },
-            { "id": "trascendencia", "name": "Trascendencia", "icon": "/imgs/trascendencia.png", "description": "Enfriamiento convertido en AD/AP" }
+            {
+              "id": "anillo",
+              "name": "Anillo de flujo de maná",
+              "icon": "/imgs/anillo.png",
+              "description": "Regenera maná al dañar campeones"
+            },
+            {
+              "id": "banda",
+              "name": "Banda de maná",
+              "icon": "/imgs/banda.png",
+              "description": "Consume maná para escudos al dañar"
+            },
+            {
+              "id": "trascendencia",
+              "name": "Trascendencia",
+              "icon": "/imgs/trascendencia.png",
+              "description": "Enfriamiento convertido en AD/AP"
+            }
           ]
         },
         {
           "name": "Slot 2",
           "runes": [
-            { "id": "focoabsoluto", "name": "Foco absoluto", "icon": "/imgs/focoabsoluto.png", "description": "Más daño con vida alta" },
-            { "id": "ultimollamada", "name": "Última llamada", "icon": "/imgs/ultimollamada.png", "description": "Más daño a objetivos con poca vida" },
-            { "id": "translimite", "name": "Translimitación", "icon": "/imgs/translimite.png", "description": "Rompe límites de enfriamiento" }
+            {
+              "id": "focoabsoluto",
+              "name": "Foco absoluto",
+              "icon": "/imgs/focoabsoluto.png",
+              "description": "Más daño con vida alta"
+            },
+            {
+              "id": "ultimollamada",
+              "name": "Última llamada",
+              "icon": "/imgs/ultimollamada.png",
+              "description": "Más daño a objetivos con poca vida"
+            },
+            {
+              "id": "translimite",
+              "name": "Translimitación",
+              "icon": "/imgs/translimite.png",
+              "description": "Rompe límites de enfriamiento"
+            }
           ]
         },
         {
           "name": "Slot 3",
           "runes": [
-            { "id": "crecimiento", "name": "Crecimiento excesivo", "icon": "/imgs/crecimiento.png", "description": "Vida adicional por muertes cercanas" },
-            { "id": "revelacion", "name": "Revelación", "icon": "/imgs/revelacion.png", "description": "Objetivos dañados revelan área" },
-            { "id": "quemar", "name": "Quemar", "icon": "/imgs/quemar.png", "description": "Habilidades incendian enemigos" }
+            {
+              "id": "crecimiento",
+              "name": "Crecimiento excesivo",
+              "icon": "/imgs/crecimiento.png",
+              "description": "Vida adicional por muertes cercanas"
+            },
+            {
+              "id": "revelacion",
+              "name": "Revelación",
+              "icon": "/imgs/revelacion.png",
+              "description": "Objetivos dañados revelan área"
+            },
+            {
+              "id": "quemar",
+              "name": "Quemar",
+              "icon": "/imgs/quemar.png",
+              "description": "Habilidades incendian enemigos"
+            }
           ]
         }
       ]
@@ -129,33 +309,93 @@
         {
           "name": "Keystone",
           "runes": [
-            { "id": "agarre", "name": "Agarre del perpetuo", "icon": "/imgs/agarre.png", "description": "Inmovilizar enemigos otorga vida y escudos" },
-            { "id": "demoler", "name": "Demoler", "icon": "/imgs/demoler.png", "description": "Daño a torretas basado en vida máxima" },
-            { "id": "guardian", "name": "Guardián", "icon": "/imgs/guardian.png", "description": "Protege aliados cercanos de daño" }
+            {
+              "id": "agarre",
+              "name": "Agarre del perpetuo",
+              "icon": "/imgs/agarre.png",
+              "description": "Inmovilizar enemigos otorga vida y escudos"
+            },
+            {
+              "id": "demoler",
+              "name": "Demoler",
+              "icon": "/imgs/demoler.png",
+              "description": "Daño a torretas basado en vida máxima"
+            },
+            {
+              "id": "guardian",
+              "name": "Guardián",
+              "icon": "/imgs/guardian.png",
+              "description": "Protege aliados cercanos de daño"
+            }
           ]
         },
         {
           "name": "Slot 1",
           "runes": [
-            { "id": "golpesalud", "name": "Golpes de escudo", "icon": "/imgs/golpesalud.png", "description": "Gana escudos al dañar enemigos" },
-            { "id": "fuente", "name": "Fuente de vida", "icon": "/imgs/fuente.png", "description": "Regenera vida al dañar enemigos" },
-            { "id": "segundoaire", "name": "Segundo aire", "icon": "/imgs/segundoaire.png", "description": "Regeneración luego de recibir daño" }
+            {
+              "id": "golpesalud",
+              "name": "Golpes de escudo",
+              "icon": "/imgs/golpesalud.png",
+              "description": "Gana escudos al dañar enemigos"
+            },
+            {
+              "id": "fuente",
+              "name": "Fuente de vida",
+              "icon": "/imgs/fuente.png",
+              "description": "Regenera vida al dañar enemigos"
+            },
+            {
+              "id": "segundoaire",
+              "name": "Segundo aire",
+              "icon": "/imgs/segundoaire.png",
+              "description": "Regeneración luego de recibir daño"
+            }
           ]
         },
         {
           "name": "Slot 2",
           "runes": [
-            { "id": "coraza", "name": "Coraza del hueso", "icon": "/imgs/coraza.png", "description": "Reduce daño de campeones" },
-            { "id": "frente", "name": "Frente a frente", "icon": "/imgs/frente.png", "description": "Reduce daño de ataques básicos" },
-            { "id": "sobrecrecimiento", "name": "Sobrecimiento", "icon": "/imgs/sobrecrecimiento.png", "description": "Vida permanente por muertes cercanas" }
+            {
+              "id": "coraza",
+              "name": "Coraza del hueso",
+              "icon": "/imgs/coraza.png",
+              "description": "Reduce daño de campeones"
+            },
+            {
+              "id": "frente",
+              "name": "Frente a frente",
+              "icon": "/imgs/frente.png",
+              "description": "Reduce daño de ataques básicos"
+            },
+            {
+              "id": "sobrecrecimiento",
+              "name": "Sobrecimiento",
+              "icon": "/imgs/sobrecrecimiento.png",
+              "description": "Vida permanente por muertes cercanas"
+            }
           ]
         },
         {
           "name": "Slot 3",
           "runes": [
-            { "id": "revitalizar", "name": "Revitalizar", "icon": "/imgs/revitalizar.png", "description": "Aumenta escudos y curaciones" },
-            { "id": "indestructible", "name": "Indestructible", "icon": "/imgs/indestructible.png", "description": "Escudo al bajar de vida" },
-            { "id": "inquebrantable", "name": "Inquebrantable", "icon": "/imgs/inquebrantable.png", "description": "Tenacidad y reducción de ralentizaciones" }
+            {
+              "id": "revitalizar",
+              "name": "Revitalizar",
+              "icon": "/imgs/revitalizar.png",
+              "description": "Aumenta escudos y curaciones"
+            },
+            {
+              "id": "indestructible",
+              "name": "Indestructible",
+              "icon": "/imgs/indestructible.png",
+              "description": "Escudo al bajar de vida"
+            },
+            {
+              "id": "inquebrantable",
+              "name": "Inquebrantable",
+              "icon": "/imgs/inquebrantable.png",
+              "description": "Tenacidad y reducción de ralentizaciones"
+            }
           ]
         }
       ]
@@ -169,33 +409,93 @@
         {
           "name": "Keystone",
           "runes": [
-            { "id": "calzado", "name": "Calzado mágico", "icon": "/imgs/calzado.png", "description": "Botas gratis a los 12 min" },
-            { "id": "mercado", "name": "Mercado del futuro", "icon": "/imgs/mercado.png", "description": "Puedes endeudarte para comprar" },
-            { "id": "velperfecta", "name": "Velocidad perfecta", "icon": "/imgs/velperfecta.png", "description": "Velocidad de movimiento adicional" }
+            {
+              "id": "calzado",
+              "name": "Calzado mágico",
+              "icon": "/imgs/calzado.png",
+              "description": "Botas gratis a los 12 min"
+            },
+            {
+              "id": "mercado",
+              "name": "Mercado del futuro",
+              "icon": "/imgs/mercado.png",
+              "description": "Puedes endeudarte para comprar"
+            },
+            {
+              "id": "velperfecta",
+              "name": "Velocidad perfecta",
+              "icon": "/imgs/velperfecta.png",
+              "description": "Velocidad de movimiento adicional"
+            }
           ]
         },
         {
           "name": "Slot 1",
           "runes": [
-            { "id": "hextech", "name": "Distorsión hextech", "icon": "/imgs/hextech.png", "description": "Reduce enfriamiento de Destello y TP" },
-            { "id": "biscuit", "name": "Galleta de maná", "icon": "/imgs/biscuit.png", "description": "Galletas que restauran maná y vida" },
-            { "id": "reloj", "name": "Reloj perfecto", "icon": "/imgs/reloj.png", "description": "Cronómetro gratis a los 6 min" }
+            {
+              "id": "hextech",
+              "name": "Distorsión hextech",
+              "icon": "/imgs/hextech.png",
+              "description": "Reduce enfriamiento de Destello y TP"
+            },
+            {
+              "id": "biscuit",
+              "name": "Galleta de maná",
+              "icon": "/imgs/biscuit.png",
+              "description": "Galletas que restauran maná y vida"
+            },
+            {
+              "id": "reloj",
+              "name": "Reloj perfecto",
+              "icon": "/imgs/reloj.png",
+              "description": "Cronómetro gratis a los 6 min"
+            }
           ]
         },
         {
           "name": "Slot 2",
           "runes": [
-            { "id": "calidadsuperior", "name": "Calidad superior", "icon": "/imgs/calidadsuperior.png", "description": "Mejora objetos legendarios" },
-            { "id": "futuro", "name": "Entrega de futuro", "icon": "/imgs/futuro.png", "description": "Oro por alcanzar puntos de poder" },
-            { "id": "acercamiento", "name": "Acercamiento veloz", "icon": "/imgs/acercamiento.png", "description": "Velocidad hacia aliados afectados" }
+            {
+              "id": "calidadsuperior",
+              "name": "Calidad superior",
+              "icon": "/imgs/calidadsuperior.png",
+              "description": "Mejora objetos legendarios"
+            },
+            {
+              "id": "futuro",
+              "name": "Entrega de futuro",
+              "icon": "/imgs/futuro.png",
+              "description": "Oro por alcanzar puntos de poder"
+            },
+            {
+              "id": "acercamiento",
+              "name": "Acercamiento veloz",
+              "icon": "/imgs/acercamiento.png",
+              "description": "Velocidad hacia aliados afectados"
+            }
           ]
         },
         {
           "name": "Slot 3",
           "runes": [
-            { "id": "cosmico", "name": "Conocimiento cósmico", "icon": "/imgs/cosmico.png", "description": "Reducción de enfriamiento de definitiva" },
-            { "id": "tonico", "name": "Tónico de distorsión temporal", "icon": "/imgs/tonico.png", "description": "Poción prolongada con velocidad" },
-            { "id": "creativo", "name": "Genio creativo", "icon": "/imgs/creativo.png", "description": "Reducción de enfriamiento de objetos" }
+            {
+              "id": "cosmico",
+              "name": "Conocimiento cósmico",
+              "icon": "/imgs/cosmico.png",
+              "description": "Reducción de enfriamiento de definitiva"
+            },
+            {
+              "id": "tonico",
+              "name": "Tónico de distorsión temporal",
+              "icon": "/imgs/tonico.png",
+              "description": "Poción prolongada con velocidad"
+            },
+            {
+              "id": "creativo",
+              "name": "Genio creativo",
+              "icon": "/imgs/creativo.png",
+              "description": "Reducción de enfriamiento de objetos"
+            }
           ]
         }
       ]

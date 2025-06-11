@@ -2,14 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import styles from './items.module.css';
 
-const ItemSelector = ({ 
+const ItemSelector = ({
   onSelectionChange,
-  initialSelectedStarters = [], 
+  initialSelectedStarters = [],
   initialSelectedBoots = [],
   initialSelectedItems = [],
-  selectedPosition = ''  
+  selectedPosition = ''
 }) => {
-  
+
   const [selectedStarterItems, setSelectedStarterItems] = useState(initialSelectedStarters);
   const [selectedBoots, setSelectedBoots] = useState(initialSelectedBoots);
   const [selectedItems, setSelectedItems] = useState(initialSelectedItems);
@@ -65,10 +65,10 @@ const ItemSelector = ({
 
   const objetos_suport_completos = objetos.concat(suport_completos);
 
-  if (selectedPosition.toLowerCase() == "jungle"){
+  if (selectedPosition.toLowerCase() == "jungle") {
     selectedPosition = "Jungla"
-  }else if(selectedPosition.toLowerCase() == "utility"){
-        selectedPosition = "Support"
+  } else if (selectedPosition.toLowerCase() == "utility") {
+    selectedPosition = "Support"
   }
 
   useEffect(() => {
@@ -117,7 +117,7 @@ const ItemSelector = ({
       }
       if (selectedPosition === 'Support') {
         return suport_start.includes(item.name);
-      } 
+      }
       return starter.includes(item.name);
     });
     setStarterOptions(filteredStarters);
@@ -161,7 +161,7 @@ const ItemSelector = ({
         setSelectedBoots(newBoots);
         notifyParent(selectedStarterItems, newBoots, selectedItems);
       }
-    } 
+    }
     // Si es ítem inicial o poción
     else if (isStarter(item) || isPotion(item)) {
       const alreadySelected = selectedStarterItems.find(i => i.id === item.id);
@@ -182,7 +182,7 @@ const ItemSelector = ({
           }
         }
       }
-    } 
+    }
     else {
       const alreadySelected = selectedItems.find(i => i.id === item.id);
       if (alreadySelected) {
@@ -197,7 +197,7 @@ const ItemSelector = ({
     }
   };
   const getTooltip = (desc) => desc ? desc.replace(/<[^>]+>/g, '') : '';
-  
+
   return (
     <div className={styles.itemSelector}>
 
@@ -207,9 +207,8 @@ const ItemSelector = ({
           {bootOptions.map(item => (
             <div
               key={item.id}
-              className={`${styles.itemCard} ${
-                selectedBoots.find(i => i.id === item.id) ? styles.selected : ''
-              }`}
+              className={`${styles.itemCard} ${selectedBoots.find(i => i.id === item.id) ? styles.selected : ''
+                }`}
               onClick={() => handleAddItem(item)}
               title={getTooltip(item.description)}
             >
@@ -221,15 +220,14 @@ const ItemSelector = ({
           ))}
         </div>
       </div>
-      
+
       <div className={styles.starterSelector}>
         <h4>Selecciona objeto inicial y pociones</h4>
         <div className={styles.itemsGrid}>
           {starterOptions.map(item => (
             <div
               key={item.id}
-              className={`${styles.itemCard} ${
-                selectedStarterItems.find(i => i.id === item.id) ? styles.selected : ''
+              className={`${styles.itemCard} ${selectedStarterItems.find(i => i.id === item.id) ? styles.selected : ''
                 }`}
               onClick={() => handleAddItem(item)}
               title={getTooltip(item.description)}
@@ -284,7 +282,7 @@ const ItemSelector = ({
         </div>
       </div>
 
-            <input
+      <input
         type="text"
         placeholder="Buscar objeto..."
         value={search}
