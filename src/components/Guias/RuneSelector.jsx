@@ -13,6 +13,7 @@ const RuneSelector = ({ onChange }) => {
     fragments: []
   });
 
+  // Carga de datos de DDragon
   useEffect(() => {
     const fetchRunes = async () => {
       try {
@@ -28,6 +29,7 @@ const RuneSelector = ({ onChange }) => {
     fetchRunes();
   }, []);
 
+  // Propagación al padre
   useEffect(() => {
     onChange({ primaryPath, secondaryPath, selectedRunes });
   }, [primaryPath, secondaryPath, selectedRunes, onChange]);
@@ -59,10 +61,12 @@ const RuneSelector = ({ onChange }) => {
     });
   };
 
+  // Buscamos la runa por su id
   const getPathById = (id) => runesData.find(p => p.id === id);
-
+  // Limpiar el texto para el title
   const getTooltip = (desc) => desc ? desc.replace(/<[^>]+>/g, '') : '';
 
+  // Render del componente
   return (
     <div className={styles.runeSelectorLayout}>
       <div className={styles.runeColumn}>

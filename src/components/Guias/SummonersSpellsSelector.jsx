@@ -15,8 +15,10 @@ const SummonerSpellsSelector = ({
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Filtro para excluir datos de eventos u otros modos de juego
   const filtro = ["Limpiar", "Extenuación", "Destello", "Prender", "Barrera", "Fantasmal", "Curar", "Aplastar", "Teleportar"];
 
+  // Carga de datos
   useEffect(() => {
     const fetchSpells = async () => {
       try {

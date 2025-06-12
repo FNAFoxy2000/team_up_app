@@ -179,7 +179,6 @@
   text-align: center;
 }
 
-/* Campo de descripción */
 .descriptionInput {
   width: 100%;
   padding: 12px;
@@ -242,14 +241,11 @@
   display: flex;
   align-items: center;
   margin-left: 15px;
-  /* espacio con elementos a la izquierda */
   gap: 8px;
-  /* espacio entre checkbox y texto */
   position: relative;
   user-select: none;
 }
 
-/* Ocultar el checkbox nativo pero mantenerlo accesible */
 .privacyWrapper label {
   position: relative;
   padding-left: 32px;
@@ -275,7 +271,6 @@
   /* sube un poco más */
 }
 
-/* Caja personalizada del checkbox */
 .privacyWrapper label::before {
   content: "";
   position: absolute;
@@ -290,19 +285,16 @@
   transition: background-color 0.3s, border-color 0.3s;
 }
 
-/* Hover en checkbox: cambia el color del recuadro */
 .privacyWrapper input[type="checkbox"]:hover+label::before {
   background-color: #3a3a3a;
   border-color: #f0a400;
 }
 
-/* Cuando está checked cambia colores */
 .privacyWrapper input[type="checkbox"]:checked+label::before {
   background-color: #f0a400;
   border-color: #f0a400;
 }
 
-/* La marca de check */
 .privacyWrapper input[type="checkbox"]:checked+label::after {
   content: "";
   position: absolute;

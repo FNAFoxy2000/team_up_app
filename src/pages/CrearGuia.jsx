@@ -28,12 +28,14 @@ const GuiaCampeon = () => {
   const [guidePatch, setGuidePatch] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
 
+  // Objetos seleccionados en item selector 
   const [selectedItems, setSelectedItems] = useState({
     starterItems: [],
     boots: [],
     items: []
   });
 
+  // Posiciones (imagenes no disponibles en DDragon)
   const positions = [
     {
       id: "top",
@@ -69,6 +71,7 @@ const GuiaCampeon = () => {
     }
   }, [campeonNombre]);
 
+  // Carga de datos del campeon desde ddragon
   useEffect(() => {
     const fetchCampeon = async () => {
       try {
@@ -89,6 +92,7 @@ const GuiaCampeon = () => {
     fetchCampeon();
   }, [championId]);
 
+  // Callbacks para actualizar el estado de los componentes
   const handleSkillChange = (orden) => {
     setSkillOrder(orden);
   };
@@ -113,6 +117,7 @@ const GuiaCampeon = () => {
     setGuideDescription(e.target.value);
   };
 
+  // Funcion para validar la guia
   const validateGuideData = ({
     titulo,
     parche,
@@ -216,6 +221,7 @@ const GuiaCampeon = () => {
     }
   }
 
+  // Funcion para validar la guia y guardarla
   const handlePrintSelections = async () => {
     const dataToPrint = {
       titulo: guideTitle,
@@ -236,9 +242,7 @@ const GuiaCampeon = () => {
       return;
     }
 
-
     const objetoGuardar = retornarObjeto(dataToPrint);
-
 
     const estaLogeado = AuthService.isAuthenticated();
     if (!estaLogeado) {
@@ -248,7 +252,7 @@ const GuiaCampeon = () => {
 
     const usr = AuthService.getUserFromToken();
     const lol_id = 2;
-
+    // Llamamos a la funcion asincrona para guardar los datos de la guia
     try {
       await guardarGuia(
         usr.id_usuario,
@@ -259,7 +263,7 @@ const GuiaCampeon = () => {
       );
 
       showSuccess("¡Guardado correctamente!");
-      navigate('/guias/privadas');
+      navigate('/guias/privadas'); // Redireccion al listado privado
     } catch (error) {
       if (error.response && error.response.data) {
         console.error("Error al guardar la guía:", error.response.data);
@@ -272,11 +276,11 @@ const GuiaCampeon = () => {
   };
 
 
-
   if (loading) return <p className={styles.loadingText}>Cargando datos del campeón...</p>;
   if (error) return <p className={styles.errorText}>{error}</p>;
   if (!campeon) return null;
 
+  // Render del componente
   return (
     <div className={styles.guiaContainer}>
       <header className={styles.header}>

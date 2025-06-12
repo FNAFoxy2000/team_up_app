@@ -84,7 +84,6 @@
   font-size: 0.9rem;
 }
 
-/* Responsive */
 @media (max-width: 768px) {
   .skillGridHeaderCell {
     font-size: 0.8rem;

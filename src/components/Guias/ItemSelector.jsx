@@ -19,6 +19,8 @@ const ItemSelector = ({
   const [starterOptions, setStarterOptions] = useState([]);
   const [search, setSearch] = useState('');
 
+
+  // Listas estáticas para poder filtrar los items.
   const botas = ["Grebas de berserker", "Botas de rapidez", "Suelas simbióticas", "Botas de hechicero", "Botas blindadas", "Botas de mercurio", "Botas jonias de la lucidez"];
 
   const starter = ["Escudo de Doran", "Espada de Doran", "Anillo de Doran", "Poción de vida", "Sello oscuro", "Poción reutilizable"];
@@ -71,6 +73,7 @@ const ItemSelector = ({
     selectedPosition = "Support"
   }
 
+  // Carga de datos desde DDragon
   useEffect(() => {
     const fetchItems = async () => {
       try {
@@ -100,6 +103,7 @@ const ItemSelector = ({
     fetchItems();
   }, []);
 
+  // Notificar al padre con los ites nuevos
   const notifyParent = (newStarters, newBoots, newItems) => {
     if (onSelectionChange) {
       onSelectionChange({
@@ -110,6 +114,7 @@ const ItemSelector = ({
     }
   };
 
+  // Filtro dependiendo de la posicion
   useEffect(() => {
     const filteredStarters = items.filter(item => {
       if (selectedPosition === 'Jungla') {
@@ -149,7 +154,6 @@ const ItemSelector = ({
     .filter(item => item.name.toLowerCase().includes(search.toLowerCase()));
 
   const handleAddItem = (item) => {
-    // Si es bota
     if (isBoot(item)) {
       const alreadySelected = selectedBoots.find(i => i.id === item.id);
       if (alreadySelected) {
@@ -162,7 +166,6 @@ const ItemSelector = ({
         notifyParent(selectedStarterItems, newBoots, selectedItems);
       }
     }
-    // Si es ítem inicial o poción
     else if (isStarter(item) || isPotion(item)) {
       const alreadySelected = selectedStarterItems.find(i => i.id === item.id);
       if (alreadySelected) {
@@ -196,6 +199,8 @@ const ItemSelector = ({
       }
     }
   };
+
+  // Funcion para limpiar el tootltip
   const getTooltip = (desc) => desc ? desc.replace(/<[^>]+>/g, '') : '';
 
   return (

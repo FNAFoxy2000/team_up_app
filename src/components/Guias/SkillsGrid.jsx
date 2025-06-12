@@ -17,10 +17,12 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
   const esNunu = campeonNombre?.toLowerCase() === 'nunu y willump';
   const esMundo = campeonNombre?.toLowerCase() === 'dr. mundo';
 
+  // Traduccion de nombres a ingles
   if (esBardo) campeonNombre = 'Bard';
   if (esNunu) campeonNombre = 'Nunu';
   if (esMundo) campeonNombre = 'DrMundo';
 
+  // Carga de datos del campeon
   useEffect(() => {
     if (!campeonNombre) return;
 
@@ -37,6 +39,7 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
       });
   }, [campeonNombre]);
 
+  // Contador de puntos asignados a cada habilidad
   const contarPuntos = () => {
     const conteo = { Q: 0, W: 0, E: 0, R: 0 };
     seleccion.forEach(hab => {
@@ -44,7 +47,7 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
     });
     return conteo;
   };
-
+  // Lógica para determinar si se puede asignar una habilidad en un nivel
   const puedeAsignar = (nivel, hab) => {
     const puntos = contarPuntos();
     const nivelReal = nivel + 1;
@@ -60,6 +63,7 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
     return true;
   };
 
+  // Manejo de selección/deselección de habilidad por nivel
   const handleSelect = (nivel, hab) => {
     if (seleccion[nivel] === hab) {
       const newSel = [...seleccion];
@@ -89,6 +93,7 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
     return <div>No se encontraron datos para el campeón "{campeonNombre}".</div>;
   }
 
+  // Datos de las habilidades del personaje
   const passiveIcon = campeonData.passive.image.full;
   const passiveName = campeonData.passive.name;
   const passiveDesc = campeonData.passive.description;
@@ -108,11 +113,10 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
     return spell ? spell.description : '';
   });
 
+  // Render del componente
   return (
     <div className={styles.skillGridContainer}>
-      {/* Contenedor centrado para pasiva y habilidades */}
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', marginBottom: 12, gap: 20 }}>
-        {/* Pasiva */}
         {passiveIcon && (
           <div style={{ textAlign: 'center' }}>
             <img
@@ -125,7 +129,6 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
           </div>
         )}
 
-        {/* Habilidades Q,W,E,R */}
         <div style={{ display: 'flex', gap: 10 }}>
           {habilidades.map((hab, idx) => (
             <div key={hab} style={{ textAlign: 'center' }}>
@@ -157,7 +160,6 @@ const SkillLevelGrid = ({ onChange, campeonNombre }) => {
         </div>
       </div>
 
-      {/* Grid de niveles y habilidades */}
       <div className={styles.skillGrid}>
         <div className={styles.skillGridHeader}>
           <div className={styles.skillGridCorner}></div>
