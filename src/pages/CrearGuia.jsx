@@ -9,8 +9,11 @@ import SkillsGrid from '../components/Guias/SkillsGrid';
 import ItemSelector from '../components/Guias/ItemSelector';
 import SummonerSpellsSelector from '../components/Guias/SummonersSpellsSelector';
 import RuneSelector from '../components/Guias/RuneSelector';
+import { useNavigate } from 'react-router-dom';
 
 const GuiaCampeon = () => {
+  const navigate = useNavigate();
+
   const { championId } = useParams();
   const [campeon, setCampeon] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -256,6 +259,7 @@ const GuiaCampeon = () => {
       );
 
       showSuccess("¡Guardado correctamente!");
+      navigate('/guias/privadas');
     } catch (error) {
       if (error.response && error.response.data) {
         console.error("Error al guardar la guía:", error.response.data);

@@ -9,7 +9,6 @@ import { showSuccess, showError, showInfo } from '../components/Toast';
 function Guias() {
   const navigate = useNavigate();
 
-  const [searchText, setSearchText] = useState('');
   const [selectedGame, setSelectedGame] = useState('');
   const [orderBy, setOrderBy] = useState('');
   const [guias, setGuias] = useState([]);
@@ -64,13 +63,10 @@ function Guias() {
   };
 
   const guiasFiltradas = guias.filter((guia) => {
-    const lowerSearch = searchText.toLowerCase();
-    const matchesUser = guia.nombre_usuario.toLowerCase().includes(lowerSearch);
-    const matchesTitle = guia.contenido.titulo.toLowerCase().includes(lowerSearch);
     const matchesGame = selectedGame ? guia.id_juego === gameMapping[selectedGame] : true;
     const matchesChampion = selectedChampion ? guia.campeon_nombre === selectedChampion : true;
 
-    return (matchesUser || matchesTitle) && matchesGame && matchesChampion;
+    return  matchesGame && matchesChampion;
   });
 
   const sortedGuias = [...guiasFiltradas];
@@ -114,20 +110,6 @@ function Guias() {
       </div>
 
       <form className="form" onSubmit={handleSubmit}>
-        <div className="inputGroup">
-          <label htmlFor="NombreUsuario" className="label">
-            Nombre de usuario:
-          </label>
-          <input
-            id="NombreUsuario"
-            type="text"
-            placeholder="Buscar por nombre..."
-            value={searchText}
-            onChange={(e) => setSearchText(e.target.value)}
-            className="input"
-          />
-        </div>
-
         <div className="filtersRow">
           <select
             value={selectedGame}
