@@ -67,7 +67,7 @@ const ItemSelector = ({
 
   if (selectedPosition.toLowerCase() == "jungle") {
     selectedPosition = "Jungla"
-  } else if (selectedPosition.toLowerCase() == "utility") {
+  } else if (selectedPosition.toLowerCase() == "support") {
     selectedPosition = "Support"
   }
 

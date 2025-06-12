@@ -56,7 +56,7 @@ const GuiaCampeon = () => {
       icon: "https://wiki.leagueoflegends.com/en-us/images/Bottom_icon.png?6d4b2",
     },
     {
-      id: "utility",
+      id: "support",
       name: "Soporte",
       icon: "https://wiki.leagueoflegends.com/en-us/images/Support_icon.png?af1ff",
     },
