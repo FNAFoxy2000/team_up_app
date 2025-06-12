@@ -28,7 +28,7 @@ const GuiaCampeon = () => {
   const [guidePatch, setGuidePatch] = useState('');
   const [isPrivate, setIsPrivate] = useState(false);
 
-  // Objetos seleccionados en item selector 
+  // Objetos seleccionados en el componente item selector 
   const [selectedItems, setSelectedItems] = useState({
     starterItems: [],
     boots: [],
