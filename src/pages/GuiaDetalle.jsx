@@ -18,6 +18,7 @@ function DatosGuia() {
   const { id } = useParams();
   const patchVersion = '14.10.1';
 
+  // Sacamos el usuario activo desde el token 
   useEffect(() => {
     const user = AuthService.getUserFromToken();
     if (user) {
@@ -25,6 +26,7 @@ function DatosGuia() {
     }
   }, []);
 
+  // Cargamos los datos de la guia desde el id en la url
   useEffect(() => {
     const cargarDatosGuia = async (id_guia) => {
       setLoading(true);
@@ -46,6 +48,7 @@ function DatosGuia() {
     }
   }, [id]);
 
+  // Sacamos las listas de los datos que necesitamos
   useEffect(() => {
     Promise.all([
       axios.get(`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/data/es_ES/summoner.json`),
@@ -60,6 +63,7 @@ function DatosGuia() {
       .catch(console.error);
   }, []);
 
+  // Cargamos los datos del campeon específico de la guia.
   useEffect(() => {
     if (guia && guia.campeon_nombre) {
       axios.get(`https://ddragon.leagueoflegends.com/cdn/${patchVersion}/data/es_ES/champion/${guia.campeon_nombre}.json`)
@@ -70,6 +74,7 @@ function DatosGuia() {
     }
   }, [guia]);
 
+  // Borrar la guia
   const handleDelete = (e) => {
     const confirmed = window.confirm(`¿Estás seguro de que deseas eliminar esta guía? ${guia.contenido.titulo}`);
     if (confirmed) {
@@ -81,6 +86,7 @@ function DatosGuia() {
   if (loading) return <div className={styles.loadingText}>Cargando guía...</div>;
   if (!summonerSpells || !items || !runes || !guia || !guia.contenido) return <div className={styles.loadingText}>Cargando datos del juego...</div>;
 
+  // Procesamos los datos de la guia
   const { hechizosInvocador, objetosIniciales, botas, objetosCompletos, runaPrincipal, runaSecundaria, runasRamaPrincipal, runasRamaSecundaria, ordenHabilidades } = guia.contenido;
 
   const hechizosInvocadorInfo = hechizosInvocador.map(id => Object.values(summonerSpells).find(s => s.id === id));
@@ -109,6 +115,7 @@ function DatosGuia() {
     });
   }
 
+  // Renderizamos la página
   return (
     <div className={styles.guiaContainer}>
       <div className={styles.header}>
