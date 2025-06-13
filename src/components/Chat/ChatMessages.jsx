@@ -3,7 +3,7 @@
 import { useState, useRef, useEffect } from "react"
 import ChatInfo from "./ChatInfo"
 
-const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userId, userEmail }) => {
+const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userId, userEmail, onChatLeave }) => {
   const [newMessage, setNewMessage] = useState("")
   const [showChatInfo, setShowChatInfo] = useState(false)
   const messagesEndRef = useRef(null)
@@ -60,7 +60,15 @@ const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userI
 
   // Si se está mostrando la información del chat, renderizar ChatInfo
   if (showChatInfo) {
-    return <ChatInfo currentChat={currentChat} onBack={handleBackToChat} userId={userId} userEmail={userEmail} />
+    return (
+      <ChatInfo
+        currentChat={currentChat}
+        onBack={handleBackToChat}
+        userId={userId}
+        userEmail={userEmail}
+        onChatLeave={onChatLeave}
+      />
+    )
   }
 
   if (!currentChat) {

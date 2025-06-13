@@ -143,16 +143,38 @@
   margin-top: 1rem;
   padding-top: 1rem;
   border-top: 1px solid #444;
+  align-items: center;
+}
+
+/* Nuevo contenedor para los botones */
+.button-wrapper {
+  display: inline-block;
 }
 
 .cancel-button,
 .submit-button {
-  padding: 0.8rem 1.5rem;
+  /* Reset completo de estilos */
+  margin: 0;
+  padding: 0;
   border: none;
+  background: none;
+  font: inherit;
+  color: inherit;
+  line-height: normal;
+  overflow: visible;
+
+  /* Nuevos estilos consistentes */
+  display: block;
+  width: auto;
+  height: 44px;
+  padding: 0 1.5rem;
   border-radius: 4px;
   font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
   transition: background-color 0.3s;
+  text-align: center;
+  line-height: 44px; /* Alinea el texto verticalmente */
 }
 
 .cancel-button {

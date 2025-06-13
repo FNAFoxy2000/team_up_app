@@ -64,7 +64,7 @@ const ChatPage = () => {
   useEffect(() => {
     if (!userId || !user) return
 
-    // console.log("Inicializando Socket.io con usuario:", { userId, username: user.username })
+    console.log("Inicializando Socket.io con usuario:", { userId, username: user.username })
     const newSocket = io(`${apiURL}`, {
       auth: { serverOffset: 0 },
     })
@@ -139,6 +139,17 @@ const ChatPage = () => {
     }
   }
 
+  // Después de la definición de fetchUserChats
+  const handleChatLeave = () => {
+    console.log("Usuario abandonó un chat, recargando datos...")
+    // Recargar la lista de chats
+    fetchUserChats()
+    // Limpiar el chat actual
+    setCurrentChat(null)
+    // Limpiar los mensajes
+    setMessages([])
+  }
+
   // Función para unirse a un chat
   const joinChat = (chat) => {
     if (!socket || !isConnected) return
@@ -186,6 +197,7 @@ const ChatPage = () => {
             isConnected={isConnected}
             userId={userId}
             userEmail={user.email}
+            onChatLeave={handleChatLeave}
           />
         </div>
       </div>

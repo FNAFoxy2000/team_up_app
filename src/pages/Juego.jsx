@@ -306,7 +306,7 @@ const GameProfilePage = () => {
 
         {isLoggedIn && (
           <div className="chats-juego-section">
-            <h3>Chats de {juego.nombre}</h3>
+            <h3>Comunidades de {juego.nombre}</h3>
 
             {loadingChats ? (
               <p>Cargando chats...</p>

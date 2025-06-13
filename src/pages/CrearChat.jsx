@@ -183,12 +183,17 @@ const CrearChat = () => {
           </div>
 
           <div className="form-actions">
-            <button type="button" onClick={handleCancel} className="cancel-button" disabled={loading}>
-              Cancelar
-            </button>
-            <button type="submit" className="submit-button" disabled={loading}>
-              {loading ? "Creando..." : "Crear Chat"}
-            </button>
+            {/* Envolvemos los botones en spans para asegurar que tengan el mismo contenedor padre */}
+            <span className="button-wrapper">
+              <button type="button" onClick={handleCancel} className="cancel-button" disabled={loading}>
+                Cancelar
+              </button>
+            </span>
+            <span className="button-wrapper">
+              <button type="submit" className="submit-button" disabled={loading}>
+                {loading ? "Creando..." : "Crear Chat"}
+              </button>
+            </span>
           </div>
         </form>
       </div>

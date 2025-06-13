@@ -604,6 +604,7 @@
   background-color: #2a2a2a;
   border-radius: 8px;
   border: 1px solid #444;
+  margin-bottom: 1.5rem;
 }
 
 .add-users-section h4 {
@@ -773,4 +774,40 @@
   font-size: 0.8rem;
   margin: 0.5rem 0 0 0;
   text-align: center;
+}
+
+/* Estilos para el botón de abandonar chat */
+.leave-chat-section {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.leave-chat-button {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.leave-chat-button:hover:not(:disabled) {
+  background-color: #c0392b;
+}
+
+.leave-chat-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.leave-icon {
+  width: 18px;
+  height: 18px;
 }

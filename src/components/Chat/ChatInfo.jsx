@@ -4,9 +4,9 @@ import { useState, useEffect } from "react"
 import { getChatUsers, getInfoChat, abandonarChat, unirseChat } from "../../peticiones/chat_peticiones.mjs"
 import { getAmistades } from "../../peticiones/amistades_peticiones.mjs"
 import { getAllUsuarios } from "../../peticiones/usuario_peticiones.mjs"
-import { ArrowLeft, Users, Calendar, Gamepad2, Crown, Globe, Lock, UserMinus, UserPlus } from "lucide-react"
+import { ArrowLeft, Users, Calendar, Gamepad2, Crown, Globe, Lock, UserMinus, UserPlus, LogOut } from "lucide-react"
 
-const ChatInfo = ({ currentChat, onBack, userId, userEmail }) => {
+const ChatInfo = ({ currentChat, onBack, userId, userEmail, onChatLeave }) => {
   const [usuarios, setUsuarios] = useState([])
   const [amigos, setAmigos] = useState([])
   const [todosUsuarios, setTodosUsuarios] = useState([])
@@ -16,6 +16,7 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail }) => {
   const [addingUser, setAddingUser] = useState(false)
   const [addUserError, setAddUserError] = useState("")
   const [activeTab, setActiveTab] = useState("amigos")
+  const [abandonandoChat, setAbandonandoChat] = useState(false)
 
   useEffect(() => {
     const fetchChatInfo = async () => {
@@ -83,6 +84,30 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail }) => {
     }
   }
 
+  const handleAbandonarChat = async () => {
+    if (!userId || !displayData?.id_chat) return
+
+    try {
+      setAbandonandoChat(true)
+      setError("")
+
+      // Usar la misma función que para expulsar, pero con el ID del usuario actual
+      await abandonarChat(userId, displayData.id_chat)
+
+      // Volver a la lista de chats
+      onBack()
+
+      // Recargar el ChatPage si existe la función
+      if (typeof onChatLeave === "function") {
+        onChatLeave()
+      }
+    } catch (error) {
+      console.error("Error al abandonar el chat:", error)
+      setError("Error al abandonar el chat. Inténtalo de nuevo.")
+      setAbandonandoChat(false)
+    }
+  }
+
   const handleAñadirUsuario = async (id_usuario) => {
     try {
       setAddingUser(true)
@@ -110,25 +135,25 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail }) => {
   // Filtrar amigos que no están en el chat
   const amigosDisponibles = Array.isArray(amigos)
     ? amigos.filter((amigo) => {
-      const amigoId = normalizeId(amigo.id_usuario)
-      const estaEnChat = usuarios.some((usuario) => normalizeId(usuario.id_usuario) === amigoId)
+        const amigoId = normalizeId(amigo.id_usuario)
+        const estaEnChat = usuarios.some((usuario) => normalizeId(usuario.id_usuario) === amigoId)
 
-      return !estaEnChat
-    })
+        return !estaEnChat
+      })
     : []
 
   // Filtrar usuarios que no están en el chat y no son amigos
   const usuariosDisponibles = Array.isArray(todosUsuarios)
     ? todosUsuarios.filter((usuario) => {
-      const usuarioId = normalizeId(usuario.id_usuario)
-      const currentUserIdNorm = normalizeId(userId)
+        const usuarioId = normalizeId(usuario.id_usuario)
+        const currentUserIdNorm = normalizeId(userId)
 
-      const esUsuarioActual = usuarioId === currentUserIdNorm
-      const estaEnChat = usuarios.some((chatUser) => normalizeId(chatUser.id_usuario) === usuarioId)
-      const esAmigo = Array.isArray(amigos) && amigos.some((amigo) => normalizeId(amigo.id_usuario) === usuarioId)
+        const esUsuarioActual = usuarioId === currentUserIdNorm
+        const estaEnChat = usuarios.some((chatUser) => normalizeId(chatUser.id_usuario) === usuarioId)
+        const esAmigo = Array.isArray(amigos) && amigos.some((amigo) => normalizeId(amigo.id_usuario) === usuarioId)
 
-      return !esUsuarioActual && !estaEnChat && !esAmigo
-    })
+        return !esUsuarioActual && !estaEnChat && !esAmigo
+      })
     : []
 
   const displayData = chatInfo || currentChat
@@ -326,6 +351,14 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail }) => {
               {addUserError && <p className="error-message">{addUserError}</p>}
             </div>
           )}
+
+          {/* Botón para abandonar el chat */}
+          <div className="leave-chat-section">
+            <button onClick={handleAbandonarChat} className="leave-chat-button" disabled={abandonandoChat}>
+              <LogOut className="leave-icon" />
+              {abandonandoChat ? "Abandonando..." : "Abandonar Chat"}
+            </button>
+          </div>
         </div>
       </div>
     </div>
