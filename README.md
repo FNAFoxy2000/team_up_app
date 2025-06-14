@@ -24,7 +24,7 @@
 1. Clonar el repositorio:
 
    ```bash
-   git clone https://github.com/tu-usuario/team-up.git
+   git clone https://github.com/FNAFoxy2000/team_up_app.git
    cd team-up
    
 2. Instalar dependencias:
