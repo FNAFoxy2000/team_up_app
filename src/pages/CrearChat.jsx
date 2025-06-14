@@ -26,17 +26,15 @@ const CrearChat = () => {
   useEffect(() => {
     const initializeData = async () => {
       try {
-        // Obtener información del usuario
         const userData = AuthService.getUserFromToken()
         if (userData && userData.email) {
           const id = await getUserIdByEmail(userData.email)
           setUserId(id)
         } else {
-          navigate("/LoginError")
+          navigate("/NoLogin")
           return
         }
 
-        // Cargar juegos
         setLoadingJuegos(true)
         const juegosData = await getAllJuegos()
         setJuegos(juegosData)
@@ -99,7 +97,6 @@ const CrearChat = () => {
     } catch (error) {
       console.error("Error al crear el chat:", error)
 
-      // Manejar diferentes tipos de errores
       if (error.response && error.response.data && error.response.data.error) {
         setError(error.response.data.error)
       } else {
@@ -183,7 +180,6 @@ const CrearChat = () => {
           </div>
 
           <div className="form-actions">
-            {/* Envolvemos los botones en spans para asegurar que tengan el mismo contenedor padre */}
             <span className="button-wrapper">
               <button type="button" onClick={handleCancel} className="cancel-button" disabled={loading}>
                 Cancelar

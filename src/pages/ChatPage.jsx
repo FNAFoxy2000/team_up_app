@@ -8,7 +8,7 @@ import ChatMessages from "../components/Chat/ChatMessages"
 import { getUserChats } from "../peticiones/chat_peticiones"
 import AuthService from "../services/authService.mjs"
 import { getUserIdByEmail } from "../peticiones/usuario_peticiones"
-import "../components/Chat/Chat.css"
+import "../components/Chat/chat.css"
 
 const apiURL = import.meta.env.VITE_API_URL
 
@@ -47,11 +47,11 @@ const ChatPage = () => {
           }
         } else {
           // Si no hay usuario autenticado, redirigir al login
-          navigate("/LoginError")
+          navigate("/NoLogin")
         }
       } catch (error) {
         console.error("Error al obtener datos del usuario:", error)
-        navigate("/LoginError")
+        navigate("/NoLogin")
       } finally {
         setLoading(false)
       }
@@ -71,7 +71,6 @@ const ChatPage = () => {
 
     setSocket(newSocket)
 
-    // Limpiar socket al desmontar
     return () => {
       newSocket.disconnect()
     }
@@ -94,7 +93,6 @@ const ChatPage = () => {
 
     // Eventos de chat
     socket.on("load messages", (msgs) => {
-      // Verificar si hay mensajes con el mismo id_mensaje
       const messageIds = {}
       msgs.forEach((msg) => {
         if (msg.id_mensaje !== undefined && msg.id_mensaje !== null) {
@@ -111,7 +109,6 @@ const ChatPage = () => {
     socket.on("chat message", (msg) => {
       // Verificar si este mensaje ya existe en la lista actual
       setMessages((prev) => {
-        // Comprobar si ya existe un mensaje con el mismo id_mensaje (si tiene)
         if (msg.id_mensaje && prev.some((m) => m.id_mensaje === msg.id_mensaje)) {
           console.warn(`Mensaje con id_mensaje ${msg.id_mensaje} ya existe en la lista`)
           return prev
@@ -129,7 +126,7 @@ const ChatPage = () => {
     }
   }, [socket, userId])
 
-  // Función para obtener los chats del usuario
+  // Obtener los chats del usuario
   const fetchUserChats = async () => {
     try {
       const data = await getUserChats(userId)
@@ -139,18 +136,14 @@ const ChatPage = () => {
     }
   }
 
-  // Después de la definición de fetchUserChats
   const handleChatLeave = () => {
     console.log("Usuario abandonó un chat, recargando datos...")
-    // Recargar la lista de chats
     fetchUserChats()
-    // Limpiar el chat actual
     setCurrentChat(null)
-    // Limpiar los mensajes
     setMessages([])
   }
 
-  // Función para unirse a un chat
+  // Unirse a un chat
   const joinChat = (chat) => {
     if (!socket || !isConnected) return
 
@@ -162,7 +155,7 @@ const ChatPage = () => {
     })
   }
 
-  // Función para enviar un mensaje
+  // Enviar un mensaje
   const sendMessage = (message) => {
     if (!socket || !isConnected || !currentChat) return
 
@@ -174,7 +167,6 @@ const ChatPage = () => {
     return <div className="loading">Cargando...</div>
   }
 
-  // Verificar que tenemos tanto el usuario como su ID
   if (!user || !userId) {
     return (
       <div className="error-message">

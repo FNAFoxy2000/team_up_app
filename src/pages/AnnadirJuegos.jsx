@@ -10,7 +10,7 @@ const AnnadirJuego = () => {
   const location = useLocation();
   const userFromToken = AuthService.getUserFromToken();
   if (!userFromToken || !userFromToken.is_admin) {
-    window.location.href = '/LoginError';
+    window.location.href = '/NoLogin';
   }
 
   const juegoExistente = location.state?.juego;

@@ -35,7 +35,7 @@ const PerfilUsuario = () => {
 
   const userFromToken = AuthService.getUserFromToken();
   if (!userFromToken) {
-    window.location.href = '/LoginError';
+    window.location.href = '/NoLogin';
   }
 
   useEffect(() => {

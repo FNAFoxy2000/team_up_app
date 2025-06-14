@@ -7,7 +7,7 @@ const GuiasSinApi = () => {
   const [runes, setRunesData] = useState({});
   const userFromToken = AuthService.getUserFromToken();
   if (!userFromToken) {
-    navigate('/LoginError', { replace: true });
+    navigate('/NoLogin', { replace: true });
     return;
   }
 

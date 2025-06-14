@@ -35,11 +35,9 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail, onChatLeave }) => {
         // console.log("Usuarios del chat:", usersData)
         setUsuarios(usersData)
 
-        // Obtener amigos del usuario usando el email
+        // Obtener amigos del usuario actual
         if (userEmail) {
           const amigosResponse = await getAmistades(userEmail)
-
-          // Extraer el array de datos de la respuesta
           const amigosData = amigosResponse?.data || []
           setAmigos(amigosData)
         }
@@ -47,7 +45,6 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail, onChatLeave }) => {
         // Obtener todos los usuarios
         const todosUsuariosResponse = await getAllUsuarios()
 
-        // Verificar si getAllUsuarios también tiene la misma estructura
         const todosUsuariosData = todosUsuariosResponse?.data || todosUsuariosResponse || []
         setTodosUsuarios(todosUsuariosData)
       } catch (error) {
@@ -91,13 +88,10 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail, onChatLeave }) => {
       setAbandonandoChat(true)
       setError("")
 
-      // Usar la misma función que para expulsar, pero con el ID del usuario actual
       await abandonarChat(userId, displayData.id_chat)
 
-      // Volver a la lista de chats
       onBack()
 
-      // Recargar el ChatPage si existe la función
       if (typeof onChatLeave === "function") {
         onChatLeave()
       }
@@ -127,7 +121,6 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail, onChatLeave }) => {
     }
   }
 
-  // Normalizar IDs para comparación
   const normalizeId = (id) => {
     return typeof id === "string" ? Number.parseInt(id) : id
   }
@@ -281,7 +274,6 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail, onChatLeave }) => {
                 </button>
               </div>
 
-              {/* Lista de usuarios disponibles */}
               <div className="available-users-list">
                 {activeTab === "amigos" ? (
                   amigosDisponibles.length > 0 ? (
@@ -352,7 +344,6 @@ const ChatInfo = ({ currentChat, onBack, userId, userEmail, onChatLeave }) => {
             </div>
           )}
 
-          {/* Botón para abandonar el chat */}
           <div className="leave-chat-section">
             <button onClick={handleAbandonarChat} className="leave-chat-button" disabled={abandonandoChat}>
               <LogOut className="leave-icon" />

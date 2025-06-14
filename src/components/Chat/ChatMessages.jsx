@@ -26,27 +26,23 @@ const ChatMessages = ({ messages, currentChat, onSendMessage, isConnected, userI
     }
   }
 
-  // Función para determinar si un mensaje es del usuario actual
+  // Determinar si un mensaje es del usuario actual
   const isOwnMessage = (message) => {
-    // Asegurarse de que estamos comparando el mismo tipo de datos
     const messageUserId = typeof message.id_usuario === "string" ? message.id_usuario : String(message.id_usuario)
     const currentUserId = typeof userId === "string" ? userId : String(userId)
     return messageUserId === currentUserId
   }
 
-  // Función para generar una clave única para cada mensaje
+  // Generar una clave única para cada mensaje
   const getMessageKey = (msg, index) => {
-    // Si el mensaje tiene id_mensaje, usarlo
     if (msg.id_mensaje !== undefined && msg.id_mensaje !== null) {
       return `msg-${msg.id_mensaje}`
     }
 
-    // Si no tiene id_mensaje pero tiene timestamp, usar una combinación
     if (msg.fecha_mensaje) {
       return `temp-${msg.fecha_mensaje}-${index}`
     }
 
-    // Como último recurso, usar un timestamp actual con el índice
     return `temp-${Date.now()}-${index}`
   }
 

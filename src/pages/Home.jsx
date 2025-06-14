@@ -1,10 +1,7 @@
 import styles from './Home.module.css';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Slider from 'react-slick';
-import ReactPlayer from 'react-player';
 import CRVideo from '../assets/CR_video.mp4';
 import { useNavigate } from 'react-router-dom';
 import SeccionJuego from '../components/SeccionJuego';
@@ -120,7 +117,7 @@ function Home() {
             titulo={juego.nombre}
             descripcion={juego.descripcion}
             onClick={() => navigate(`/juegos/${juego.slug}`)}
-            invertido={index % 2 === 1} // alternar posición para variedad
+            invertido={index % 2 === 1}
           />
         ))}
 

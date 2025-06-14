@@ -7,6 +7,7 @@ import Busqueda from './pages/Busqueda';
 import Juego from './pages/Juego';
 import ListadoJuegos from './pages/ListadoJuegos';
 import LoginError from './pages/LoginError';
+import NoLogin from './pages/NoLogin';
 import AnnadirJuego from './pages/AnnadirJuegos';
 import ChatPage from './pages/ChatPage';
 import CrearChat from './pages/CrearChat';
@@ -44,6 +45,7 @@ function App() {
         <Route path="/crearChat" element={<CrearChat />} />
         <Route path="/usuario/datosUsuario" element={<PerfilUsuario />} />
         <Route path="/LoginError" element={<LoginError />} />
+        <Route path="/NoLogin" element={<NoLogin />} />
         <Route path="/guias/:id" element={<GuiaDetalle />} />
 
         <Route path="*" element={<h1>404 - Página no encontrada</h1>} />

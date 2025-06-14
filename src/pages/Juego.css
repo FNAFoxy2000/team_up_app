@@ -6,7 +6,6 @@
   display: flex;
   flex-direction: column;
   padding: 0 10px;
-  /* Añadido para dejar espacio en los márgenes */
 }
 
 .header {
@@ -45,7 +44,6 @@
   font-size: 3rem;
   font-weight: 700;
   color: #facc15;
-  /* Amarillo vibrante */
 }
 
 .game-description {
@@ -73,7 +71,6 @@
   justify-content: center;
   gap: 20px;
   flex-wrap: wrap;
-  /* Añadido para permitir que los botones se acomoden en varias líneas en pantallas pequeñas */
 }
 
 .btn-primary,
@@ -84,7 +81,6 @@
   font-size: 1rem;
   transition: background-color 0.3s, color 0.3s;
   margin: 5px;
-  /* Añadido para separar botones cuando se apilan */
 }
 
 .btn-primary {
@@ -203,7 +199,6 @@
 }
 
 
-
 /* Media Queries para hacer la página responsive */
 
 /* Pantallas grandes (desktop) */
@@ -264,7 +259,6 @@
   .game-description {
     font-size: 1rem;
     padding: 0 10px;
-    /* Añadido para mejorar la legibilidad en móviles */
   }
 
   .extra-info {
@@ -273,14 +267,12 @@
 
   .cta-buttons {
     flex-direction: column;
-    /* Los botones se apilan en lugar de estar en fila */
     align-items: center;
     gap: 10px;
   }
 
   .header-image {
     height: 200px;
-    /* Reduce la altura del banner en dispositivos pequeños */
   }
 
   .game-profile {
@@ -293,9 +285,8 @@
   }
 }
 
-/* Estilos existentes... */
 
-/* Estilos para la sección de chats del juego */
+/* Sección de chats del juego */
 .chats-juego-section {
   margin-top: 2rem;
   padding: 1.5rem;

@@ -16,9 +16,7 @@ const ChatList = ({ chats, currentChat, onSelectChat }) => {
   return (
     <div className="chat-list">
       <div className="chat-list-header">
-        <button onClick={handleCreateGroup} className="create-group-button">
-          Crear grupo
-        </button>
+        <button onClick={handleCreateGroup} className="create-group-button">Crear grupo</button>
         <h2>Mis Chats</h2>
         <input
           type="text"

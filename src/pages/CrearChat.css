@@ -1,4 +1,3 @@
-/* Estilos para la página de crear chat */
 .crear-chat-page {
   min-height: 100vh;
   background-color: #121212;
@@ -146,14 +145,12 @@
   align-items: center;
 }
 
-/* Nuevo contenedor para los botones */
 .button-wrapper {
   display: inline-block;
 }
 
 .cancel-button,
 .submit-button {
-  /* Reset completo de estilos */
   margin: 0;
   padding: 0;
   border: none;
@@ -163,7 +160,6 @@
   line-height: normal;
   overflow: visible;
 
-  /* Nuevos estilos consistentes */
   display: block;
   width: auto;
   height: 44px;
@@ -174,7 +170,7 @@
   cursor: pointer;
   transition: background-color 0.3s;
   text-align: center;
-  line-height: 44px; /* Alinea el texto verticalmente */
+  line-height: 44px;
 }
 
 .cancel-button {
